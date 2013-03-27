@@ -1,6 +1,7 @@
-
 import org.powerbot.core.script.job.state.Node;
+import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;
+import org.powerbot.game.api.wrappers.map.TilePath;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,16 +10,23 @@ import org.powerbot.game.api.methods.interactive.Players;
  * Time: 9:03 AM
  * To change this template use File | Settings | File Templates.
  */
-public class WalkToDung extends Node {
+public class WalkToCave extends Node {
 
+    final TilePath pathToCave = Walking.newTilePath(Var.path1);
 
     @Override
     public boolean activate() {
-        return (!Var.bankArea.contains(Players.getLocal()));
+        return (!Var.dungArea.contains(Players.getLocal()));
     }
 
     @Override
     public void execute() {
-        //To change body of implemented methods use File | Settings | File Templates.
+
+        if(pathToCave != null && pathToCave.validate()){
+
+            pathToCave.traverse();
+
+        }
+
     }
 }
