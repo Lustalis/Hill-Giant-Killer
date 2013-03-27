@@ -1,5 +1,3 @@
-package hillgiantkiller.nodes;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -7,5 +5,5 @@ package hillgiantkiller.nodes;
  * Time: 8:35 AM
  * To change this template use File | Settings | File Templates.
  */
-public class LootNode {
+public class AttackNode {
 }

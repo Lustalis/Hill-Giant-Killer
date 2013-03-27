@@ -1,5 +1,3 @@
-package Nodes;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -7,5 +5,5 @@ package Nodes;
  * Time: 8:35 AM
  * To change this template use File | Settings | File Templates.
  */
-public class AttackNode {
+public class LootNode {
 }
