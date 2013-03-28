@@ -1,8 +1,11 @@
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
+import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Walking;
+import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.SceneEntities;
+import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.map.TilePath;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
@@ -16,6 +19,7 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
 public class WalkToBank extends Node {
 
     final TilePath pathToBank = Walking.newTilePath(Var.path2);
+    SceneObject stairUp = null;
 
     @Override
     public boolean activate() {
@@ -24,22 +28,28 @@ public class WalkToBank extends Node {
 
     @Override
     public void execute() {
-        SceneObject stairUp = SceneEntities.getNearest(Var.stairsUp);
+        Var.theGiant = NPCs.getNearest(Var.npcIds);
 
-        if(stairUp != null){
-            System.out.println("Stairs up is valid");
-            stairUp.interact("Climb-up");
-            while(!Var.dungArea.contains(Players.getLocal())){
-                Task.sleep(500, 1250);
+        if(Var.theGiant != null){
+            System.out.println("In the underground; going up");
+            stairUp = SceneEntities.getNearest(Var.stairsUp);
+            if(Calculations.distanceTo(stairUp) >=8){
+                Walking.walk(stairUp);
+                Methods.waitForArea(Var.insideDungArea);
             }
-            SceneObject door = SceneEntities.getNearest(Var.doorId);
-            Task.sleep(500);
-        }
+            System.out.println("Interacting with the stairs going up");
+            stairUp.interact("Climb-up");
+            Methods.waitForArea(Var.dungArea);
 
-        //TODO: make a new path cause this one fucks up
-        if(pathToBank != null && pathToBank.validate()){
+            SceneObject door = SceneEntities.getNearest(Var.doorId);
+            door.interact("Open");
+
+            Task.sleep(500);
+        }else{
             pathToBank.traverse();
         }
+
+        //TODO: so far this part works!!
 
     }
 }

@@ -21,6 +21,9 @@ public class Var {
     public static final Area bankArea = new Area(new Tile[] { new Tile(3140, 3491, 0), new Tile(3140, 3472, 0), new Tile(3151, 3465, 0),
             new Tile(3158, 3465, 0), new Tile(3157, 3490, 0) });
 
+    public static final Area insideDungArea = new Area(new Tile[] {new Tile(3115,9854,0), new Tile(3117,9854,0), new Tile(3117,9850,0),
+             new Tile(3115,9850,0)});
+
     public static final Tile[] path1 = new Tile[] { new Tile(3150, 3474, 0), new Tile(3146, 3464, 0), new Tile(3136, 3456, 0),
             new Tile(3127, 3455, 0), new Tile(3114, 3446, 0) };
 
