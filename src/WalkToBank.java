@@ -31,9 +31,10 @@ public class WalkToBank extends Node {
         Var.theGiant = NPCs.getNearest(Var.npcIds);
 
         if(Var.theGiant != null){
-            System.out.println("In the underground; going up");
+            //takes the stairs out of of the dungeon
+            System.out.println("In the dungeon; going up");
             stairUp = SceneEntities.getNearest(Var.stairsUp);
-            if(Calculations.distanceTo(stairUp) >=8){
+            if(Calculations.distanceTo(stairUp) >=8){    //if far from stairs walk to them first
                 Walking.walk(stairUp);
                 Methods.waitForArea(Var.insideDungArea);
             }
@@ -43,8 +44,10 @@ public class WalkToBank extends Node {
 
             SceneObject door = SceneEntities.getNearest(Var.doorId);
             door.interact("Open");
+            do{
+                Task.sleep(150,450);
+            }while(!Players.getLocal().isIdle());
 
-            Task.sleep(500);
         }else{
             pathToBank.traverse();
         }

@@ -1,7 +1,9 @@
 
+import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.interactive.NPC;
+import org.powerbot.game.api.wrappers.node.GroundItem;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,19 +39,34 @@ public class Var {
 
     public static final int[] npcIds = {117, 4689, 4690, 4691, 4692, 4693, 10706, 10707,
              10708, 10709, 10710, 10711, 10712, 10713, 10714, 10715, 10716, 10717, };
-
     public static NPC theGiant = null;
-
-    public static final int[] foodIds = {379, 380};
+    public static Tile lootLocation = null;
+    public static final int[] foodIds = {373, 374};
+    public static int[] lootIds = {532, 533, 17974, 17675, 225, 226} ;
+    public static int healPercent = 65;
 
     /*
     Scene Entity stuff
      */
 
     public static int doorId = 1804;
-
     public static int stairsDown = 12389;
     public static int stairsUp = 29355;
+
+    /*
+    Filters
+     */
+
+    public static Filter<GroundItem> lootFilter = new Filter<GroundItem>(){
+
+        @Override
+        public boolean accept(GroundItem g) {
+            for(int i: Var.lootIds){
+                return g.getId() == i && g.getLocation() == lootLocation;
+            }
+            return false;
+        }
+    };
 
 
 

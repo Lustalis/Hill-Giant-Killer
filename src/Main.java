@@ -5,6 +5,8 @@ import org.powerbot.core.script.job.state.Node;
 import org.powerbot.core.script.util.Random;
 import org.powerbot.game.api.Manifest;
 import org.powerbot.game.api.methods.Game;
+import org.powerbot.game.api.methods.input.Mouse;
+import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.WidgetCache;
 import org.powerbot.game.client.Client;
 
@@ -35,8 +37,10 @@ public class Main extends ActiveScript implements PaintListener {
 
         System.out.println("Script start");
 
-       // provide(new WalkToCave());
-        provide(new WalkToBank());
+        //provide(new WalkToCave());
+        //provide(new WalkToBank());
+        provide(new FindTargetNode());
+        provide(new AttackNode());
 
     }
 
@@ -59,6 +63,11 @@ public class Main extends ActiveScript implements PaintListener {
         }
 
         if(Game.isLoggedIn()){
+
+            if(Methods.needToHeal(Var.healPercent) && Methods.haveFood(Var.foodIds)){
+                Inventory.getItem(Var.foodIds).getWidgetChild().interact("Eat");
+            }
+
             for (Node node: nodeCollection){
                 if (node != null && node.activate()){
                     node.execute();
@@ -69,7 +78,10 @@ public class Main extends ActiveScript implements PaintListener {
     }
 
     @Override
-    public void onRepaint(Graphics graphics) {
+    public void onRepaint(Graphics g) {
+        g.setColor(Color.RED);
+        g.drawLine(Mouse.getX() - 5, Mouse.getY() - 5, Mouse.getX() + 5, Mouse.getY() + 5);
+        g.drawLine(Mouse.getX() - 5, Mouse.getY() + 5, Mouse.getX() + 5, Mouse.getY() - 5);
 
     }
 }

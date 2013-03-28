@@ -1,3 +1,4 @@
+import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;
@@ -27,19 +28,23 @@ public class WalkToCave extends Node {
     public void execute() {
 
         if(!Var.dungArea.contains(Players.getLocal())){
+            //walking to dungeon
             pathToCave.traverse();
         }else{
-
+            //going though door
             door = SceneEntities.getNearest(Var.doorId);
             if(door != null){
-                //TODO: Left of here; interacting with door going into dungeon
+                door.interact("Open");
+                do{
+                    Task.sleep(500,750);
+                }while(!Players.getLocal().isIdle());
             }
-
-        }
-
-        if(pathToCave != null && pathToCave.validate()){
-
-            pathToCave.traverse();
+            stairs = SceneEntities.getNearest(Var.stairsDown);
+            //going down stairs
+            if(stairs != null){
+                stairs.interact("Climb-down");
+                Methods.waitForArea(Var.insideDungArea);
+            }
 
         }
 
