@@ -11,7 +11,7 @@ import org.powerbot.game.api.methods.interactive.Players;
 public class AttackNode extends Node {
     @Override
     public boolean activate() {
-        return Methods.haveFood(Var.foodIds) && (Var.theGiant != null
+        return !Methods.needToLoot(Var.lootFilter) && Methods.haveFood(Var.foodIds) && (Var.theGiant != null
                 && Var.theGiant.validate()) && Players.getLocal().getInteracting() == null;
     }
 

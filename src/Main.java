@@ -40,7 +40,8 @@ public class Main extends ActiveScript implements PaintListener {
         //provide(new WalkToCave());
         //provide(new WalkToBank());
         provide(new FindTargetNode());
-        provide(new AttackNode());
+        //provide(new AttackNode());
+        //provide(new LootNode());
 
     }
 

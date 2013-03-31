@@ -5,7 +5,6 @@ import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.SceneEntities;
-import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.map.TilePath;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
@@ -23,7 +22,7 @@ public class WalkToBank extends Node {
 
     @Override
     public boolean activate() {
-        return (!Var.bankArea.contains(Players.getLocal()));
+        return !Var.bankArea.contains(Players.getLocal()) && !Methods.haveFood(Var.foodIds);
     }
 
     @Override

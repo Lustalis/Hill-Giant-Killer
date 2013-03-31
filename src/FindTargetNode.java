@@ -1,4 +1,5 @@
 import org.powerbot.core.script.job.state.Node;
+import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.widget.Camera;
 
@@ -12,22 +13,37 @@ import org.powerbot.game.api.methods.widget.Camera;
 public class FindTargetNode extends Node {
     @Override
     public boolean activate() {
-        return (Var.theGiant == null || !Var.theGiant.validate()
-                || Players.getLocal().getInteracting() == null) && !Players.getLocal().isMoving();
+
+        return  Methods.haveFood(Var.foodIds) && (Players.getLocal().getInteracting() == null || !Players.getLocal().getInteracting().validate()
+                || Var.theGiant == null || !Var.theGiant.validate()) && !Var.bankArea.contains(Players.getLocal())
+                && !Var.dungArea.contains(Players.getLocal());
     }
 
     @Override
     public void execute() {
 
         System.out.println("Finding npc.....");
-        Var.theGiant = Methods.getMonster(Var.npcIds);
+        Var.theGiant = Methods.getMonster();
+
         if(Var.theGiant != null){
+            System.out.println("Found npc!!!");
             if(!Methods.isOnScreen(Var.theGiant)){
                 Camera.turnTo(Var.theGiant);
+                if(!Methods.isOnScreen(Var.theGiant)){
+                    Walking.walk(Var.theGiant);
+                }
+                Methods.waitForOnScreen(Var.theGiant);
             }
+            System.out.println("Attacking");
+            Var.theGiant.interact("Attack");
+            Methods.waitForCombat();
+
+            //Var.lootLocation = Var.theGiant.getLocation();
         }
 
         //TODO: This works
 
     }
+
+    //4653
 }

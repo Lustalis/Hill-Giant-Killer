@@ -1,4 +1,5 @@
 
+import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Tile;
@@ -37,13 +38,13 @@ public class Var {
     Combat stuff
      */
 
-    public static final int[] npcIds = {117, 4689, 4690, 4691, 4692, 4693, 10706, 10707,
-             10708, 10709, 10710, 10711, 10712, 10713, 10714, 10715, 10716, 10717, };
+    public static final int[] npcIds = {117, 4689, 4690, 4691, 4692, 4693};
     public static NPC theGiant = null;
     public static Tile lootLocation = null;
     public static final int[] foodIds = {373, 374};
-    public static int[] lootIds = {532, 533, 17974, 17675, 225, 226} ;
-    public static int healPercent = 65;
+    public static int[] lootIds = {532, 533, 17974, 17675, 225, 226} ;  //just hill giant bones right now
+    public static int healPercent = 50;
+    public static int deathID = 4653;
 
     /*
     Scene Entity stuff
@@ -69,7 +70,16 @@ public class Var {
     };
 
 
-
+    public static Filter<NPC> npcFilter = new Filter<NPC>() {
+        @Override
+        public boolean accept(NPC n) {
+            if(n.getName().equalsIgnoreCase("hill giant") && (n.getInteracting() == null || n.getInteracting().equals(Players.getLocal()))
+                    && n.getAnimation() != deathID) {
+                return true;
+            }
+            return false;
+        }
+    };
 
 
 

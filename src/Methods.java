@@ -1,4 +1,5 @@
 import org.powerbot.core.script.job.Task;
+import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Tabs;
 import org.powerbot.game.api.methods.Widgets;
@@ -31,9 +32,15 @@ public class Methods{
     }
 
     //waits for player to enter an area
-    public static void waitForArea(Area a){
+    public static void waitForArea(final Area a){
         Timer t = new Timer(5000);
-        while(t.isRunning() && !a.contains(Players.getLocal())){
+        Condition x = new Condition() {
+            @Override
+            public boolean accept() {
+                return a.contains(Players.getLocal());
+            }
+        };
+        while(t.isRunning() && !x.accept()){
             Task.sleep(150, 350);
         }
 
@@ -50,6 +57,34 @@ public class Methods{
 
         while(t.isRunning() && !x.accept()){
             Task.sleep(150, 450);
+        }
+    }
+
+    public static void waitForInvChange(){
+        Timer t = new Timer(3000);
+        final int a = Inventory.getCount();
+        Condition x = new Condition() {
+            @Override
+            public boolean accept() {
+                return a != Inventory.getCount();
+            }
+        };
+        while(t.isRunning() && !x.accept()){
+            Task.sleep(100, 399);
+        }
+    }
+
+    public static void waitForOnScreen(final NPC n){
+        Timer t = new Timer(3000);
+        Condition x = new Condition() {
+            @Override
+            public boolean accept() {
+                return Methods.isOnScreen(n) && Calculations.distanceTo(n) <= 3;
+            }
+        };
+
+        while(t.isRunning() && !x.accept()){
+            Task.sleep(150, 300);
         }
     }
 
@@ -87,26 +122,20 @@ public class Methods{
     }
 
 
-    public static NPC getMonster(final int... id){
-
-        return NPCs.getNearest(new Filter<NPC>() {
-            @Override
-            public boolean accept(NPC npc) {
-                for(int i: id){
-                    if(npc.getId() == i){
-                        if(npc.getInteracting().equals(Players.getLocal())){
-                            return npc != null && !npc.equals(Var.theGiant);
-                        }else{
-                            return npc != null && !npc.equals(Var.theGiant) && npc.getInteracting() == null;
-                        }
-
-                    }  else{
-                        System.out.println("npc not found");
-                    }
-                }
-                return false;
-            }
-        });
+    public static NPC getMonster(){
+//        NPC[] list = NPCs.getLoaded(Var.npcIds);
+//        if (list.length >= 1) {
+//            for(NPC n: list){
+//                if (n != null && (n.getInteracting() == null || n.getInteracting().equals(Players.getLocal())
+//                        && n.getAnimation() != Var.deathID)){
+//                    return n;
+//                }
+//            }
+//        }else{
+//            System.out.println("No good npcs");
+//        }
+//        return null;
+        return NPCs.getNearest(Var.npcFilter);
 
     }
 
@@ -124,7 +153,7 @@ public class Methods{
     //uses a filter
     //will loot when certain amount of npc's killed
     public static boolean needToLoot(Filter<GroundItem> itemFilter){
-        int remainder = Paint.giantsKilled % 5;
+        int remainder = Paint.giantsKilled % 1;
         if(remainder == 0){
             GroundItem x = GroundItems.getNearest(itemFilter);
             return x != null;
