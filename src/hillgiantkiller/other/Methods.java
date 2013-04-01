@@ -1,3 +1,5 @@
+package hillgiantkiller.other;
+
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Game;
@@ -123,11 +125,11 @@ public class Methods{
 
 
     public static NPC getMonster(){
-//        NPC[] list = NPCs.getLoaded(Var.npcIds);
+//        NPC[] list = NPCs.getLoaded(hillgiantkiller.other.Var.npcIds);
 //        if (list.length >= 1) {
 //            for(NPC n: list){
 //                if (n != null && (n.getInteracting() == null || n.getInteracting().equals(Players.getLocal())
-//                        && n.getAnimation() != Var.deathID)){
+//                        && n.getAnimation() != hillgiantkiller.other.Var.deathID)){
 //                    return n;
 //                }
 //            }

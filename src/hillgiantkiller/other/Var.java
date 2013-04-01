@@ -1,3 +1,4 @@
+package hillgiantkiller.other;
 
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.util.Filter;

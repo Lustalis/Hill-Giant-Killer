@@ -1,3 +1,7 @@
+package hillgiantkiller.nodes;
+
+import hillgiantkiller.other.Methods;
+import hillgiantkiller.other.Var;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;
@@ -38,12 +42,10 @@ public class FindTargetNode extends Node {
             Var.theGiant.interact("Attack");
             Methods.waitForCombat();
 
-            //Var.lootLocation = Var.theGiant.getLocation();
+            //hillgiantkiller.other.Var.lootLocation = hillgiantkiller.other.Var.theGiant.getLocation();
         }
 
         //TODO: This works
 
     }
-
-    //4653
 }

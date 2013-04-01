@@ -1,3 +1,5 @@
+package hillgiantkiller.nodes;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator

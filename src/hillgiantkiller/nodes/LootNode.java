@@ -1,3 +1,8 @@
+package hillgiantkiller.nodes;
+
+import hillgiantkiller.other.Methods;
+import hillgiantkiller.other.Paint;
+import hillgiantkiller.other.Var;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;

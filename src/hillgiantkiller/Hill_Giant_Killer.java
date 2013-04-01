@@ -1,3 +1,10 @@
+package hillgiantkiller;
+
+import hillgiantkiller.looptasks.EatFood;
+import hillgiantkiller.looptasks.UseAbilities;
+import hillgiantkiller.nodes.FindTargetNode;
+import hillgiantkiller.other.Methods;
+import hillgiantkiller.other.Var;
 import org.powerbot.core.Bot;
 import org.powerbot.core.event.listeners.PaintListener;
 import org.powerbot.core.script.ActiveScript;
@@ -21,7 +28,7 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 
-@Manifest(authors = { "Stefano" }, description = "Fuck wit dem hill gIants", name = "Giant fucker")
+@Manifest(authors = { "Kirinsoul" }, description = "Fuck wit dem hill gIants", name = "Giant fucker", version = 1.0)
 
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
     public static ArrayList<Node> nodeCollection = new ArrayList<>();
@@ -37,10 +44,12 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
 
         System.out.println("Script start");
 
-        //provide(new WalkToCave());
-        //provide(new WalkToBank());
+        //provide(new hillgiantkiller.nodes.WalkToCave());
+        //provide(new hillgiantkiller.nodes.WalkToBank());
         provide(new FindTargetNode());
-        //provide(new LootNode());
+        getContainer().submit(new EatFood());
+        getContainer().submit(new UseAbilities());
+        //provide(new hillgiantkiller.nodes.LootNode());
 
     }
 
@@ -63,10 +72,6 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
         }
 
         if(Game.isLoggedIn()){
-
-            if(Methods.needToHeal(Var.healPercent) && Methods.haveFood(Var.foodIds)){
-                Inventory.getItem(Var.foodIds).getWidgetChild().interact("Eat");
-            }
 
             for (Node node: nodeCollection){
                 if (node != null && node.activate()){
