@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 @Manifest(authors = { "Stefano" }, description = "Fuck wit dem hill gIants", name = "Giant fucker")
 
-public class Main extends ActiveScript implements PaintListener {
+public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
     public static ArrayList<Node> nodeCollection = new ArrayList<>();
     private Client client = Bot.client();
 
@@ -40,7 +40,6 @@ public class Main extends ActiveScript implements PaintListener {
         //provide(new WalkToCave());
         //provide(new WalkToBank());
         provide(new FindTargetNode());
-        //provide(new AttackNode());
         //provide(new LootNode());
 
     }
