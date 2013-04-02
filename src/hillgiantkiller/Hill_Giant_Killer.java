@@ -1,14 +1,9 @@
 package hillgiantkiller;
 
+import hillgiantkiller.looptasks.AfterGiantDead;
 import hillgiantkiller.looptasks.EatFood;
-import hillgiantkiller.looptasks.GiantCounter;
 import hillgiantkiller.looptasks.UseAbilities;
-import hillgiantkiller.nodes.BankNode;
-import hillgiantkiller.nodes.FindTargetNode;
-import hillgiantkiller.nodes.WalkToBank;
-import hillgiantkiller.nodes.WalkToCave;
-import hillgiantkiller.other.Methods;
-import hillgiantkiller.other.Var;
+import hillgiantkiller.nodes.*;
 import org.powerbot.core.Bot;
 import org.powerbot.core.event.listeners.PaintListener;
 import org.powerbot.core.script.ActiveScript;
@@ -17,7 +12,6 @@ import org.powerbot.core.script.util.Random;
 import org.powerbot.game.api.Manifest;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.input.Mouse;
-import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.methods.widget.WidgetCache;
 import org.powerbot.game.client.Client;
@@ -56,13 +50,14 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
         provide(new WalkToCave());
         provide(new BankNode());
         provide(new FindTargetNode());
+        provide(new LootNode());
 
         /*
         Loop Tasks
          */
         getContainer().submit(new EatFood());
         getContainer().submit(new UseAbilities());
-        getContainer().submit(new GiantCounter());
+        getContainer().submit(new AfterGiantDead());
 
     }
 

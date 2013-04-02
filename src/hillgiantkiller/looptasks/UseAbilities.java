@@ -1,12 +1,10 @@
 package hillgiantkiller.looptasks;
 
-import hillgiantkiller.nodes.FindTargetNode;
 import hillgiantkiller.other.Var;
+import hillgiantkiller.sk.action.ActionBar;
 import org.powerbot.core.script.job.LoopTask;
-import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.util.Random;
 import org.powerbot.game.api.methods.interactive.Players;
-import hillgiantkiller.sk.action.ActionBar;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,9 +16,8 @@ import hillgiantkiller.sk.action.ActionBar;
 public class UseAbilities extends LoopTask {
     @Override
     public int loop() {
-        //TODO: works
         if ((Players.getLocal().getInteracting() != null && Players.getLocal().getInteracting().validate())
-                && (Var.theGiant != null && Var.theGiant.validate())) {
+                && (Var.theGiant != null && Var.theGiant.validate()) ) {
 
             if (!ActionBar.isExpanded()) {
                 ActionBar.setExpanded(true);

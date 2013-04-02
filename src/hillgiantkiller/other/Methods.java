@@ -130,24 +130,14 @@ public class Methods{
 
     }
 
-    //use if getting loot from gui
-    public static boolean needToLoot(ArrayList<Integer> customLoot){
-        for (Integer aCustomLoot : customLoot) {
-            GroundItem x = GroundItems.getNearest(aCustomLoot);
-            if (x != null) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    //uses a filter
-    //will loot when certain amount of npc's killed
-    public static boolean needToLoot(Filter<GroundItem> itemFilter){
-        int remainder = Paint.giantsKilled % 1;
-        if(remainder == 0){
-            GroundItem x = GroundItems.getNearest(itemFilter);
-            return x != null;
+    /*
+    returns true when 1 npc has been killed
+    and Var.lootLocations has a Tile in it
+     */
+    public static boolean needToLoot(){
+        if(Var.lootLocations.size() >= 1){
+            return true;
         }else{
             return false;
         }
@@ -157,7 +147,7 @@ public class Methods{
 
     public static boolean droppedLoot(){
         //TODO: make this method save tiles that it finds loot on
-        Tile x = Var.lootLocation;
+        Tile x = Var.deathLocation;
         if(x!= null){
             Area lootZone = new Area(new Tile(x.getX() + 1, x.getY() + 1, Game.getPlane())
                     ,new Tile(x.getX() - 1, x.getY() - 1, Game.getPlane()) );
@@ -166,6 +156,8 @@ public class Methods{
                 for(GroundItem p: potential){
                     for(int i: Var.lootIds){
                         if(i == p.getId()){
+                            Var.lootLocations.add(t);
+                            System.out.println("Tiles in list: "+Var.lootLocations.size());
                             return true;
                         }
                     }

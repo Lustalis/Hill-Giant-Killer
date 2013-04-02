@@ -18,12 +18,10 @@ import org.powerbot.game.api.wrappers.interactive.NPC;
  * To change this template use File | Settings | File Templates.
  */
 public class FindTargetNode extends Node {
-    public static int counter = 0;
     @Override
     public boolean activate() {
-        NPC x = NPCs.getNearest(Var.npcIds);
-        return  Methods.haveFood(Var.foodIds) && (Var.theGiant == null || !Var.theGiant.validate()) ||
-        (Players.getLocal().getInteracting() == null || !Players.getLocal().getInteracting().validate())
+        NPC x = NPCs.getNearest(Var.NPC_IDS);
+        return  !Methods.needToLoot() && Methods.haveFood(Var.foodIds) && (interacting() == null || !interacting().validate())
                 && (x != null) && Players.getLocal().getAnimation() == -1;
     }
 
@@ -49,7 +47,11 @@ public class FindTargetNode extends Node {
 
         }
 
-        //TODO: This works
 
+    }
+
+    private org.powerbot.game.api.wrappers.interactive.Character interacting(){
+        return Players.getLocal().getInteracting() != null && Players.getLocal().getInteracting().validate() ?
+                Players.getLocal().getInteracting() : null;
     }
 }

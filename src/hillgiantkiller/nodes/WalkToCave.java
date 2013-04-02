@@ -21,36 +21,36 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
  */
 public class WalkToCave extends Node {
 
-    final TilePath pathToCave = Walking.newTilePath(Var.path1);
+    final TilePath pathToCave = Walking.newTilePath(Var.PATH_1);
     SceneObject door = null;
     SceneObject stairs = null;
 
     @Override
     public boolean activate() {
-        NPC x = NPCs.getNearest(Var.npcIds);
+        NPC x = NPCs.getNearest(Var.NPC_IDS);
         return ((Methods.haveFood(Var.foodIds) && x == null));
     }
 
     @Override
     public void execute() {
 
-        if(!Var.dungArea.contains(Players.getLocal())){
+        if(!Var.DUNG_AREA.contains(Players.getLocal())){
             //walking to dungeon
             pathToCave.traverse();
         }else{
             //going though door
-            door = SceneEntities.getNearest(Var.doorId);
+            door = SceneEntities.getNearest(Var.DOOR_ID);
             if(door != null){
                 door.interact("Open");
                 do{
                     Task.sleep(500,750);
                 }while(!Players.getLocal().isIdle());
             }
-            stairs = SceneEntities.getNearest(Var.stairsDown);
+            stairs = SceneEntities.getNearest(Var.STAIRS_DOWN);
             //going down stairs
             if(stairs != null){
                 stairs.interact("Climb-down");
-                Methods.waitForArea(Var.insideDungArea);
+                Methods.waitForArea(Var.INSIDE_DUNG_AREA);
             }
 
         }

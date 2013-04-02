@@ -374,7 +374,6 @@ public enum Spell implements Ability {
 
 	@Override
 	public Completion getChange() {
-		// TODO improve
 		return null;
 	}
 

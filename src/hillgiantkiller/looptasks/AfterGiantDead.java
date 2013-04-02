@@ -12,13 +12,13 @@ import org.powerbot.game.api.util.Random;
  * Date: 4/1/13
  * Time: 10:24 PM
  */
-public class GiantCounter extends LoopTask {
+public class AfterGiantDead extends LoopTask {
     @Override
     public int loop() {
 
         if(Var.theGiant != null && Var.theGiant.validate()){
-            if (Var.theGiant.getAnimation() == Var.deathID) {
-                Var.lootLocation = Var.theGiant.getLocation();
+            if (Var.theGiant.getAnimation() == Var.DEATH_ID) {
+                Var.deathLocation = Var.theGiant.getLocation();
                 Paint.giantsKilled++;
                 Task.sleep(3000);
 

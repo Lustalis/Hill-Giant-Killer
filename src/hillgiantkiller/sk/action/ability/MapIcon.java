@@ -47,7 +47,6 @@ public enum MapIcon implements Ability {
 	SUMMONING(747, 18, 23, 29) {
 		@Override
 		public boolean available() {
-			//TODO improve
 			return true;
 		}
 	};

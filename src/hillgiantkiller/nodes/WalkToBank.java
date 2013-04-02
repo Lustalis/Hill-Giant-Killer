@@ -21,43 +21,37 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
  */
 public class WalkToBank extends Node {
 
-    final TilePath pathToBank = Walking.newTilePath(Var.path2);
+    final TilePath pathToBank = Walking.newTilePath(Var.PATH_2);
     SceneObject stairUp = null;
 
     @Override
     public boolean activate() {
-        return !Var.bankArea.contains(Players.getLocal()) && !Methods.haveFood(Var.foodIds);
+        return !Var.BANK_AREA.contains(Players.getLocal()) && !Methods.haveFood(Var.foodIds);
     }
 
     @Override
     public void execute() {
-        Var.theGiant = NPCs.getNearest(Var.npcIds);
+        Var.theGiant = NPCs.getNearest(Var.NPC_IDS);
 
         if(Var.theGiant != null){
             //takes the stairs out of of the dungeon
             System.out.println("In the dungeon; going up");
-            stairUp = SceneEntities.getNearest(Var.stairsUp);
+            stairUp = SceneEntities.getNearest(Var.STAIRS_UP);
             if(Calculations.distanceTo(stairUp) >=8){    //if far from stairs walk to them first
                 Walking.walk(stairUp);
-                Methods.waitForArea(Var.insideDungArea);
+                Methods.waitForArea(Var.INSIDE_DUNG_AREA);
             }
             System.out.println("Interacting with the ladder going up");
             stairUp.interact("Climb-up");
-            Methods.waitForArea(Var.dungArea);
+            Methods.waitForArea(Var.DUNG_AREA);
 
-            SceneObject door = SceneEntities.getNearest(Var.doorId);
+            SceneObject door = SceneEntities.getNearest(Var.DOOR_ID);
             if(door != null){
                 door.interact("Open");
             }
-            do{
-                Task.sleep(150,450);
-            }while(!Players.getLocal().isIdle());
-
         }else{
             pathToBank.traverse();
         }
-
-        //TODO: so far this part works!!
 
     }
 }

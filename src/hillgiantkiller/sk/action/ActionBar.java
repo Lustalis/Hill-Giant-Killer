@@ -544,7 +544,6 @@ public class ActionBar {
 			loader = Emote.ANGRY;
 			loader = MapIcon.HEALTH;
 			loader = Spell.HOME_TELEPORT;
-			// TODO add more loaders;
 		}
 	}
 
