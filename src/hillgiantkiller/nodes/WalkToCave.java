@@ -5,8 +5,10 @@ import hillgiantkiller.other.Var;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
+import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.SceneEntities;
+import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.map.TilePath;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
@@ -25,7 +27,8 @@ public class WalkToCave extends Node {
 
     @Override
     public boolean activate() {
-        return (!Var.insideDungArea.contains(Players.getLocal()));
+        NPC x = NPCs.getNearest(Var.npcIds);
+        return ((Methods.haveFood(Var.foodIds) && x == null));
     }
 
     @Override

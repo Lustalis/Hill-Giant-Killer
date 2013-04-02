@@ -13,6 +13,7 @@ import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Entity;
+import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.node.GroundItem;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
@@ -125,18 +126,7 @@ public class Methods{
 
 
     public static NPC getMonster(){
-//        NPC[] list = NPCs.getLoaded(hillgiantkiller.other.Var.npcIds);
-//        if (list.length >= 1) {
-//            for(NPC n: list){
-//                if (n != null && (n.getInteracting() == null || n.getInteracting().equals(Players.getLocal())
-//                        && n.getAnimation() != hillgiantkiller.other.Var.deathID)){
-//                    return n;
-//                }
-//            }
-//        }else{
-//            System.out.println("No good npcs");
-//        }
-//        return null;
+
         return NPCs.getNearest(Var.npcFilter);
 
     }
@@ -165,23 +155,21 @@ public class Methods{
 
     }
 
-    //opens inventory
-    public static boolean openInv(){
-
-        if (Tabs.getCurrent() != Tabs.INVENTORY){
-            Tabs.INVENTORY.open();
+    //gets all the loot at a selected tile
+    //then loops through all the loot to see if its
+    //anything you want
+    public static boolean tileContainsLoot(Tile t){
+        GroundItem[] x = GroundItems.getLoadedAt(t.getX(), t.getY());
+        for(GroundItem i: x){
+            for(int s: Var.lootIds){
+                if(i.getId()==s){
+                    return true;
+                }
+            }
         }
-        return true;
-
+        return false;
     }
 
-    public static void openBar(){ //opens action bar
-        Widgets.get(640, 28).click(true);
-    }
-
-    public static void closeBar(){
-        Widgets.get(640,30).click(true);
-    }
 
 
 

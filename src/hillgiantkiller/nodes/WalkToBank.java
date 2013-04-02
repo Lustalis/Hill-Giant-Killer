@@ -41,12 +41,14 @@ public class WalkToBank extends Node {
                 Walking.walk(stairUp);
                 Methods.waitForArea(Var.insideDungArea);
             }
-            System.out.println("Interacting with the stairs going up");
+            System.out.println("Interacting with the ladder going up");
             stairUp.interact("Climb-up");
             Methods.waitForArea(Var.dungArea);
 
             SceneObject door = SceneEntities.getNearest(Var.doorId);
-            door.interact("Open");
+            if(door != null){
+                door.interact("Open");
+            }
             do{
                 Task.sleep(150,450);
             }while(!Players.getLocal().isIdle());

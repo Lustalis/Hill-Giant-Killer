@@ -4,8 +4,10 @@ import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Var;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
+import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.widget.Camera;
+import org.powerbot.game.api.wrappers.interactive.NPC;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,21 +17,21 @@ import org.powerbot.game.api.methods.widget.Camera;
  * To change this template use File | Settings | File Templates.
  */
 public class FindTargetNode extends Node {
+    public static int counter = 0;
     @Override
     public boolean activate() {
-
-        return  Methods.haveFood(Var.foodIds) && (Players.getLocal().getInteracting() == null || !Players.getLocal().getInteracting().validate()
-                || Var.theGiant == null || !Var.theGiant.validate()) && !Var.bankArea.contains(Players.getLocal())
-                && !Var.dungArea.contains(Players.getLocal());
+        NPC x = NPCs.getNearest(Var.npcIds);
+        return  Methods.haveFood(Var.foodIds) && (Var.theGiant == null || !Var.theGiant.validate()) ||
+        (Players.getLocal().getInteracting() == null || !Players.getLocal().getInteracting().validate())
+                && (x != null) && Players.getLocal().getAnimation() == -1;
     }
 
     @Override
     public void execute() {
-
-        System.out.println("Finding npc.....");
         Var.theGiant = Methods.getMonster();
 
         if(Var.theGiant != null){
+            System.out.println("Killed this many nigguhs: "+counter);
             System.out.println("Found npc!!!");
             if(!Methods.isOnScreen(Var.theGiant)){
                 Camera.turnTo(Var.theGiant);
@@ -42,7 +44,8 @@ public class FindTargetNode extends Node {
             Var.theGiant.interact("Attack");
             Methods.waitForCombat();
 
-            //hillgiantkiller.other.Var.lootLocation = hillgiantkiller.other.Var.theGiant.getLocation();
+            Var.lootLocation = Var.theGiant.getLocation();
+
         }
 
         //TODO: This works

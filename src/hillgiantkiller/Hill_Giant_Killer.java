@@ -1,8 +1,12 @@
 package hillgiantkiller;
 
 import hillgiantkiller.looptasks.EatFood;
+import hillgiantkiller.looptasks.GiantCounter;
 import hillgiantkiller.looptasks.UseAbilities;
+import hillgiantkiller.nodes.BankNode;
 import hillgiantkiller.nodes.FindTargetNode;
+import hillgiantkiller.nodes.WalkToBank;
+import hillgiantkiller.nodes.WalkToCave;
 import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Var;
 import org.powerbot.core.Bot;
@@ -14,6 +18,7 @@ import org.powerbot.game.api.Manifest;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.tab.Inventory;
+import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.methods.widget.WidgetCache;
 import org.powerbot.game.client.Client;
 
@@ -43,13 +48,21 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
     public void onStart(){
 
         System.out.println("Script start");
-
-        //provide(new hillgiantkiller.nodes.WalkToCave());
-        //provide(new hillgiantkiller.nodes.WalkToBank());
+        Camera.setPitch(true);
+        /*
+        Nodes
+         */
+        provide(new WalkToBank());
+        provide(new WalkToCave());
+        provide(new BankNode());
         provide(new FindTargetNode());
+
+        /*
+        Loop Tasks
+         */
         getContainer().submit(new EatFood());
         getContainer().submit(new UseAbilities());
-        //provide(new hillgiantkiller.nodes.LootNode());
+        getContainer().submit(new GiantCounter());
 
     }
 
