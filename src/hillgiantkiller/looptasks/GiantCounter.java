@@ -1,6 +1,7 @@
 package hillgiantkiller.looptasks;
 
-import hillgiantkiller.nodes.FindTargetNode;
+import hillgiantkiller.other.Methods;
+import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Var;
 import org.powerbot.core.script.job.LoopTask;
 import org.powerbot.core.script.job.Task;
@@ -17,8 +18,17 @@ public class GiantCounter extends LoopTask {
 
         if(Var.theGiant != null && Var.theGiant.validate()){
             if (Var.theGiant.getAnimation() == Var.deathID) {
-                FindTargetNode.counter++;
-                Task.sleep(1000);
+                Var.lootLocation = Var.theGiant.getLocation();
+                Paint.giantsKilled++;
+                Task.sleep(3000);
+
+                if(Methods.droppedLoot()== true){
+                    System.out.println("There is loot here");
+                }else{
+                    System.out.println("No loot here");
+
+                }
+
             }
         }
         return Random.nextInt(250,300);

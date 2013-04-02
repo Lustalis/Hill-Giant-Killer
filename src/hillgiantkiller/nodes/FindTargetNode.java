@@ -1,6 +1,7 @@
 package hillgiantkiller.nodes;
 
 import hillgiantkiller.other.Methods;
+import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Var;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
@@ -31,7 +32,7 @@ public class FindTargetNode extends Node {
         Var.theGiant = Methods.getMonster();
 
         if(Var.theGiant != null){
-            System.out.println("Killed this many nigguhs: "+counter);
+            System.out.println("Killed this many nigguhs: "+ Paint.giantsKilled);
             System.out.println("Found npc!!!");
             if(!Methods.isOnScreen(Var.theGiant)){
                 Camera.turnTo(Var.theGiant);
@@ -44,7 +45,7 @@ public class FindTargetNode extends Node {
             Var.theGiant.interact("Attack");
             Methods.waitForCombat();
 
-            Var.lootLocation = Var.theGiant.getLocation();
+
 
         }
 

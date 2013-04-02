@@ -3,7 +3,6 @@ package hillgiantkiller.other;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Game;
-import org.powerbot.game.api.methods.Tabs;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
@@ -155,19 +154,26 @@ public class Methods{
 
     }
 
-    //gets all the loot at a selected tile
-    //then loops through all the loot to see if its
-    //anything you want
-    public static boolean tileContainsLoot(Tile t){
-        GroundItem[] x = GroundItems.getLoadedAt(t.getX(), t.getY());
-        for(GroundItem i: x){
-            for(int s: Var.lootIds){
-                if(i.getId()==s){
-                    return true;
+
+    public static boolean droppedLoot(){
+        //TODO: make this method save tiles that it finds loot on
+        Tile x = Var.lootLocation;
+        if(x!= null){
+            Area lootZone = new Area(new Tile(x.getX() + 1, x.getY() + 1, Game.getPlane())
+                    ,new Tile(x.getX() - 1, x.getY() - 1, Game.getPlane()) );
+            for(Tile t: lootZone.getTileArray()){
+                GroundItem[] potential = GroundItems.getLoadedAt(t.getX(),t.getY());
+                for(GroundItem p: potential){
+                    for(int i: Var.lootIds){
+                        if(i == p.getId()){
+                            return true;
+                        }
+                    }
                 }
             }
         }
         return false;
+
     }
 
 
