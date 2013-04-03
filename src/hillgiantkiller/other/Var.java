@@ -2,12 +2,16 @@ package hillgiantkiller.other;
 
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.util.Filter;
+import org.powerbot.game.api.util.net.GeItem;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.node.GroundItem;
+import org.powerbot.game.api.wrappers.node.Item;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Vector;
 
 /**
  * Created with IntelliJ IDEA.
@@ -46,9 +50,12 @@ public class Var {
     public static Tile deathLocation = null;
     public static ArrayList<Tile> lootLocations = new ArrayList<>();
     public static final int foodIds = 373;
-    public static int[] lootIds = {532, 533, 17974, 17675, 225, 226} ;  //just hill giant bones right now
+    public static int[] lootIds = {532, 225} ;  //just hill giant bones right now
     public static final int HEAL_PERCENT = 50;
     public static final int DEATH_ID = 4653;
+    public static final int EATING_ID = 18001;
+    public static boolean isLooting = false;
+    public static boolean isAdding = false;
 
     /*
     Scene Entity stuff
@@ -82,6 +89,47 @@ public class Var {
                 return true;
             }
             return false;
+        }
+    };
+
+    private final Filter<GroundItem> LootFilter = new Filter<GroundItem>() {
+
+        private final Hashtable<Integer, Integer> PriceTable = new Hashtable<Integer, Integer>();
+
+        private int MIN_PRICE = 1000;
+
+        public boolean accept(GroundItem loot) {
+            final Item item = loot.getGroundItem();
+
+            if (item == null)
+                return false;
+
+            Integer price = PriceTable.get(item.getId());
+            if (price == null) {
+                new PriceLoader(item.getId()).start();
+                PriceTable.put(item.getId(), 0);
+                price = 0;
+            }
+            return price * item.getStackSize() >= MIN_PRICE;
+        }
+
+        class PriceLoader extends Thread {
+
+            private final int ItemId;
+
+            public PriceLoader(final int ItemId) {
+                this.ItemId = ItemId;
+            }
+
+            @Override
+            public void run() {
+                GeItem geInfo = GeItem.lookup(ItemId);
+                if(geInfo == null) {
+                    geInfo = GeItem.lookup(ItemId-1);
+                }
+                PriceTable.put(ItemId, geInfo != null ? geInfo.getPrice() : 0);
+            }
+
         }
     };
 

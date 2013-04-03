@@ -62,17 +62,17 @@ public class Methods{
         }
     }
 
-    public static void waitForInvChange(){
+    public static void waitForInvChange(final int item){
         Timer t = new Timer(3000);
-        final int a = Inventory.getCount();
+        final int a = Inventory.getCount(item);
         Condition x = new Condition() {
             @Override
             public boolean accept() {
-                return a != Inventory.getCount();
+                return a != Inventory.getCount(item);
             }
         };
         while(t.isRunning() && !x.accept()){
-            Task.sleep(100, 399);
+            Task.sleep(50, 150);
         }
     }
 
@@ -81,12 +81,40 @@ public class Methods{
         Condition x = new Condition() {
             @Override
             public boolean accept() {
-                return Methods.isOnScreen(n) && Calculations.distanceTo(n) <= 3;
+                return isOnScreen(n) && Calculations.distanceTo(n) <= 3;
             }
         };
 
         while(t.isRunning() && !x.accept()){
             Task.sleep(150, 300);
+        }
+    }
+
+    public static void waitForOnScreen(final GroundItem n){
+        Timer t = new Timer(3000);
+        Condition x = new Condition() {
+            @Override
+            public boolean accept() {
+                return isOnScreen(n) && Calculations.distanceTo(n) <= 3;
+            }
+        };
+
+        while(t.isRunning() && !x.accept()){
+            Task.sleep(150, 300);
+        }
+    }
+
+    public static void waitForDrop(){
+        Timer t = new Timer(3000);
+        Condition x = new Condition() {
+            @Override
+            public boolean accept() {
+                return  droppedLoot();
+            }
+        };
+
+        while(t.isRunning() && !x.accept()){
+            Task.sleep(150,350);
         }
     }
 
@@ -156,8 +184,14 @@ public class Methods{
                 for(GroundItem p: potential){
                     for(int i: Var.lootIds){
                         if(i == p.getId()){
-                            Var.lootLocations.add(t);
-                            System.out.println("Tiles in list: "+Var.lootLocations.size());
+                            if(Var.lootLocations.size() == 0){
+                                System.out.println("Added tile(method)");
+                                Var.lootLocations.add(t);
+                            }else if(Var.lootLocations.size() >0 && !Var.lootLocations.contains(t)){
+                                System.out.println("Added tile(method)");
+                                Var.lootLocations.add(t);
+                            }
+                            System.out.println("Tiles in list(method): "+Var.lootLocations.size());
                             return true;
                         }
                     }
