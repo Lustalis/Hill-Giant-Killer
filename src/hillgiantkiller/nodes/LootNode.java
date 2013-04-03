@@ -9,6 +9,7 @@ import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.widget.Camera;
+import org.powerbot.game.api.util.net.GeItem;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.node.GroundItem;
@@ -37,12 +38,37 @@ public class LootNode extends Node {
         Var.isLooting = true;
         System.out.println("Tiles in list: "+Var.lootLocations.size());
         for(Iterator<Tile> t = Var.lootLocations.iterator(); t.hasNext();){
-            //currentIndex = Var.lootLocations.indexOf(t);
             Tile tile = t.next();
             GroundItem[] item = GroundItems.getLoadedAt(tile.getX(), tile.getY());
             for(GroundItem i: item){
-                for(int x: Var.lootIds){
-                    if(x == i.getId()){
+
+
+                if (Var.lootIds.contains(i.getId())) {
+                    //Making sure item is on screen
+                    if(!Methods.isOnScreen(i)){
+                        Camera.turnTo(i);
+                        Task.sleep(500);
+                        if(!Methods.isOnScreen(i)){
+                            Walking.walk(i);
+                            Methods.waitForOnScreen(i);
+                        }
+                    }
+                    i.interact("Take", i.getGroundItem().getName());
+                    Methods.waitForInvChange(i.getId());
+                    System.out.println("Picked up: " +i.getGroundItem().getName());
+                } else if(!Var.priceTable.containsKey(i.getId())){
+                    System.out.println("Item no in list: "+i.getGroundItem().getName()+". Looking up price");
+                    Var.priceTable.put(i.getId(),0);
+                    new PriceLoader(i.getId()).start();
+                    while(Var.priceTable.get(i.getId()) == 0){
+                        Task.sleep(50,100);
+                    }
+                    int price = Var.priceTable.get(i.getId());
+                    System.out.println("Item price: "+Var.priceTable.get(i.getId()));
+                    if((price != -1) && price*i.getGroundItem().getStackSize() >= Var.MIN_PRICE){
+                        System.out.println("Added to list");
+                        Var.lootIds.add(i.getId());
+
                         //Making sure item is on screen
                         if(!Methods.isOnScreen(i)){
                             Camera.turnTo(i);
@@ -53,14 +79,35 @@ public class LootNode extends Node {
                             }
                         }
                         i.interact("Take", i.getGroundItem().getName());
-                        Methods.waitForInvChange(x);
+                        Methods.waitForInvChange(i.getId());
                         System.out.println("Picked up: " +i.getGroundItem().getName());
+
                     }
                 }
+
+
             }
 
             t.remove();
         }
-        //Var.lootLocations.iterator().remove(currentIndex);
+    }
+
+    class PriceLoader extends Thread {
+
+        private final int itemId;
+
+        public PriceLoader(final int itemId) {
+            this.itemId = itemId;
+        }
+
+        @Override
+        public void run() {
+            GeItem geInfo = GeItem.lookup(itemId);
+            if(geInfo == null) {
+                geInfo = GeItem.lookup(itemId -1);
+            }
+            Var.priceTable.put(itemId, geInfo != null ? geInfo.getPrice() : -1);
+        }
+
     }
 }

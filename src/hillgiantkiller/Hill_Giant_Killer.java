@@ -4,6 +4,7 @@ import hillgiantkiller.looptasks.AfterGiantDead;
 import hillgiantkiller.looptasks.EatFood;
 import hillgiantkiller.looptasks.UseAbilities;
 import hillgiantkiller.nodes.*;
+import hillgiantkiller.other.Var;
 import org.powerbot.core.Bot;
 import org.powerbot.core.event.listeners.PaintListener;
 import org.powerbot.core.script.ActiveScript;
@@ -43,6 +44,9 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
 
         System.out.println("Script start");
         Camera.setPitch(true);
+
+        Var.lootIds.add(532);
+        Var.lootIds.add(225);
         /*
         Nodes
          */

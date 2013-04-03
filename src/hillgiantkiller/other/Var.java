@@ -48,14 +48,23 @@ public class Var {
     public static final int[] NPC_IDS = {117, 4689, 4690, 4691, 4692, 4693};
     public static NPC theGiant = null;
     public static Tile deathLocation = null;
-    public static ArrayList<Tile> lootLocations = new ArrayList<>();
     public static final int foodIds = 373;
-    public static int[] lootIds = {532, 225} ;  //just hill giant bones right now
     public static final int HEAL_PERCENT = 50;
     public static final int DEATH_ID = 4653;
     public static final int EATING_ID = 18001;
+
+
+    /*
+    Looting stuff
+     */
     public static boolean isLooting = false;
     public static boolean isAdding = false;
+    //public static int[] lootIds = {532, 225} ;  //just hill giant bones right now
+    public static ArrayList<Integer> lootIds =  new ArrayList<>();
+    public static ArrayList<Tile> lootLocations = new ArrayList<>();
+    public static Hashtable<Integer, Integer> priceTable = new Hashtable<>();
+    public static final int MIN_PRICE = 1000;
+
 
     /*
     Scene Entity stuff

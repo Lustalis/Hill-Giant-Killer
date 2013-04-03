@@ -9,6 +9,7 @@ import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.SceneEntities;
+import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.map.TilePath;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
@@ -23,6 +24,7 @@ public class WalkToBank extends Node {
 
     final TilePath pathToBank = Walking.newTilePath(Var.PATH_2);
     SceneObject stairUp = null;
+    public static boolean walkToBank = false;
 
     @Override
     public boolean activate() {
@@ -31,24 +33,30 @@ public class WalkToBank extends Node {
 
     @Override
     public void execute() {
-        Var.theGiant = NPCs.getNearest(Var.NPC_IDS);
+        NPC x = NPCs.getNearest(Var.NPC_IDS);
 
-        if(Var.theGiant != null){
+        if(!Var.DUNG_AREA.contains(Players.getLocal()) && !walkToBank){
             //takes the stairs out of of the dungeon
             System.out.println("In the dungeon; going up");
             stairUp = SceneEntities.getNearest(Var.STAIRS_UP);
-            if(Calculations.distanceTo(stairUp) >=8){    //if far from stairs walk to them first
+            if(Calculations.distanceTo(stairUp) >=8 && stairUp != null){    //if far from stairs walk to them first
                 Walking.walk(stairUp);
                 Methods.waitForArea(Var.INSIDE_DUNG_AREA);
+                System.out.println("Interacting with the ladder going up");
+                stairUp.interact("Climb-up");
+                Methods.waitForArea(Var.DUNG_AREA);
             }
-            System.out.println("Interacting with the ladder going up");
-            stairUp.interact("Climb-up");
-            Methods.waitForArea(Var.DUNG_AREA);
 
+
+
+        }else if(x == null && !walkToBank){
             SceneObject door = SceneEntities.getNearest(Var.DOOR_ID);
             if(door != null){
+                System.out.println("Opening door");
                 door.interact("Open");
+                walkToBank = true;
             }
+
         }else{
             pathToBank.traverse();
         }
