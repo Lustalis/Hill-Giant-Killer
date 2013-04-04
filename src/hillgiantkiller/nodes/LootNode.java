@@ -14,6 +14,7 @@ import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.node.GroundItem;
 
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -37,12 +38,13 @@ public class LootNode extends Node {
         System.out.println("In the loot node");
         Var.isLooting = true;
         System.out.println("Tiles in list: "+Var.lootLocations.size());
+        Collections.reverse(Var.lootLocations);
         for(Iterator<Tile> t = Var.lootLocations.iterator(); t.hasNext();){
             Tile tile = t.next();
             GroundItem[] item = GroundItems.getLoadedAt(tile.getX(), tile.getY());
             for(GroundItem i: item){
 
-
+                //
                 if (Var.lootIds.contains(i.getId())) {
                     //Making sure item is on screen
                     if(!Methods.isOnScreen(i)){
