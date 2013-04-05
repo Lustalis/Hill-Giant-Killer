@@ -17,7 +17,7 @@ import org.powerbot.game.api.methods.widget.Bank;
 public class BankNode extends Node {
     @Override
     public boolean activate() {
-        return Var.BANK_AREA.contains(Players.getLocal()) && (!Methods.haveFood(Var.foodIds) || Methods.fullInv());
+        return Var.BANK_AREA.contains(Players.getLocal()) && (!Methods.haveFood(Var.foodId) || Methods.fullInv());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class BankNode extends Node {
         }
 
         Bank.depositInventory();
-        Bank.withdraw(Var.foodIds, 15);
+        Bank.withdraw(Var.foodId, 15);
         Bank.withdraw(983, 1);
         Bank.close();
         WalkToBank.walkToBank = false;

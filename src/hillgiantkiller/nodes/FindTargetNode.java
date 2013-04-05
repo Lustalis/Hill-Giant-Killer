@@ -21,7 +21,7 @@ public class FindTargetNode extends Node {
     @Override
     public boolean activate() {
         NPC x = NPCs.getNearest(Var.NPC_IDS);
-        return  !Methods.needToLoot() && Methods.haveFood(Var.foodIds) && !Methods.fullInv() && (interacting() == null || !interacting().validate())
+        return  !Methods.needToLoot() && Methods.haveFood(Var.foodId) && !Methods.fullInv() && (interacting() == null || !interacting().validate())
                 && (x != null) && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
                 && !Players.getLocal().isMoving();
     }

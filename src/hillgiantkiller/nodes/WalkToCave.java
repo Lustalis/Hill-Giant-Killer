@@ -28,7 +28,7 @@ public class WalkToCave extends Node {
     @Override
     public boolean activate() {
         NPC x = NPCs.getNearest(Var.NPC_IDS);
-        return ((Methods.haveFood(Var.foodIds) && x == null && !Methods.fullInv()));
+        return ((Methods.haveFood(Var.foodId) && x == null && !Methods.fullInv()));
     }
 
     @Override

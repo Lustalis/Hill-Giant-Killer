@@ -19,7 +19,7 @@ public class HillGiantGUI extends JFrame {
     private JTextField foodAmount;
     private JTextField txtLootAfter;
     private final ButtonGroup buttonGroup = new ButtonGroup();
-    private JTextField textField;
+    private JTextField txtLootPrice;
 
     /**
      * Launch the application.
@@ -175,11 +175,6 @@ public class HillGiantGUI extends JFrame {
         );
 
         JRadioButton btnUseAbilities = new JRadioButton("Use abilities");
-        btnUseAbilities.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-
 
         final JRadioButton btnUseMomentum = new JRadioButton("Use Momentum");
         buttonGroup.add(btnUseMomentum);
@@ -248,13 +243,13 @@ public class HillGiantGUI extends JFrame {
                                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        JRadioButton btnShouldBurry = new JRadioButton("Burry Bones");
+        final JRadioButton btnShouldBurry = new JRadioButton("Burry Bones");
         btnShouldBurry.setEnabled(false);
 
-        JRadioButton btnEatFoodForLoot = new JRadioButton("Eat food for space");
+        final JRadioButton btnEatFoodForLoot = new JRadioButton("Eat food for space");
         btnEatFoodForLoot.setEnabled(false);
 
-        JRadioButton btnShouldLoot = new JRadioButton("Should loot");
+        final JRadioButton btnShouldLoot = new JRadioButton("Should loot");
 
         JLabel lblNewLabel = new JLabel("Loot after");
 
@@ -265,14 +260,15 @@ public class HillGiantGUI extends JFrame {
 
         JLabel lblKill = new JLabel("kill(s)");
 
-        JRadioButton btnLootByPrice = new JRadioButton("Loot by price");
+        final JRadioButton btnLootByPrice = new JRadioButton("Loot by price");
         btnLootByPrice.setEnabled(false);
 
         JLabel lblAnythingOver = new JLabel("Anything over");
 
-        textField = new JTextField();
-        textField.setEnabled(false);
-        textField.setColumns(10);
+        txtLootPrice = new JTextField();
+        txtLootPrice.setText("1000");
+        txtLootPrice.setEnabled(false);
+        txtLootPrice.setColumns(10);
         GroupLayout gl_panel_4 = new GroupLayout(panel_4);
         gl_panel_4.setHorizontalGroup(
                 gl_panel_4.createParallelGroup(Alignment.LEADING)
@@ -283,7 +279,7 @@ public class HillGiantGUI extends JFrame {
                                                 .addGap(21)
                                                 .addComponent(lblAnythingOver)
                                                 .addPreferredGap(ComponentPlacement.UNRELATED)
-                                                .addComponent(textField, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtLootPrice, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(39))
                                         .addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
                                                 .addGroup(gl_panel_4.createSequentialGroup()
@@ -315,7 +311,7 @@ public class HillGiantGUI extends JFrame {
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
                                         .addComponent(lblAnythingOver)
-                                        .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtLootPrice, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
                                         .addComponent(lblNewLabel)
@@ -328,7 +324,7 @@ public class HillGiantGUI extends JFrame {
         JScrollBar scrollBar = new JScrollBar();
         panel_3.add(scrollBar);
 
-        JList lootList = new JList();
+        final JList lootList = new JList();
         panel_3.setViewportView(lootList);
         lootList.setEnabled(false);
         panel_3.setViewportView(lootList);
@@ -347,21 +343,21 @@ public class HillGiantGUI extends JFrame {
         JPanel startPanel = new JPanel();
         tabbedPane.addTab("Start", null, startPanel, null);
 
-        JButton btnNewButton = new JButton("START");
-        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 33));
+        JButton btnStart = new JButton("START");
+        btnStart.setFont(new Font("Tahoma", Font.PLAIN, 33));
         GroupLayout gl_startPanel = new GroupLayout(startPanel);
         gl_startPanel.setHorizontalGroup(
                 gl_startPanel.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_startPanel.createSequentialGroup()
                                 .addGap(93)
-                                .addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnStart, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(94, Short.MAX_VALUE))
         );
         gl_startPanel.setVerticalGroup(
                 gl_startPanel.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_startPanel.createSequentialGroup()
                                 .addGap(66)
-                                .addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnStart, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(83, Short.MAX_VALUE))
         );
         startPanel.setLayout(gl_startPanel);
@@ -407,7 +403,44 @@ public class HillGiantGUI extends JFrame {
             }
         });
 
-        //TODO: finsh adding actionlisteners to all the buttons
+        btnShouldLoot.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(btnShouldLoot.isSelected()){
+                    btnShouldBurry.setEnabled(true);
+                    if(btnEatFood.isSelected())btnEatFoodForLoot.setEnabled(true);
+                    btnLootByPrice.setEnabled(true);
+                    txtLootPrice.setEnabled(true);
+                    txtLootAfter.setEnabled(true);
+                    lootList.setEnabled(true);
+
+                }else{
+                    btnShouldBurry.setEnabled(false);
+                    btnShouldBurry.setSelected(false);
+
+                    btnEatFoodForLoot.setEnabled(false);
+                    btnEatFoodForLoot.setSelected(false);
+
+                    btnLootByPrice.setEnabled(false);
+                    btnLootByPrice.setSelected(false);
+
+                    txtLootPrice.setEnabled(false);
+                    txtLootPrice.setText("");
+
+                    txtLootAfter.setEnabled(false);
+                    txtLootAfter.setText("1");
+                    lootList.setEnabled(false);
+                    lootList.clearSelection();
+                }
+            }
+        });
+
+        btnStart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
 
 

@@ -48,7 +48,6 @@ public class Var {
     public static final int[] NPC_IDS = {117, 4689, 4690, 4691, 4692, 4693};
     public static NPC theGiant = null;
     public static Tile deathLocation = null;
-    public static final int foodIds = 373;
     public static final int HEAL_PERCENT = 50;
     public static final int DEATH_ID = 4653;
     public static final int EATING_ID = 18001;
@@ -73,6 +72,31 @@ public class Var {
     public static final int DOOR_ID = 1804;
     public static final int STAIRS_DOWN = 12389;
     public static final int STAIRS_UP = 29355;
+
+    /*
+    GUI Variables
+     */
+
+    public static boolean useAbilities = false;
+    public static boolean useMomentum = false;
+    public static boolean useRejuvenate = false;
+
+    public static boolean eatFood = false;
+    public static int foodId = 373;
+    public static int withdrawFoodAmount = 15;
+
+    public static int skillTraining = 1;
+
+    public static int[] itemsSelected;
+    public static boolean shouldLoot = false;
+    public static boolean burryBones = false;
+    public static boolean eatFoodForSpace = false;
+    public static boolean lootByPrice = false;
+    public static int minPriceToLoot = 1000;
+    public static int lootAfter = 1;
+
+
+
 
     /*
     Filters

@@ -2,7 +2,6 @@ package hillgiantkiller.nodes;
 
 import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Var;
-import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Walking;
@@ -28,7 +27,7 @@ public class WalkToBank extends Node {
 
     @Override
     public boolean activate() {
-        return !Var.BANK_AREA.contains(Players.getLocal()) && (!Methods.haveFood(Var.foodIds) || Methods.fullInv());
+        return !Var.BANK_AREA.contains(Players.getLocal()) && (!Methods.haveFood(Var.foodId) || Methods.fullInv());
     }
 
     @Override

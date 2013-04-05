@@ -17,8 +17,8 @@ public class EatFood extends LoopTask {
     @Override
     public int loop() {
 
-        if(Methods.needToHeal(Var.HEAL_PERCENT) && Methods.haveFood(Var.foodIds)){
-            Inventory.getItem(Var.foodIds).getWidgetChild().interact("Eat");
+        if(Methods.needToHeal(Var.HEAL_PERCENT) && Methods.haveFood(Var.foodId)){
+            Inventory.getItem(Var.foodId).getWidgetChild().interact("Eat");
         }
 
         return Random.nextInt(50, 100);

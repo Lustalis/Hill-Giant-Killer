@@ -33,6 +33,7 @@ import java.util.ArrayList;
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
     public static ArrayList<Node> nodeCollection = new ArrayList<>();
     private Client client = Bot.client();
+    public static boolean guiWait = true;
 
     public void provide(Node node){
         if(node != null){
