@@ -174,7 +174,6 @@ public class Methods{
 
 
     public static boolean droppedLoot(){
-        //TODO: make this method save tiles that it finds loot on
         Tile x = Var.deathLocation;
         if(x!= null){
             Area lootZone = new Area(new Tile(x.getX() + 1, x.getY() + 1, Game.getPlane())
