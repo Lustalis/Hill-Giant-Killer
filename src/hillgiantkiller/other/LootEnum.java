@@ -39,7 +39,7 @@ public enum LootEnum {
     DWARF_WEED("Grimy Dwarf Weed",217),
     CADANTINE("Grimy Cadantine",215),
     LANTADYME("Lantadyme",2481),
-
+    SPACE4(" ",1),
     LIMPWURT("Limpwurt Root",225),
     BODY_TAL("Body talisman",1446),
     CHAMPION_SCROLL("Champion scroll",6802);
@@ -65,14 +65,8 @@ public enum LootEnum {
         return getName();
     }
 
-
-    public static <T extends Enum<T>> String[] toStringArray(T[] values) {
-        int i = 0;
-        String[] result = new String[values.length];
-        for (T value: values) {
-            result[i++] = value.toString();
-        }
-        return result;
+    public static LootEnum[] allItems(){
+        return LootEnum.values();
     }
 
 

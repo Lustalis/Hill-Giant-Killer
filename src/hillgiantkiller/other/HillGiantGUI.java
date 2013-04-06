@@ -329,8 +329,8 @@ public class HillGiantGUI extends JFrame {
         lootList.setEnabled(false);
         panel_3.setViewportView(lootList);
         lootList.setAutoscrolls(false);
-        lootList.setModel(new AbstractListModel() {
-            String[] values = LootEnum.toStringArray(LootEnum.values());
+        lootList.setModel(new DefaultListModel() {
+            LootEnum[] values = LootEnum.allItems();
             public int getSize() {
                 return values.length;
             }
