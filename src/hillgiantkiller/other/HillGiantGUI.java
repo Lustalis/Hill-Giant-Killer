@@ -174,7 +174,7 @@ public class HillGiantGUI extends JFrame {
                                 .addContainerGap())
         );
 
-        JRadioButton btnUseAbilities = new JRadioButton("Use abilities");
+        final JRadioButton btnUseAbilities = new JRadioButton("Use abilities");
 
         final JRadioButton btnUseMomentum = new JRadioButton("Use Momentum");
         buttonGroup.add(btnUseMomentum);
@@ -330,7 +330,7 @@ public class HillGiantGUI extends JFrame {
         panel_3.setViewportView(lootList);
         lootList.setAutoscrolls(false);
         lootList.setModel(new AbstractListModel() {
-            String[] values = new String[] {"Gold Charm", "Green Charm", "Crimson Charm", "Blue Charm", "All Charms", " ", "Mith Arrow", "Addy Arrow", "Both", " ", "Water run", "Fire Run", "Cosmic rune", "Law rune", "Nature rune", "Mind rune", "Death rune", "Chaos rune", " ", "Guam", "Marrentill", "Tarromin", "Ranarr", "Harralander", "Irit", "Avantoe", "Kwuarm", "Dwarf weed", "Cadantine", "Lantadyme", " ", "Limpwurt root", "Body talisman", "Champion scroll"};
+            String[] values = LootEnum.toStringArray(LootEnum.values());
             public int getSize() {
                 return values.length;
             }
@@ -410,7 +410,6 @@ public class HillGiantGUI extends JFrame {
                     btnShouldBurry.setEnabled(true);
                     if(btnEatFood.isSelected())btnEatFoodForLoot.setEnabled(true);
                     btnLootByPrice.setEnabled(true);
-                    txtLootPrice.setEnabled(true);
                     txtLootAfter.setEnabled(true);
                     lootList.setEnabled(true);
 
@@ -425,7 +424,7 @@ public class HillGiantGUI extends JFrame {
                     btnLootByPrice.setSelected(false);
 
                     txtLootPrice.setEnabled(false);
-                    txtLootPrice.setText("");
+                    txtLootPrice.setText("1000");
 
                     txtLootAfter.setEnabled(false);
                     txtLootAfter.setText("1");
@@ -435,9 +434,30 @@ public class HillGiantGUI extends JFrame {
             }
         });
 
+        btnLootByPrice.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(btnShouldLoot.isSelected() && btnLootByPrice.isSelected()){
+                    txtLootPrice.setEnabled(true);
+                }else{
+                    txtLootPrice.setEnabled(false);
+                    txtLootPrice.setText("1000");
+                }
+            }
+        });
+
         btnStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(btnUseAbilities.isSelected()){
+                    Var.useAbilities = true;
+                    if(btnUseMomentum.isSelected()) Var.useMomentum = true;
+                    if(btnUseRejuvenate.isSelected()) Var.useRejuvenate = true;
+
+                }
+                if(btnEatFood.isSelected()){
+
+                }
 
             }
         });
