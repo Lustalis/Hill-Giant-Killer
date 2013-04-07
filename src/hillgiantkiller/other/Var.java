@@ -11,7 +11,6 @@ import org.powerbot.game.api.wrappers.node.Item;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Vector;
 
 /**
  * Created with IntelliJ IDEA.

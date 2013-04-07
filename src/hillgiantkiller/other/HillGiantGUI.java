@@ -66,7 +66,7 @@ public class HillGiantGUI extends JFrame {
 
         final JComboBox foodList = new JComboBox();
         foodList.setEnabled(false);
-        foodList.setModel(new DefaultComboBoxModel(new String[] {"Lobster", "Swordfish", "Shark", "Monkfish", "Custom ID"}));
+        foodList.setModel(new DefaultComboBoxModel(FoodEnum.values()));
 
         customFood = new JTextField();
         customFood.setEnabled(false);
@@ -76,6 +76,7 @@ public class HillGiantGUI extends JFrame {
         JLabel lblWithdraw = new JLabel("Withdraw");
 
         foodAmount = new JTextField();
+        foodAmount.setText("15");
         foodAmount.setEnabled(false);
         foodAmount.setColumns(10);
 
@@ -123,7 +124,7 @@ public class HillGiantGUI extends JFrame {
 
         JLabel lblTrainingWhatSkill = new JLabel("Training what skill: ");
 
-        JComboBox skillTraining = new JComboBox();
+        final JComboBox skillTraining = new JComboBox();
         skillTraining.setModel(new DefaultComboBoxModel(new String[] {"Attack", "Strength", "Defense", "[A,S,D]", "Ranged", "Magic"}));
         GroupLayout gl_panel_2 = new GroupLayout(panel_2);
         gl_panel_2.setHorizontalGroup(
@@ -399,6 +400,10 @@ public class HillGiantGUI extends JFrame {
                 String x = String.valueOf(foodList.getSelectedItem());
                 if(x.equalsIgnoreCase("custom id")){
                     customFood.setEnabled(true);
+                    customFood.setText("");
+                }else{
+                    customFood.setEnabled(false);
+                    customFood.setText("Custom ID");
                 }
             }
         });
@@ -456,8 +461,19 @@ public class HillGiantGUI extends JFrame {
 
                 }
                 if(btnEatFood.isSelected()){
+                    Var.eatFood = true;
+                    FoodEnum temp = (FoodEnum) foodList.getSelectedItem();
+                    if(temp.getId() == 1){
+                        Var.foodId = Integer.parseInt(customFood.getText());
+                    }else{
+                        Var.foodId = temp.getId();
+                    }
+                    Var.withdrawFoodAmount = Integer.parseInt(foodAmount.getText());
 
                 }
+                Var.skillTraining = skillTraining.getSelectedIndex();
+
+
 
             }
         });

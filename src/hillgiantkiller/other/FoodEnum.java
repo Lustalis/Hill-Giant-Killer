@@ -8,10 +8,10 @@ package hillgiantkiller.other;
  * To change this template use File | Settings | File Templates.
  */
 public enum FoodEnum {
-    LOBSTER("Lobster",1),
-    SWORDFISH("Swordfish",1),
-    SHARK("Shark",1),
-    MONKFISH("Monkfish",1),
+    LOBSTER("Lobster",379),
+    SWORDFISH("Swordfish",373),
+    SHARK("Shark",385),
+    MONKFISH("Monkfish",7946),
     CUSTOMID("Custom ID",1);
 
     private int id;
@@ -23,7 +23,18 @@ public enum FoodEnum {
 
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 
 
 }
