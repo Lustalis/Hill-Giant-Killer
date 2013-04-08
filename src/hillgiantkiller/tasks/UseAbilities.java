@@ -1,5 +1,6 @@
 package hillgiantkiller.tasks;
 
+import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Var;
 import hillgiantkiller.sk.action.ActionBar;
 import org.powerbot.core.script.job.LoopTask;
@@ -25,26 +26,19 @@ public class UseAbilities extends LoopTask {
                 ActionBar.setExpanded(true);
             }
 
-            if(Var.useRejuvenate){
-                if(ActionBar.getAdrenaline() == 1000 && ActionBar.getAbilityInSlot(0).available()){
-                    ActionBar.useSlot(0);
-                }
-                for(int i = 1; i<12; i++){
-                    if(ActionBar.isReady(i)){
-                        ActionBar.useSlot(i);
-                    }
+            int x = Var.useRejuvenate ? 1: 0;
 
-                }
-            }else{
-                for(int i = 0; i<12; i++){
-                    if(ActionBar.isReady(i)){
-                        ActionBar.useSlot(i);
-                    }
-
-                }
+            if(Var.useRejuvenate && Methods.getHpPercent() <= 60 && ActionBar.getAdrenaline() == 1000
+                    && ActionBar.getAbilityInSlot(0).available()){
+                ActionBar.useSlot(0);
             }
 
+            for(int i = x; i<12; i++){
+                if(ActionBar.isReady(i)){
+                    ActionBar.useSlot(i);
+                }
 
+            }
 
         }
 

@@ -135,7 +135,7 @@ public class Methods{
 
     }
 
-    private static int getHpPercent() {
+    public static int getHpPercent() {
         return Math.abs(100 - 100 * Widgets.get(748, 5).getHeight() / 28);
     }
 

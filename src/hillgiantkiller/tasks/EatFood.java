@@ -17,6 +17,7 @@ public class EatFood extends LoopTask {
 
         if(Methods.needToHeal() && Methods.haveFood(Var.foodId)){
             Inventory.getItem(Var.foodId).getWidgetChild().interact("Eat");
+            Var.theGiant.interact("Attack");
         }
 
         return Random.nextInt(50, 100);

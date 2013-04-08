@@ -28,7 +28,8 @@ import java.util.ArrayList;
  * Date: 3/27/13
  * Time: 8:26 AM
  */
-@Manifest(authors = { "Kirinsoul" }, description = "Fuck wit dem hill gIants", name = "Giant fucker", version = 1.0)
+@Manifest(authors = { "Kirinsoul" }, description = "Kills Hill Giant and loots all their shit, then banks and repeats",
+        name = "Giant fucker", version = 1.0)
 
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
     private static ArrayList<Node> nodeCollection = new ArrayList<>();
