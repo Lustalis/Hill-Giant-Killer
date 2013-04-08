@@ -11,19 +11,34 @@ import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Administrator
  * Date: 3/28/13
  * Time: 10:07 AM
- * To change this template use File | Settings | File Templates.
  */
 public class FindTargetNode extends Node {
     @Override
     public boolean activate() {
         NPC x = NPCs.getNearest(Var.NPC_IDS);
-        return  !Methods.needToLoot() && Methods.haveFood(Var.foodId) && !Methods.fullInv() && (interacting() == null || !interacting().validate())
-                && (x != null) && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
-                && !Players.getLocal().isMoving();
+        if(Var.shouldLoot && Var.eatFood){
+            return  !Methods.needToLoot() && Methods.haveFood(Var.foodId) && !Methods.fullInv() && (interacting() == null || !interacting().validate())
+                    && (x != null) && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
+                    && !Players.getLocal().isMoving() && !Var.isAdding;
+        }else if(Var.eatFood){
+            return  Methods.haveFood(Var.foodId) && !Methods.fullInv() && (interacting() == null || !interacting().validate())
+                    && (x != null) && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
+                    && !Players.getLocal().isMoving();
+
+        }else if(Var.shouldLoot){
+            Methods.waitForDrop();
+            return  !Methods.needToLoot() && !Methods.fullInv() && (interacting() == null || !interacting().validate())
+                    && (x != null) && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
+                    && !Players.getLocal().isMoving();
+        }else{
+            return  !Methods.fullInv() && (interacting() == null || !interacting().validate())
+                    && (x != null) && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
+                    && !Players.getLocal().isMoving();
+        }
+
     }
 
     @Override
@@ -34,6 +49,7 @@ public class FindTargetNode extends Node {
         if(Var.theGiant != null){
             System.out.println("Killed this many nigguhs: "+ Paint.giantsKilled);
             System.out.println("Found npc!!!");
+            Camera.turnTo(Var.theGiant);
             if(!Methods.isOnScreen(Var.theGiant)){
                 Camera.turnTo(Var.theGiant);
                 if(!Methods.isOnScreen(Var.theGiant)){
@@ -41,9 +57,15 @@ public class FindTargetNode extends Node {
                 }
                 Methods.waitForOnScreen(Var.theGiant);
             }
-            System.out.println("Attacking");
-            Var.theGiant.interact("Attack");
-            Methods.waitForCombat();
+            if(!Var.theGiant.isInCombat()){
+                System.out.println("Attacking");
+                Var.theGiant.interact("Attack");
+                Methods.waitForCombat();
+
+            }else{
+                Var.theGiant = null;
+            }
+
 
 
 

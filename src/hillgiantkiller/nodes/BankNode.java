@@ -5,14 +5,14 @@ import hillgiantkiller.other.Var;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
+import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
+import org.powerbot.game.api.wrappers.node.Item;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Administrator
  * Date: 3/27/13
  * Time: 8:37 AM
- * To change this template use File | Settings | File Templates.
  */
 public class BankNode extends Node {
     @Override
@@ -31,7 +31,7 @@ public class BankNode extends Node {
         }
 
         Bank.depositInventory();
-        Bank.withdraw(Var.foodId, 15);
+        Bank.withdraw(Var.foodId, Var.withdrawFoodAmount);
         Bank.withdraw(983, 1);
         Bank.close();
         WalkToBank.walkToBank = false;

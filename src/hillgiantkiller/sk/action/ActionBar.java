@@ -20,6 +20,7 @@ import hillgiantkiller.sk.general.Completion;
 import hillgiantkiller.sk.general.TimedCondition;
 import hillgiantkiller.sk.tab.MainTabs;
 
+@SuppressWarnings("ALL")
 public class ActionBar {
 
 	private static final int CHATBOX_WIDGET = 137, TEXT_BAR = 56;

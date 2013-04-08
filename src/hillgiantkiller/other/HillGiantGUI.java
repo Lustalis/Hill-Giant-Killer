@@ -1,5 +1,7 @@
 package hillgiantkiller.other;
 
+import hillgiantkiller.Hill_Giant_Killer;
+
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -14,12 +16,11 @@ import java.awt.event.ItemListener;
 
 public class HillGiantGUI extends JFrame {
 
-    private JPanel contentPane;
-    private JTextField customFood;
-    private JTextField foodAmount;
-    private JTextField txtLootAfter;
+    private final JTextField customFood;
+    private final JTextField foodAmount;
+    private final JTextField txtLootAfter;
     private final ButtonGroup buttonGroup = new ButtonGroup();
-    private JTextField txtLootPrice;
+    private final JTextField txtLootPrice;
 
     /**
      * Launch the application.
@@ -42,9 +43,9 @@ public class HillGiantGUI extends JFrame {
      */
     public HillGiantGUI() {
         setTitle("Kirinsoul's Hill Giant Fighter");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(100, 100, 396, 326);
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
@@ -64,9 +65,10 @@ public class HillGiantGUI extends JFrame {
 
         final JRadioButton btnEatFood = new JRadioButton("Eat Food");
 
-        final JComboBox foodList = new JComboBox();
+        final JComboBox<FoodEnum> foodList = new JComboBox<>();
         foodList.setEnabled(false);
-        foodList.setModel(new DefaultComboBoxModel(FoodEnum.values()));
+        DefaultComboBoxModel<FoodEnum> fromEnum = new DefaultComboBoxModel<>(FoodEnum.values());
+        foodList.setModel(fromEnum);
 
         customFood = new JTextField();
         customFood.setEnabled(false);
@@ -124,8 +126,8 @@ public class HillGiantGUI extends JFrame {
 
         JLabel lblTrainingWhatSkill = new JLabel("Training what skill: ");
 
-        final JComboBox skillTraining = new JComboBox();
-        skillTraining.setModel(new DefaultComboBoxModel(new String[] {"Attack", "Strength", "Defense", "[A,S,D]", "Ranged", "Magic"}));
+        final JComboBox<String> skillTraining = new JComboBox<>();
+        skillTraining.setModel(new DefaultComboBoxModel<>(new String[] {"Attack", "Strength", "Defense", "[A,S,D]", "Ranged", "Magic"}));
         GroupLayout gl_panel_2 = new GroupLayout(panel_2);
         gl_panel_2.setHorizontalGroup(
                 gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -325,17 +327,19 @@ public class HillGiantGUI extends JFrame {
         JScrollBar scrollBar = new JScrollBar();
         panel_3.add(scrollBar);
 
-        final JList lootList = new JList();
+        final JList<LootEnum> lootList = new JList<>();
         panel_3.setViewportView(lootList);
         lootList.setEnabled(false);
         panel_3.setViewportView(lootList);
         lootList.setAutoscrolls(false);
-        lootList.setModel(new DefaultListModel() {
-            LootEnum[] values = LootEnum.allItems();
+        lootList.setModel(new DefaultListModel<LootEnum>() {
+            final LootEnum[] values = LootEnum.allItems();
+
             public int getSize() {
                 return values.length;
             }
-            public Object getElementAt(int index) {
+
+            public LootEnum getElementAt(int index) {
                 return values[index];
             }
         });
@@ -380,10 +384,10 @@ public class HillGiantGUI extends JFrame {
         btnEatFood.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!foodList.isEnabled() && !foodAmount.isEnabled()){
+                if (!foodList.isEnabled() && !foodAmount.isEnabled()) {
                     foodList.setEnabled(true);
                     foodAmount.setEnabled(true);
-                }else{
+                } else {
                     foodList.setEnabled(false);
                     foodList.setSelectedIndex(0);
                     foodAmount.setEnabled(false);
@@ -472,9 +476,39 @@ public class HillGiantGUI extends JFrame {
 
                 }
                 Var.skillTraining = skillTraining.getSelectedIndex();
+                if(btnShouldLoot.isSelected()){
+                    Var.shouldLoot = true;
+                    int tempLootAfter = Integer.parseInt(txtLootAfter.getText());
+                    if(tempLootAfter == 0){
+                        Var.lootAfter = 1;
+                        Var.shouldWaitForLoot = true;
+                    }
+                    Var.lootAfter = Integer.parseInt(txtLootAfter.getText());
+                    if(btnShouldBurry.isSelected()){
+                        Var.burryBones = true;
+                    }
+                    if(btnEatFoodForLoot.isSelected()){
+                        Var.eatFoodForSpace = true;
+                    }
+                    if(btnLootByPrice.isSelected()){
+                        Var.lootByPrice = true;
+                        Var.minPriceToLoot = Integer.parseInt(txtLootPrice.getText());
+                    }
+                    //LootEnum[] temp = (LootEnum[]) lootList.getSelectedValuesList().toArray();
+                    Object[] temp = lootList.getSelectedValuesList().toArray();
+                    for(Object  x: temp){
+                        LootEnum casted = (LootEnum) x;
+                        for(int i: casted.getId()){
+                            if(i != 1){
+                                Var.lootIds.add(i);
+                            }
+                        }
+
+                    }
 
 
-
+                }
+                Hill_Giant_Killer.guiWait = false;
             }
         });
 

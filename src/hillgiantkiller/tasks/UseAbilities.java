@@ -1,10 +1,12 @@
-package hillgiantkiller.looptasks;
+package hillgiantkiller.tasks;
 
 import hillgiantkiller.other.Var;
 import hillgiantkiller.sk.action.ActionBar;
 import org.powerbot.core.script.job.LoopTask;
+import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.util.Random;
 import org.powerbot.game.api.methods.interactive.Players;
+import org.powerbot.game.api.methods.Settings;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,15 +25,28 @@ public class UseAbilities extends LoopTask {
                 ActionBar.setExpanded(true);
             }
 
-            for(int i = 1; i<12; i++){
-                if(ActionBar.isReady(i)){
-                    ActionBar.useSlot(i);
+            if(Var.useRejuvenate){
+                if(ActionBar.getAdrenaline() == 1000 && ActionBar.getAbilityInSlot(0).available()){
+                    ActionBar.useSlot(0);
+                }
+                for(int i = 1; i<12; i++){
+                    if(ActionBar.isReady(i)){
+                        ActionBar.useSlot(i);
+                    }
+
+                }
+            }else{
+                for(int i = 0; i<12; i++){
+                    if(ActionBar.isReady(i)){
+                        ActionBar.useSlot(i);
+                    }
+
                 }
             }
 
+
+
         }
-
-
 
         return Random.nextInt(50,100);
     }

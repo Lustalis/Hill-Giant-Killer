@@ -1,11 +1,9 @@
 package hillgiantkiller.other;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Administrator
  * Date: 4/5/13
  * Time: 11:33 AM
- * To change this template use File | Settings | File Templates.
  */
 public enum LootEnum {
 
@@ -15,10 +13,12 @@ public enum LootEnum {
     BLUE_CHARM("Blue Charm",12163),
     ALL_CHARMS("All Charms", 12158,12159,12160,12163),
     SPACE1(" ",1),
+
     MITHRIL_ARROW("Mithril Arrow",888),
     ADAMANT_ARROW("Adamant Arrow",890),
     BOTH_ARROWS("Both Arrows",888,890),
     SPACE2(" ",1),
+
     WATER_RUNE("Water Rune",555),
     FIRE_RUNE("Fire Rune",554),
     COSMIC_RUNE("Cosmic Rune",564),
@@ -28,6 +28,7 @@ public enum LootEnum {
     DEATH_RUNE("Death Rune",560),
     CHAOS_RUNE("Chaos Rune",563),
     SPACE3(" ",1),
+
     GUAM("Grimy Guam",199),
     MARRENTILL("Grimy Marrentill",201),
     TARROMIN("Grimy Tarromin",203),
@@ -40,6 +41,8 @@ public enum LootEnum {
     CADANTINE("Grimy Cadantine",215),
     LANTADYME("Lantadyme",2481),
     SPACE4(" ",1),
+
+    BIG_BONE("Big Bones",532),
     LIMPWURT("Limpwurt Root",225),
     BODY_TAL("Body talisman",1446),
     CHAMPION_SCROLL("Champion scroll",6802);
@@ -56,7 +59,7 @@ public enum LootEnum {
         return id;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 

@@ -1,13 +1,16 @@
 package hillgiantkiller;
 
-import hillgiantkiller.looptasks.AfterGiantDead;
-import hillgiantkiller.looptasks.EatFood;
-import hillgiantkiller.looptasks.UseAbilities;
+import hillgiantkiller.tasks.AfterGiantDead;
+import hillgiantkiller.tasks.EatFood;
+import hillgiantkiller.tasks.MomentumUser;
+import hillgiantkiller.tasks.UseAbilities;
 import hillgiantkiller.nodes.*;
+import hillgiantkiller.other.HillGiantGUI;
 import hillgiantkiller.other.Var;
 import org.powerbot.core.Bot;
 import org.powerbot.core.event.listeners.PaintListener;
 import org.powerbot.core.script.ActiveScript;
+import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.core.script.util.Random;
 import org.powerbot.game.api.Manifest;
@@ -21,21 +24,18 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Administrator
  * Date: 3/27/13
  * Time: 8:26 AM
- * To change this template use File | Settings | File Templates.
  */
-
 @Manifest(authors = { "Kirinsoul" }, description = "Fuck wit dem hill gIants", name = "Giant fucker", version = 1.0)
 
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
-    public static ArrayList<Node> nodeCollection = new ArrayList<>();
+    private static ArrayList<Node> nodeCollection = new ArrayList<>();
     private Client client = Bot.client();
     public static boolean guiWait = true;
 
-    public void provide(Node node){
+    void provide(Node node){
         if(node != null){
             nodeCollection.add(node);
         }
@@ -43,25 +43,32 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
 
     public void onStart(){
 
+        HillGiantGUI gui  = new HillGiantGUI();
+        gui.setVisible(true);
+        while(guiWait){
+            Task.sleep(100);
+        }
+        gui.dispose();
+
         System.out.println("Script start");
         Camera.setPitch(true);
 
-        Var.lootIds.add(532);
-        Var.lootIds.add(225);
         /*
-        Nodes
+        Nodes/tasks
          */
+        if(Var.useMomentum) getContainer().submit(new MomentumUser());
         provide(new WalkToBank());
         provide(new WalkToCave());
         provide(new BankNode());
         provide(new FindTargetNode());
-        provide(new LootNode());
+        if(Var.shouldLoot) provide(new LootNode());
 
         /*
         Loop Tasks
          */
-        getContainer().submit(new EatFood());
-        getContainer().submit(new UseAbilities());
+        if(Var.eatFood) getContainer().submit(new EatFood());
+        if(Var.useAbilities) getContainer().submit(new UseAbilities());
+
         getContainer().submit(new AfterGiantDead());
 
     }

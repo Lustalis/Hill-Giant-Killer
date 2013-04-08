@@ -7,5 +7,5 @@ package hillgiantkiller.sk.action;
  * 
  */
 public enum ActionSlotType {
-	NOTHING, ABILITY, ITEM;
+	NOTHING, ABILITY, ITEM
 }

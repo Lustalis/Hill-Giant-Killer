@@ -8,22 +8,24 @@ import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.tab.Inventory;
+import org.powerbot.game.api.methods.widget.Camera;
+import org.powerbot.game.api.util.Random;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Entity;
 import org.powerbot.game.api.wrappers.Tile;
+import org.powerbot.game.api.wrappers.graphics.CapturedModel;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.node.GroundItem;
+import org.powerbot.game.api.wrappers.node.SceneObject;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 import java.awt.*;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Administrator
  * Date: 3/27/13
  * Time: 8:37 AM
- * To change this template use File | Settings | File Templates.
  */
 public class Methods{
 
@@ -116,19 +118,10 @@ public class Methods{
         }
     }
 
-    public static boolean isOnScreen(Entity e) {
-        Rectangle screen = new Rectangle(new Point(0, 0), Game.getDimensions());
-        WidgetChild actionbarWidget = Widgets.get(640, 6);
-        Rectangle actionbar = actionbarWidget == null || !actionbarWidget.isOnScreen() ? null : actionbarWidget.getBoundingRectangle();
-        for (Polygon p : e.getBounds()) {
-            for (int i = 0; i < p.npoints; i++) {
-                int x = p.xpoints[i], y = p.ypoints[i];
-                if (screen.contains(x, y) && (actionbar == null || !actionbar.contains(x, y))) {
-                    return true;
-                }
-            }
-        }
-        return false;
+
+    public static boolean isOnScreen(Entity e){
+        final WidgetChild actionBar = Widgets.get(640, 6);
+        return e.isOnScreen() && (actionBar == null || !actionBar.isOnScreen() || !actionBar.contains(e.getCentralPoint()));
     }
 
     public static boolean fullInv(){
@@ -141,18 +134,23 @@ public class Methods{
 
     }
 
-    public static int getHpPercent() {
+    private static int getHpPercent() {
         return Math.abs(100 - 100 * Widgets.get(748, 5).getHeight() / 28);
     }
 
-    public static boolean needToHeal(final int eatPercent){
-        return getHpPercent() <= eatPercent;
+    public static boolean needToHeal(){
+        return getHpPercent() <= Var.HEAL_PERCENT;
     }
 
 
     public static NPC getMonster(){
+        if(NPCs.getNearest(Var.priorityNPCFilter) != null){
+            return  NPCs.getNearest(Var.priorityNPCFilter);
+        }else{
+            return NPCs.getNearest(Var.npcFilter);
+        }
 
-        return NPCs.getNearest(Var.npcFilter);
+
 
     }
 
@@ -162,11 +160,7 @@ public class Methods{
     and Var.lootLocations has a Tile in it
      */
     public static boolean needToLoot(){
-        if(Var.lootLocations.size() >= 1){
-            return true;
-        }else{
-            return false;
-        }
+        return Var.lootLocations.size() >= Var.lootAfter;
 
     }
 
@@ -174,8 +168,8 @@ public class Methods{
     public static boolean droppedLoot(){
         Tile x = Var.deathLocation;
         if(x!= null){
-            Area lootZone = new Area(new Tile(x.getX() + 1, x.getY() + 1, Game.getPlane())
-                    ,new Tile(x.getX() - 1, x.getY() - 1, Game.getPlane()) );
+            Area lootZone = new Area(new Tile(x.getX() + 3, x.getY() + 3, Game.getPlane())
+                    ,new Tile(x.getX() - 3, x.getY() - 3, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
                 GroundItem[] potential = GroundItems.getLoadedAt(t.getX(),t.getY());
                 for(GroundItem p: potential){

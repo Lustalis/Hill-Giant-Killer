@@ -23,15 +23,16 @@ public class Var {
     /*
      Map and walking stuff
      */
+    public static final Tile insideSafeZone = new Tile(3109,9848,0);
 
-    public static final Area DUNG_AREA =  new Area(new Tile[] { new Tile(3107, 3457, 0), new Tile(3108, 3442, 0), new Tile(3124, 3442, 0),
-            new Tile(3124, 3458, 0) });
+    public static final Area DUNG_AREA =  new Area(new Tile(3107, 3457, 0), new Tile(3108, 3442, 0), new Tile(3124, 3442, 0),
+            new Tile(3124, 3458, 0));
 
-    public static final Area BANK_AREA = new Area(new Tile[] { new Tile(3140, 3491, 0), new Tile(3140, 3472, 0), new Tile(3151, 3465, 0),
-            new Tile(3158, 3465, 0), new Tile(3157, 3490, 0) });
+    public static final Area BANK_AREA = new Area(new Tile(3140, 3491, 0), new Tile(3140, 3472, 0), new Tile(3151, 3465, 0),
+            new Tile(3158, 3465, 0), new Tile(3157, 3490, 0));
 
-    public static final Area INSIDE_DUNG_AREA = new Area(new Tile[] {new Tile(3115,9854,0), new Tile(3117,9854,0), new Tile(3117,9850,0),
-             new Tile(3115,9850,0)});
+    public static final Area INSIDE_DUNG_AREA = new Area(new Tile(3115,9854,0), new Tile(3117,9854,0), new Tile(3117,9850,0),
+            new Tile(3115,9850,0));
 
     public static final Tile[] PATH_1 = new Tile[] { new Tile(3150, 3474, 0), new Tile(3146, 3464, 0), new Tile(3136, 3456, 0),
             new Tile(3127, 3455, 0), new Tile(3114, 3446, 0) };
@@ -61,7 +62,7 @@ public class Var {
     public static ArrayList<Integer> lootIds =  new ArrayList<>();
     public static ArrayList<Tile> lootLocations = new ArrayList<>();
     public static Hashtable<Integer, Integer> priceTable = new Hashtable<>();
-    public static final int MIN_PRICE = 1000;
+    public static boolean waitingForLoot = false;
 
 
     /*
@@ -86,13 +87,14 @@ public class Var {
 
     public static int skillTraining = 1;
 
-    public static int[] itemsSelected;
     public static boolean shouldLoot = false;
     public static boolean burryBones = false;
     public static boolean eatFoodForSpace = false;
     public static boolean lootByPrice = false;
     public static int minPriceToLoot = 1000;
     public static int lootAfter = 1;
+    public static boolean shouldWaitForLoot = false;
+
 
 
 
@@ -101,32 +103,24 @@ public class Var {
     Filters
      */
 
-    public static Filter<GroundItem> lootFilter = new Filter<GroundItem>(){
-
-        @Override
-        public boolean accept(GroundItem g) {
-            for(int i: Var.lootIds){
-                return g.getId() == i && g.getLocation() == deathLocation;
-            }
-            return false;
-        }
-    };
-
 
     public static Filter<NPC> npcFilter = new Filter<NPC>() {
         @Override
         public boolean accept(NPC n) {
-            if(n.getName().equalsIgnoreCase("hill giant") && (n.getInteracting() == null || n.getInteracting().equals(Players.getLocal()))
-                    && n.getAnimation() != DEATH_ID) {
-                return true;
-            }
-            return false;
+            return n.getName().equalsIgnoreCase("hill giant") && (n.getInteracting() == null || n.getInteracting().equals(Players.getLocal()))
+                    && n.getAnimation() != DEATH_ID;
+        }
+    };
+    public static Filter<NPC> priorityNPCFilter = new Filter<NPC>() {
+        @Override
+        public boolean accept(NPC n) {
+            return n.getInteracting() != null && n.getInteracting().equals(Players.getLocal());
         }
     };
 
     private final Filter<GroundItem> LootFilter = new Filter<GroundItem>() {
 
-        private final Hashtable<Integer, Integer> PriceTable = new Hashtable<Integer, Integer>();
+        private final Hashtable<Integer, Integer> PriceTable = new Hashtable<>();
 
         private int MIN_PRICE = 1000;
 

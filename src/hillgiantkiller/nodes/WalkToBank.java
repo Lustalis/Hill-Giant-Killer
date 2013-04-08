@@ -21,8 +21,8 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
  */
 public class WalkToBank extends Node {
 
-    final TilePath pathToBank = Walking.newTilePath(Var.PATH_2);
-    SceneObject stairUp = null;
+    private final TilePath pathToBank = Walking.newTilePath(Var.PATH_2);
+    private SceneObject stairUp = null;
     public static boolean walkToBank = false;
 
     @Override

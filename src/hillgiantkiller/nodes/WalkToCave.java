@@ -21,9 +21,9 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
  */
 public class WalkToCave extends Node {
 
-    final TilePath pathToCave = Walking.newTilePath(Var.PATH_1);
-    SceneObject door = null;
-    SceneObject stairs = null;
+    private final TilePath pathToCave = Walking.newTilePath(Var.PATH_1);
+    private SceneObject door = null;
+    private SceneObject stairs = null;
 
     @Override
     public boolean activate() {

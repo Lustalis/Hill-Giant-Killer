@@ -1,11 +1,9 @@
 package hillgiantkiller.other;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Stefano
  * Date: 06/04/13
  * Time: 2:38 AM
- * To change this template use File | Settings | File Templates.
  */
 public enum FoodEnum {
     LOBSTER("Lobster",379),
@@ -23,7 +21,7 @@ public enum FoodEnum {
 
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 

@@ -1,4 +1,4 @@
-package hillgiantkiller.looptasks;
+package hillgiantkiller.tasks;
 
 import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Paint;
@@ -21,14 +21,19 @@ public class AfterGiantDead extends LoopTask {
                 && Players.getLocal().getAnimation() != Var.EATING_ID && !Players.getLocal().isMoving()){
             if (Var.theGiant.getAnimation() == Var.DEATH_ID) {
                 System.out.println("Giant is deeeead");
-                Var.deathLocation = Var.theGiant.getLocation();
                 Paint.giantsKilled++;
-                while(Var.isLooting){
-                    Task.sleep(100, 200);
+
+                if (Var.shouldLoot) {
+                    Var.deathLocation = Var.theGiant.getLocation();
+
+                    while(Var.isLooting){ //so it doesn't add loot while looting
+                        Task.sleep(100, 200);
+                    }
+
+                    Var.isAdding = true;
+                    Methods.waitForDrop();
+                    Var.isAdding = false;
                 }
-                Var.isAdding = true;
-                Methods.waitForDrop();
-                Var.isAdding = false;
             }
         }
         return Random.nextInt(500,600);
