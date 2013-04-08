@@ -49,9 +49,8 @@ public class FindTargetNode extends Node {
         if(Var.theGiant != null){
             System.out.println("Killed this many nigguhs: "+ Paint.giantsKilled);
             System.out.println("Found npc!!!");
-            Camera.turnTo(Var.theGiant);
             if(!Methods.isOnScreen(Var.theGiant)){
-                Camera.turnTo(Var.theGiant);
+                Methods.threadedCamera(Var.theGiant);
                 if(!Methods.isOnScreen(Var.theGiant)){
                     Walking.walk(Var.theGiant);
                 }

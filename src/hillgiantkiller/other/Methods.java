@@ -19,6 +19,7 @@ import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.node.GroundItem;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
+import org.powerbot.game.client.RSCharacter;
 
 import java.awt.*;
 
@@ -191,6 +192,16 @@ public class Methods{
         }
         return false;
 
+    }
+
+    //learn to make threads!!
+    public static void threadedCamera(final NPC c){
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                Camera.turnTo(c);
+            }
+        });
     }
 
 
