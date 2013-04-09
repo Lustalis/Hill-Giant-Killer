@@ -1,4 +1,4 @@
-package hillgiantkiller.sk.general;
+package hillgiantkiller2.sk.general;
 
 /**
  * An interface that checks to see if something is done

@@ -1,11 +1,11 @@
-package hillgiantkiller.sk.action.ability;
+package hillgiantkiller2.sk.action.ability;
 
 import org.powerbot.game.api.methods.Settings;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
-import hillgiantkiller.sk.action.Ability;
-import hillgiantkiller.sk.general.Completion;
+import hillgiantkiller2.sk.action.Ability;
+import hillgiantkiller2.sk.general.Completion;
 
 /**
  * Icons near the map in the top left part of the screen.

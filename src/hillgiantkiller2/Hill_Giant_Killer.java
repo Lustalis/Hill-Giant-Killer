@@ -18,7 +18,8 @@ import java.util.ArrayList;
 @Manifest(authors = {"Kirinsoul"}, description = "Hill Giants v2", name = "Hill Giants v2")
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
     private Client client = Bot.client();
-    private static Node[] jobs = {new Banking(), new ToHillGiants(), new Eat(), new UseAbilities(), new Loot(), new Fight()};
+    //private static Node[] jobs = {new Banking(), new ToHillGiants(), new Eat(), new UseAbilities(), new Loot(), new Fight()};
+    private static Node[] jobs = {new Banking(), new ToHillGiants()};
     public void onStart() {
 
     }
@@ -46,6 +47,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
         if (Game.isLoggedIn()) {
             for (Node node : jobs) {
                 if (node.activate()) {
+                    System.out.println(node.getClass().getName());
                     node.execute();
                     return Random.nextInt(50, 100);
                 }

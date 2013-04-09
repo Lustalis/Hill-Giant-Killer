@@ -1,9 +1,9 @@
-package hillgiantkiller.sk.action.book;
+package hillgiantkiller2.sk.action.book;
 
 import org.powerbot.game.api.methods.tab.Skills;
 
-import hillgiantkiller.sk.tab.InnerAbilityTabs;
-import hillgiantkiller.sk.tab.Tab;
+import hillgiantkiller2.sk.tab.InnerAbilityTabs;
+import hillgiantkiller2.sk.tab.Tab;
 
 /**
  * An enum of styles of ability. Corresponds to the skill requirement to use the ability

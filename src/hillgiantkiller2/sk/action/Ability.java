@@ -1,10 +1,10 @@
-package hillgiantkiller.sk.action;
+package hillgiantkiller2.sk.action;
 
 import java.util.HashMap;
 
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
-import hillgiantkiller.sk.general.Completion;
+import hillgiantkiller2.sk.general.Completion;
 
 /**
  * Holds information for an Ability that can be placed in the action bar. Refers to any draggable icon in the

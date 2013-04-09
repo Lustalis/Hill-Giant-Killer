@@ -1,7 +1,5 @@
 package hillgiantkiller.other;
 
-import hillgiantkiller.Hill_Giant_Killer;
-
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -508,7 +506,6 @@ public class HillGiantGUI extends JFrame {
 
 
                 }
-                Hill_Giant_Killer.guiWait = false;
             }
         });
 

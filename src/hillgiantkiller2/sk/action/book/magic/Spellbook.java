@@ -1,4 +1,4 @@
-package hillgiantkiller.sk.action.book.magic;
+package hillgiantkiller2.sk.action.book.magic;
 
 import org.powerbot.game.api.methods.Settings;
 

@@ -1,4 +1,4 @@
-package hillgiantkiller.sk.tab;
+package hillgiantkiller2.sk.tab;
 
 import java.util.Arrays;
 
@@ -6,7 +6,7 @@ import org.powerbot.game.api.methods.Settings;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
-import hillgiantkiller.sk.general.TimedCondition;
+import hillgiantkiller2.sk.general.TimedCondition;
 
 /**
  * An enum specifying the outer tabs in the ability book

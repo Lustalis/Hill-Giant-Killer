@@ -1,4 +1,4 @@
-package hillgiantkiller.sk.tab;
+package hillgiantkiller2.sk.tab;
 
 /**
  * Indicates a tab that can be opened

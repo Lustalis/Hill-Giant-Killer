@@ -1,6 +1,5 @@
 package hillgiantkiller2;
 
-import hillgiantkiller.other.Var;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Game;
@@ -136,15 +135,15 @@ public class Methods {
     }
 
     public static boolean needToHeal(){
-        return getHpPercent() <= Var.HEAL_PERCENT;
+        return getHpPercent() <= Variables.HEAL_PERCENT;
     }
 
 
     public static NPC getMonster(){
-        if(NPCs.getNearest(Var.priorityNPCFilter) != null){
-            return  NPCs.getNearest(Var.priorityNPCFilter);
+        if(NPCs.getNearest(Variables.priorityNPCFilter) != null){
+            return  NPCs.getNearest(Variables.priorityNPCFilter);
         }else{
-            return NPCs.getNearest(Var.npcFilter);
+            return NPCs.getNearest(Variables.npcFilter);
         }
 
 
@@ -154,32 +153,32 @@ public class Methods {
 
     /*
     returns true when 1 npc has been killed
-    and Var.lootLocations has a Tile in it
+    and Variables.lootLocations has a Tile in it
      */
     public static boolean needToLoot(){
-        return Var.lootLocations.size() >= Var.lootAfter;
+        return Variables.lootLocations.size() >= Variables.lootAfter;
 
     }
 
 
     public static boolean droppedLoot(){
-        Tile x = Var.deathLocation;
+        Tile x = Variables.deathLocation;
         if(x!= null){
             Area lootZone = new Area(new Tile(x.getX() + 3, x.getY() + 3, Game.getPlane())
                     ,new Tile(x.getX() - 3, x.getY() - 3, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
                 GroundItem[] potential = GroundItems.getLoadedAt(t.getX(), t.getY());
                 for(GroundItem p: potential){
-                    for(int i: Var.lootIds){
+                    for(int i: Variables.lootIds){
                         if(i == p.getId()){
-                            if(Var.lootLocations.size() == 0){
+                            if(Variables.lootLocations.size() == 0){
                                 System.out.println("Added tile(method)");
-                                Var.lootLocations.add(t);
-                            }else if(Var.lootLocations.size() >0 && !Var.lootLocations.contains(t)){
+                                Variables.lootLocations.add(t);
+                            }else if(Variables.lootLocations.size() >0 && !Variables.lootLocations.contains(t)){
                                 System.out.println("Added tile(method)");
-                                Var.lootLocations.add(t);
+                                Variables.lootLocations.add(t);
                             }
-                            System.out.println("Tiles in list(method): "+Var.lootLocations.size());
+                            System.out.println("Tiles in list(method): "+Variables.lootLocations.size());
                             return true;
                         }
                     }

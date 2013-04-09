@@ -29,8 +29,7 @@ public class Variables {
     public static final Area BANK_AREA = new Area(new Tile(3140, 3491, 0), new Tile(3140, 3472, 0), new Tile(3151, 3465, 0),
             new Tile(3158, 3465, 0), new Tile(3157, 3490, 0));
 
-    public static final Area INSIDE_DUNG_AREA = new Area(new Tile(3115,9854,0), new Tile(3117,9854,0), new Tile(3117,9850,0),
-            new Tile(3115,9850,0));
+
 
     public static final Tile[] PATH_1 = new Tile[] { new Tile(3150, 3474, 0), new Tile(3146, 3464, 0), new Tile(3136, 3456, 0),
             new Tile(3127, 3455, 0), new Tile(3114, 3446, 0) };
@@ -46,7 +45,7 @@ public class Variables {
     public static final int[] NPC_IDS = {117, 4689, 4690, 4691, 4692, 4693};
     public static NPC theGiant = null;
     public static Tile deathLocation = null;
-    public static final int HEAL_PERCENT = 50;
+    public static final int HEAL_PERCENT = 40;
     public static final int DEATH_ID = 4653;
     public static final int EATING_ID = 18001;
 
@@ -68,8 +67,8 @@ public class Variables {
      */
 
     public static final int DOOR_ID = 1804;
-    public static final int STAIRS_DOWN = 12389;
-    public static final int STAIRS_UP = 29355;
+
+
 
     /*
     GUI Variables

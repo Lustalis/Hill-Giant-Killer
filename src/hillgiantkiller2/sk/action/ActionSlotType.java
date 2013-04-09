@@ -1,4 +1,4 @@
-package hillgiantkiller.sk.action;
+package hillgiantkiller2.sk.action;
 
 /**
  * The type of the slot in the ActionBar

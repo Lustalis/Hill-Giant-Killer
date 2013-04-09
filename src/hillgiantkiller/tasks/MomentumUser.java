@@ -1,7 +1,6 @@
 package hillgiantkiller.tasks;
 
-import hillgiantkiller.sk.action.ActionBar;
-import hillgiantkiller.sk.action.book.BookAbility;
+import hillgiantkiller2.sk.action.ActionBar;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Settings;
 

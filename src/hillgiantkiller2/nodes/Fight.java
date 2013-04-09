@@ -4,7 +4,9 @@ import hillgiantkiller2.Methods;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;
+import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.wrappers.interactive.NPC;
+import org.powerbot.game.api.wrappers.interactive.Character;
 
 public class Fight extends Node {
     public NPC theGiant = null;
@@ -13,8 +15,7 @@ public class Fight extends Node {
     @Override
     public boolean activate() {
 
-        return Players.getLocal().getInteracting() == null && !Players.getLocal().getInteracting().validate() && !Players.getLocal().isMoving()
-                && Players.getLocal().getAnimation() == -1;
+        return isInteracting() == null && !Players.getLocal().isMoving() && Players.getLocal().getAnimation() == -1;
     }
 
     @Override
@@ -22,9 +23,9 @@ public class Fight extends Node {
         theGiant = Methods.getMonster();
 
         if(theGiant != null){
-            if(!Methods.isOnScreen(theGiant) || theGiant.interact("Attack")){
+            if(!Methods.isOnScreen(theGiant) || !theGiant.interact("Attack")){
+                Camera.turnTo(theGiant);
                 Walking.walk(theGiant);
-
                 Methods.waitForOnScreen(theGiant);
             }
             if(!theGiant.isInCombat()){
@@ -34,5 +35,10 @@ public class Fight extends Node {
         }
 
     }//End of Execute
+
+    private Character isInteracting(){
+        return Players.getLocal().getInteracting() != null && Players.getLocal().getInteracting().validate() ?
+                Players.getLocal().getInteracting() : null;
+    }
 
 } //End of Node

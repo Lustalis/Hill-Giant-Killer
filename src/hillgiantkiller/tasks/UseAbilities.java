@@ -2,12 +2,10 @@ package hillgiantkiller.tasks;
 
 import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Var;
-import hillgiantkiller.sk.action.ActionBar;
+import hillgiantkiller2.sk.action.ActionBar;
 import org.powerbot.core.script.job.LoopTask;
-import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.util.Random;
 import org.powerbot.game.api.methods.interactive.Players;
-import org.powerbot.game.api.methods.Settings;
 
 /**
  * Created with IntelliJ IDEA.

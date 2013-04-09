@@ -1,4 +1,4 @@
-package hillgiantkiller.sk.action.book;
+package hillgiantkiller2.sk.action.book;
 
 /**
  * An enum of the type of ability (basic, threshold, ultimate)
