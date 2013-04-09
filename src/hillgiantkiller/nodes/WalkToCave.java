@@ -33,7 +33,8 @@ public class WalkToCave extends Node {
 
     @Override
     public void execute() {
-
+        //TODO: get tile in front of dungeon and make
+        //script talk there until Calculations.distanceTo >=2;
         if(!Var.DUNG_AREA.contains(Players.getLocal())){
             //walking to dungeon
             pathToCave.traverse();

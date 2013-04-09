@@ -50,7 +50,6 @@ public class Var {
     public static Tile deathLocation = null;
     public static final int HEAL_PERCENT = 50;
     public static final int DEATH_ID = 4653;
-    public static final int EATING_ID = 18001;
 
 
     /*

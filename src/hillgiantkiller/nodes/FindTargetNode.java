@@ -21,21 +21,21 @@ public class FindTargetNode extends Node {
         NPC x = NPCs.getNearest(Var.NPC_IDS);
         if(Var.shouldLoot && Var.eatFood){
             return  !Methods.needToLoot() && Methods.haveFood(Var.foodId) && !Methods.fullInv() && (interacting() == null || !interacting().validate())
-                    && (x != null) && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
+                    && (x != null) && Players.getLocal().getAnimation() == -1
                     && !Players.getLocal().isMoving() && !Var.isAdding;
         }else if(Var.eatFood){
             return  Methods.haveFood(Var.foodId) && !Methods.fullInv() && (interacting() == null || !interacting().validate())
-                    && (x != null) && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
+                    && (x != null) && Players.getLocal().getAnimation() == -1
                     && !Players.getLocal().isMoving();
 
         }else if(Var.shouldLoot){
             Methods.waitForDrop();
             return  !Methods.needToLoot() && !Methods.fullInv() && (interacting() == null || !interacting().validate())
-                    && (x != null) && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
+                    && (x != null) && Players.getLocal().getAnimation() == -1
                     && !Players.getLocal().isMoving();
         }else{
             return  !Methods.fullInv() && (interacting() == null || !interacting().validate())
-                    && (x != null) && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
+                    && (x != null) && Players.getLocal().getAnimation() == -1
                     && !Players.getLocal().isMoving();
         }
 

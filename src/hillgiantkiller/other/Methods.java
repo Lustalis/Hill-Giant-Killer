@@ -135,7 +135,7 @@ public class Methods{
 
     }
 
-    private static int getHpPercent() {
+    public static int getHpPercent() {
         return Math.abs(100 - 100 * Widgets.get(748, 5).getHeight() / 28);
     }
 
@@ -167,7 +167,8 @@ public class Methods{
 
 
     public static boolean droppedLoot(){
-        Tile x = Var.deathLocation;
+        //Tile x = Var.deathLocation;
+        Tile x = Players.getLocal().getLocation();
         if(x!= null){
             Area lootZone = new Area(new Tile(x.getX() + 3, x.getY() + 3, Game.getPlane())
                     ,new Tile(x.getX() - 3, x.getY() - 3, Game.getPlane()) );
@@ -184,24 +185,28 @@ public class Methods{
                                 Var.lootLocations.add(t);
                             }
                             System.out.println("Tiles in list(method): "+Var.lootLocations.size());
-                            return true;
+
                         }
                     }
                 }
             }
+            if(Var.lootLocations.size() >=1 )return true;
         }
         return false;
 
     }
 
     //learn to make threads!!
-    public static void threadedCamera(final NPC c){
-        EventQueue.invokeLater(new Runnable() {
+    public static void threadedCamera(final NPC c) {
+        Runnable r = new Runnable() {
             @Override
             public void run() {
                 Camera.turnTo(c);
             }
-        });
+        };
+        Thread cameraTurn = new Thread(r);
+        cameraTurn.start();
+
     }
 
 

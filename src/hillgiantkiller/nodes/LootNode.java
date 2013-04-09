@@ -30,8 +30,7 @@ public class LootNode extends Node {
     public boolean activate() {
         NPC x = NPCs.getNearest(Var.NPC_IDS);
         return Methods.needToLoot() && !Methods.fullInv() && Methods.haveFood(Var.foodId) && Players.getLocal().getInteracting() == null
-                && x!=null && Players.getLocal().getAnimation() == -1 && Players.getLocal().getAnimation() != Var.EATING_ID
-                && !Var.isAdding;
+                && x!=null && Players.getLocal().getAnimation() == -1 && !Var.isAdding;
     }
 
     @Override
