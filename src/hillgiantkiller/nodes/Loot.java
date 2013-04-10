@@ -23,10 +23,8 @@ public class Loot extends Node {
     Map and walking stuff
     */
     public static final Tile insideSafeZone = new Tile(3109,9848,0);
-    //public static int[] lootIds = {532, 225} ;  //just hill giant bones right now
     public static ArrayList<Integer> lootIds =  new ArrayList<>();
-    private Hashtable<Integer, Integer> priceTable = new Hashtable<>();
-
+    public static Hashtable<Integer, Integer> priceTable = new Hashtable<>();
 
     @Override
     public boolean activate() {
@@ -42,7 +40,7 @@ public class Loot extends Node {
         for(Tile tile: Variables.lootLocations){
             GroundItem[] item = GroundItems.getLoadedAt(tile.getX(), tile.getY());//get all items on tile
             for(GroundItem i: item){
-                if (lootIds.contains(i.getId())) {//if its a preset lood id
+                if (lootIds.contains(i.getId())) {//if its a preset loot id
 
                     if(!Methods.isOnScreen(i)){//Making sure item is on screen
                         Camera.turnTo(i);
@@ -82,14 +80,10 @@ public class Loot extends Node {
 
                     }
                 }
-
-
             }
-
-
         }
         Variables.lootLocations.clear();
-        Methods.droppedLoot();
+        //Methods.droppedLoot();
         if(Variables.eatFoodForSpace && Inventory.isFull() && Inventory.getCount(Variables.foodId) != 0){
             Inventory.getItem(Variables.foodId).getWidgetChild().interact("Eat");
         }
@@ -112,7 +106,7 @@ public class Loot extends Node {
 
     }//End of Execute
 
-    class PriceLoader extends Thread {
+    public static class PriceLoader extends Thread {
 
         private final int itemId;
 

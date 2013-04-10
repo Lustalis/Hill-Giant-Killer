@@ -35,11 +35,12 @@ public class ToHillGiants extends Node {
     public void execute() {
         if(!AROUND_LADDER_DOWN.contains(Players.getLocal())){
             door = SceneEntities.getNearest(Variables.DOOR_ID);
-            if(door != null && !Methods.isOnScreen(door)){
-                TO_DUNGEON.traverse();
-            }else if(door.interact("Open")){
+            if(door!=null && door.interact("Open")){
                 Methods.waitForArea(AROUND_LADDER_DOWN);
+            }else{
+                TO_DUNGEON.traverse();
             }
+
 
         }else{
             ladderDown = SceneEntities.getNearest(LADDER_DOWN);

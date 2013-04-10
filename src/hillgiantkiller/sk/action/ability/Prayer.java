@@ -1,11 +1,10 @@
 package hillgiantkiller.sk.action.ability;
 
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.action.Ability;
 import hillgiantkiller.sk.general.Completion;
 import hillgiantkiller.sk.tab.MainTabs;
 import hillgiantkiller.sk.tab.Tab;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 public enum Prayer implements Ability {
 	;

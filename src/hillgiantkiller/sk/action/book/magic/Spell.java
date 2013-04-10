@@ -1,13 +1,12 @@
 package hillgiantkiller.sk.action.book.magic;
 
-import org.powerbot.game.api.methods.Widgets;
-import org.powerbot.game.api.methods.tab.Skills;
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.action.Ability;
 import hillgiantkiller.sk.general.Completion;
 import hillgiantkiller.sk.tab.InnerAbilityTabs;
 import hillgiantkiller.sk.tab.Tab;
+import org.powerbot.game.api.methods.Widgets;
+import org.powerbot.game.api.methods.tab.Skills;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 /**
  * An enum with all the spells from all the spellbooks.

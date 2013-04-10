@@ -1,6 +1,5 @@
 package hillgiantkiller.nodes;
 
-import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Variables;
 import hillgiantkiller.sk.action.ActionBar;
 import org.powerbot.core.script.job.state.Node;

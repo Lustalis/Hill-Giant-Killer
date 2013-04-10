@@ -18,23 +18,26 @@ public class Dieing extends Node {
     private int npcHash = 0;
     @Override
     public boolean activate() {
-        return Players.getLocal().getInteracting() != null && Players.getLocal().getInteracting().getAnimation() == Variables.DEATH_ID;
+        return Fight.theGiant.getAnimation() == Variables.DEATH_ID;
     }
 
     @Override
     public void execute() {
-        if(npcHash == 0 || npcHash != Players.getLocal().getInteracting().hashCode()){
+        if(npcHash == 0 || npcHash != Fight.theGiant.hashCode()){
             System.out.println("Giant is deeeead");
             Paint.giantsKilled++;
-            npcHash = Players.getLocal().getInteracting().hashCode();
+            npcHash = Fight.theGiant.hashCode();
             if (Variables.shouldLoot) {
-                Variables.deathLocation = Players.getLocal().getInteracting().getLocation();
+                Variables.deathLocation = Fight.theGiant.getLocation();
 
-                if (Variables.shouldWaitForLoot || Variables.lootAfter == 1) {
+                if (Variables.lootAfter == 1) {
+                    System.out.println("Wait for loot");
                     Methods.waitForDrop();
+                }else{
+                    Methods.droppedLoot();
                 }
             }
-            npcHash = Players.getLocal().getInteracting().hashCode();
+
         }
     }
 }

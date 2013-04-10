@@ -12,6 +12,7 @@ import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Timer;
+import org.powerbot.game.api.util.net.GeItem;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Entity;
 import org.powerbot.game.api.wrappers.Tile;
@@ -119,7 +120,7 @@ public class Methods {
 
     public static boolean isOnScreen(Entity e){
         final WidgetChild actionBar = Widgets.get(640, 6);
-        return e.isOnScreen() && (actionBar == null || !actionBar.isOnScreen() || !actionBar.contains(e.getCentralPoint()));
+        return e != null && e.isOnScreen() && (actionBar == null || !actionBar.isOnScreen() || !actionBar.contains(e.getCentralPoint()));
     }
 
     public static boolean fullInv(){
@@ -170,34 +171,37 @@ public class Methods {
                     ,new Tile(x.getX() - 3, x.getY() - 3, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
                 GroundItem[] potential = GroundItems.getLoadedAt(t.getX(), t.getY());
-                for(GroundItem p: potential){
-                    for(int i: Loot.lootIds){
-                        if(i == p.getId()){
-                            if(Variables.lootLocations.size() == 0){
-                                System.out.println("Added tile(method)");
-                                Variables.lootLocations.add(t);
-                            }else if(Variables.lootLocations.size() >0 && !Variables.lootLocations.contains(t)){
-                                System.out.println("Added tile(method)");
-                                Variables.lootLocations.add(t);
+                System.out.println(potential.length);
+                if(Variables.lootByPrice && Loot.lootIds.isEmpty() && potential.length > 0){
+                    System.out.println("No loot id's selected; adding tile");
+                    addTile(t);
+                }else{
+                    for(GroundItem p: potential){
+                        for(int i: Loot.lootIds){
+                            if(i == p.getId()){
+                                addTile(t);
+                                System.out.println("Tiles in list(method): "+Variables.lootLocations.size());
                             }
-                            System.out.println("Tiles in list(method): "+Variables.lootLocations.size());
-                            return true;
                         }
+
                     }
                 }
+
             }
+            if(Variables.lootLocations.size() >=1) return true;
         }
         return false;
 
     }
 
-    //learn to make threads!!
-    public static void threadedCamera(final NPC c){
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Camera.turnTo(c);
-            }
-        });
+    public static void addTile(Tile t){
+        if(Variables.lootLocations.size() == 0 || (Variables.lootLocations.size() >0 && !Variables.lootLocations.contains(t))){
+            System.out.println("Added tile(method)");
+            Variables.lootLocations.add(t);
+        }else{
+            System.out.println("Tile not added");
+
+        }
     }
+
 }

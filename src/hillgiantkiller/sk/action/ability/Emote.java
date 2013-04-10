@@ -1,16 +1,15 @@
 package hillgiantkiller.sk.action.ability;
 
-import java.util.Arrays;
-
+import hillgiantkiller.sk.action.Ability;
+import hillgiantkiller.sk.general.Completion;
+import hillgiantkiller.sk.tab.MainTabs;
+import hillgiantkiller.sk.tab.Tab;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.wrappers.interactive.Player;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
-import hillgiantkiller.sk.action.Ability;
-import hillgiantkiller.sk.general.Completion;
-import hillgiantkiller.sk.tab.MainTabs;
-import hillgiantkiller.sk.tab.Tab;
+import java.util.Arrays;
 
 /**
  * The emotes in the emote tab stored as abilities.

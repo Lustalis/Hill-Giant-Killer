@@ -5,11 +5,11 @@ import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.widget.Camera;
-import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.interactive.Character;
+import org.powerbot.game.api.wrappers.interactive.NPC;
 
 public class Fight extends Node {
-    public NPC theGiant = null;
+    public static NPC theGiant = null;
 
 
     @Override

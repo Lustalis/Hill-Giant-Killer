@@ -14,7 +14,7 @@ public class Eat extends Node {
     @Override
     public boolean activate() {
 
-        return Methods.needToHeal();
+        return Methods.needToHeal() && Variables.eatFood;
     }
 
     @Override

@@ -1,7 +1,12 @@
 package hillgiantkiller.sk.action;
 
-import java.awt.event.KeyEvent;
-
+import hillgiantkiller.sk.action.ability.Emote;
+import hillgiantkiller.sk.action.ability.MapIcon;
+import hillgiantkiller.sk.action.book.BookAbility;
+import hillgiantkiller.sk.action.book.magic.Spell;
+import hillgiantkiller.sk.general.Completion;
+import hillgiantkiller.sk.general.TimedCondition;
+import hillgiantkiller.sk.tab.MainTabs;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Settings;
 import org.powerbot.game.api.methods.Widgets;
@@ -12,13 +17,7 @@ import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.node.Item;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
-import hillgiantkiller.sk.action.ability.Emote;
-import hillgiantkiller.sk.action.ability.MapIcon;
-import hillgiantkiller.sk.action.book.BookAbility;
-import hillgiantkiller.sk.action.book.magic.Spell;
-import hillgiantkiller.sk.general.Completion;
-import hillgiantkiller.sk.general.TimedCondition;
-import hillgiantkiller.sk.tab.MainTabs;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("ALL")
 public class ActionBar {
