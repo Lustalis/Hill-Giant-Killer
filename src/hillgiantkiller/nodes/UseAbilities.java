@@ -1,11 +1,12 @@
 package hillgiantkiller.nodes;
 
+import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Variables;
 import hillgiantkiller.sk.action.ActionBar;
 import org.powerbot.core.script.job.state.Node;
 
 public class UseAbilities extends Node {
-    private int x = Variables.useRejuvenate ? 1:0;
+    private int x = Variables.useRejuvenate ? 2:0;
 
     @Override
     public boolean activate() {
@@ -16,9 +17,14 @@ public class UseAbilities extends Node {
     @Override
     public void execute() {
         for(int i = x; i<12; i++){
-            if(ActionBar.isReady(i)){
-                ActionBar.useSlot(i);
-                return;
+            if(x == 2 && (Methods.getHpPercent() >= (Eat.HEAL_PERCENT + 10)) && ActionBar.getAdrenaline() == 1000 ){
+                ActionBar.useSlot(1);
+            }else{
+                if(ActionBar.isReady(i)){
+                    ActionBar.useSlot(i);
+                    return;
+                }
+
             }
 
         }

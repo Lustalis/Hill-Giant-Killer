@@ -171,7 +171,6 @@ public class Methods {
                     ,new Tile(x.getX() - 3, x.getY() - 3, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
                 GroundItem[] potential = GroundItems.getLoadedAt(t.getX(), t.getY());
-                System.out.println(potential.length);
                 if(Variables.lootByPrice && Loot.lootIds.isEmpty() && potential.length > 0){
                     System.out.println("No loot id's selected; adding tile");
                     addTile(t);
@@ -198,9 +197,6 @@ public class Methods {
         if(Variables.lootLocations.size() == 0 || (Variables.lootLocations.size() >0 && !Variables.lootLocations.contains(t))){
             System.out.println("Added tile(method)");
             Variables.lootLocations.add(t);
-        }else{
-            System.out.println("Tile not added");
-
         }
     }
 

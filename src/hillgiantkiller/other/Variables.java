@@ -72,7 +72,7 @@ public class Variables {
     public static Filter<NPC> npcFilter = new Filter<NPC>() {
         @Override
         public boolean accept(NPC n) {
-            return n.getName().equalsIgnoreCase("hill giant") && (n.getInteracting() == null || n.getInteracting().equals(Players.getLocal()))
+            return n.getName().equalsIgnoreCase("hill giant") && (n.getInteracting() == null )
                     && n.getAnimation() != DEATH_ID;
         }
     };

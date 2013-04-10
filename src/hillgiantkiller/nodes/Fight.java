@@ -24,8 +24,8 @@ public class Fight extends Node {
         theGiant = Methods.getMonster();
 
         if(theGiant != null){
+            Camera.turnTo(theGiant);
             if(!Methods.isOnScreen(theGiant) || !theGiant.interact("Attack")){
-                Camera.turnTo(theGiant);
                 Walking.walk(theGiant);
                 Methods.waitForOnScreen(theGiant);
             }

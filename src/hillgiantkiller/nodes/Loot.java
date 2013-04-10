@@ -83,7 +83,6 @@ public class Loot extends Node {
             }
         }
         Variables.lootLocations.clear();
-        //Methods.droppedLoot();
         if(Variables.eatFoodForSpace && Inventory.isFull() && Inventory.getCount(Variables.foodId) != 0){
             Inventory.getItem(Variables.foodId).getWidgetChild().interact("Eat");
         }
