@@ -1,5 +1,7 @@
 package hillgiantkiller.other;
 
+import hillgiantkiller.nodes.Eat;
+import hillgiantkiller.nodes.Loot;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Game;
@@ -9,27 +11,22 @@ import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Camera;
-import org.powerbot.game.api.util.Random;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Entity;
 import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.graphics.CapturedModel;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.node.GroundItem;
-import org.powerbot.game.api.wrappers.node.SceneObject;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
-import org.powerbot.game.client.RSCharacter;
 
 import java.awt.*;
 
 /**
- * User: Administrator
- * Date: 3/27/13
- * Time: 8:37 AM
+ * User: Stefano Tabone
+ * Date: 4/8/13
+ * Time: 11:09 PM
  */
-public class Methods{
-
+public class Methods {
     public interface Condition{
         public boolean accept();
     }
@@ -140,15 +137,15 @@ public class Methods{
     }
 
     public static boolean needToHeal(){
-        return getHpPercent() <= Var.HEAL_PERCENT;
+        return getHpPercent() <= Eat.HEAL_PERCENT;
     }
 
 
     public static NPC getMonster(){
-        if(NPCs.getNearest(Var.priorityNPCFilter) != null){
-            return  NPCs.getNearest(Var.priorityNPCFilter);
+        if(NPCs.getNearest(Variables.priorityNPCFilter) != null){
+            return  NPCs.getNearest(Variables.priorityNPCFilter);
         }else{
-            return NPCs.getNearest(Var.npcFilter);
+            return NPCs.getNearest(Variables.npcFilter);
         }
 
 
@@ -158,58 +155,49 @@ public class Methods{
 
     /*
     returns true when 1 npc has been killed
-    and Var.lootLocations has a Tile in it
+    and Variables.lootLocations has a Tile in it
      */
     public static boolean needToLoot(){
-        return Var.lootLocations.size() >= Var.lootAfter;
+        return Variables.lootLocations.size() >= Variables.lootAfter;
 
     }
 
 
     public static boolean droppedLoot(){
-        //Tile x = Var.deathLocation;
-        Tile x = Players.getLocal().getLocation();
+        Tile x = Variables.deathLocation;
         if(x!= null){
             Area lootZone = new Area(new Tile(x.getX() + 3, x.getY() + 3, Game.getPlane())
                     ,new Tile(x.getX() - 3, x.getY() - 3, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
-                GroundItem[] potential = GroundItems.getLoadedAt(t.getX(),t.getY());
+                GroundItem[] potential = GroundItems.getLoadedAt(t.getX(), t.getY());
                 for(GroundItem p: potential){
-                    for(int i: Var.lootIds){
+                    for(int i: Loot.lootIds){
                         if(i == p.getId()){
-                            if(Var.lootLocations.size() == 0){
+                            if(Variables.lootLocations.size() == 0){
                                 System.out.println("Added tile(method)");
-                                Var.lootLocations.add(t);
-                            }else if(Var.lootLocations.size() >0 && !Var.lootLocations.contains(t)){
+                                Variables.lootLocations.add(t);
+                            }else if(Variables.lootLocations.size() >0 && !Variables.lootLocations.contains(t)){
                                 System.out.println("Added tile(method)");
-                                Var.lootLocations.add(t);
+                                Variables.lootLocations.add(t);
                             }
-                            System.out.println("Tiles in list(method): "+Var.lootLocations.size());
-
+                            System.out.println("Tiles in list(method): "+Variables.lootLocations.size());
+                            return true;
                         }
                     }
                 }
             }
-            if(Var.lootLocations.size() >=1 )return true;
         }
         return false;
 
     }
 
     //learn to make threads!!
-    public static void threadedCamera(final NPC c) {
-        Runnable r = new Runnable() {
+    public static void threadedCamera(final NPC c){
+        EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 Camera.turnTo(c);
             }
-        };
-        Thread cameraTurn = new Thread(r);
-        cameraTurn.start();
-
+        });
     }
-
-
-
-
-}//end
+}

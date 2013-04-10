@@ -1,5 +1,10 @@
 package hillgiantkiller.other;
 
+import hillgiantkiller.Hill_Giant_Killer;
+import hillgiantkiller.enums.FoodEnum;
+import hillgiantkiller.enums.LootEnum;
+import hillgiantkiller.nodes.Loot;
+
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -331,7 +336,7 @@ public class HillGiantGUI extends JFrame {
         panel_3.setViewportView(lootList);
         lootList.setAutoscrolls(false);
         lootList.setModel(new DefaultListModel<LootEnum>() {
-            final LootEnum[] values = LootEnum.allItems();
+            final LootEnum[] values = LootEnum.values();
 
             public int getSize() {
                 return values.length;
@@ -457,40 +462,40 @@ public class HillGiantGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(btnUseAbilities.isSelected()){
-                    Var.useAbilities = true;
-                    if(btnUseMomentum.isSelected()) Var.useMomentum = true;
-                    if(btnUseRejuvenate.isSelected()) Var.useRejuvenate = true;
+                    Variables.useAbilities = true;
+                    if(btnUseMomentum.isSelected()) Variables.useMomentum = true;
+                    if(btnUseRejuvenate.isSelected()) Variables.useRejuvenate = true;
 
                 }
                 if(btnEatFood.isSelected()){
-                    Var.eatFood = true;
+                    Variables.eatFood = true;
                     FoodEnum temp = (FoodEnum) foodList.getSelectedItem();
                     if(temp.getId() == 1){
-                        Var.foodId = Integer.parseInt(customFood.getText());
+                        Variables.foodId = Integer.parseInt(customFood.getText());
                     }else{
-                        Var.foodId = temp.getId();
+                        Variables.foodId = temp.getId();
                     }
-                    Var.withdrawFoodAmount = Integer.parseInt(foodAmount.getText());
+                    Variables.withdrawFoodAmount = Integer.parseInt(foodAmount.getText());
 
                 }
-                Var.skillTraining = skillTraining.getSelectedIndex();
+                Variables.skillTraining = skillTraining.getSelectedIndex();
                 if(btnShouldLoot.isSelected()){
-                    Var.shouldLoot = true;
+                    Variables.shouldLoot = true;
                     int tempLootAfter = Integer.parseInt(txtLootAfter.getText());
                     if(tempLootAfter == 0){
-                        Var.lootAfter = 1;
-                        Var.shouldWaitForLoot = true;
+                        Variables.lootAfter = 1;
+                        Variables.shouldWaitForLoot = true;
                     }
-                    Var.lootAfter = Integer.parseInt(txtLootAfter.getText());
+                    Variables.lootAfter = Integer.parseInt(txtLootAfter.getText());
                     if(btnShouldBurry.isSelected()){
-                        Var.burryBones = true;
+                        Variables.burryBones = true;
                     }
                     if(btnEatFoodForLoot.isSelected()){
-                        Var.eatFoodForSpace = true;
+                        Variables.eatFoodForSpace = true;
                     }
                     if(btnLootByPrice.isSelected()){
-                        Var.lootByPrice = true;
-                        Var.minPriceToLoot = Integer.parseInt(txtLootPrice.getText());
+                        Variables.lootByPrice = true;
+                        Variables.minPriceToLoot = Integer.parseInt(txtLootPrice.getText());
                     }
                     //LootEnum[] temp = (LootEnum[]) lootList.getSelectedValuesList().toArray();
                     Object[] temp = lootList.getSelectedValuesList().toArray();
@@ -498,7 +503,7 @@ public class HillGiantGUI extends JFrame {
                         LootEnum casted = (LootEnum) x;
                         for(int i: casted.getId()){
                             if(i != 1){
-                                Var.lootIds.add(i);
+                                Loot.lootIds.add(i);
                             }
                         }
 
@@ -506,6 +511,7 @@ public class HillGiantGUI extends JFrame {
 
 
                 }
+                Hill_Giant_Killer.guiWait = false;
             }
         });
 
