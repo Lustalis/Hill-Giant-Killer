@@ -14,7 +14,7 @@ import org.powerbot.game.api.methods.interactive.Players;
  * To change this template use File | Settings | File Templates.
  */
 
-public class Dieing extends Node {
+public class Dying extends Node {
     private int npcHash = 0;
     @Override
     public boolean activate() {

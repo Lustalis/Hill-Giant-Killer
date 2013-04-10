@@ -43,7 +43,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
         }
         gui.dispose();
         if(Variables.useMomentum) getContainer().submit(new MomentumTask());
-        provide(new Banking(), new ToHillGiants(), new Eat(), new Loot(), new Fight(), new Dieing(),new UseAbilities());
+        provide(new Banking(), new ToHillGiants(), new Eat(), new Loot(), new Fight(), new Dying(),new UseAbilities());
 
     }
 
