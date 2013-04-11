@@ -113,7 +113,6 @@ public class Loot extends Node {
             this.itemId = itemId;
         }
 
-        @Override
         public void run() {
             GeItem geInfo = GeItem.lookup(itemId);
             if(geInfo == null) {

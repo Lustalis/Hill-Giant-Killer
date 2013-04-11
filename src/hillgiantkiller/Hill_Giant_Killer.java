@@ -1,8 +1,10 @@
 package hillgiantkiller;
 
 import hillgiantkiller.nodes.*;
+import hillgiantkiller.tasks.CheckForDying;
 import hillgiantkiller.other.HillGiantGUI;
 import hillgiantkiller.other.Variables;
+import hillgiantkiller.tasks.MomentumTask;
 import org.powerbot.core.Bot;
 import org.powerbot.core.event.listeners.PaintListener;
 import org.powerbot.core.script.ActiveScript;
@@ -33,6 +35,15 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
             }
         }
     }
+    public synchronized final void provideSpecific(final Node node, final int index) {
+        if(!jobsCollection.contains(node)){
+            jobsCollection.add(index, node);
+        }
+    }
+
+    public synchronized final void removeSpecific(final int index){
+        jobsCollection.remove(index);
+    }
 
     public void onStart() {
 
@@ -42,6 +53,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
             Task.sleep(100);
         }
         gui.dispose();
+        getContainer().submit(new CheckForDying());
         if(Variables.useMomentum) getContainer().submit(new MomentumTask());
         provide(new Banking(), new ToHillGiants(), new Eat(), new Loot(), new Fight(),new UseAbilities());
 
@@ -69,14 +81,11 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener {
 
         if (Game.isLoggedIn()) {
             for (Node node : jobsCollection) {
-                if(Fight.theGiant != null && Fight.theGiant.getAnimation() == Variables.DEATH_ID){
-                    getContainer().submit(new Dying());
-                    getContainer().setPaused(true);
-                }
                 if (node.activate()) {
                     node.execute();
                     return Random.nextInt(50, 100);
                 }
+
             }
         }
 

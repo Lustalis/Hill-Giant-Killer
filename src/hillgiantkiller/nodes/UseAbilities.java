@@ -17,7 +17,8 @@ public class UseAbilities extends Node {
     @Override
     public void execute() {
         for(int i = x; i<12; i++){
-            if(x == 2 && (Methods.getHpPercent() >= (Eat.HEAL_PERCENT + 10)) && ActionBar.getAdrenaline() == 1000 ){
+            if(x == 2 && (Methods.getHpPercent() >= (Eat.HEAL_PERCENT + 10)) && !ActionBar.getReloadChild(1).visible()
+                    && ActionBar.getAdrenaline() == 1000 ){
                 ActionBar.useSlot(1);
             }else{
                 if(ActionBar.isReady(i)){

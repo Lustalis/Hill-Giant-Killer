@@ -1,6 +1,7 @@
 package hillgiantkiller.nodes;
 
 import hillgiantkiller.other.Methods;
+import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;
@@ -24,7 +25,7 @@ public class Fight extends Node {
         theGiant = Methods.getMonster();
 
         if(theGiant != null){
-            Camera.turnTo(theGiant);
+            new MoveCamera(theGiant).start();
             if(!Methods.isOnScreen(theGiant) || !theGiant.interact("Attack")){
                 Walking.walk(theGiant);
                 Methods.waitForOnScreen(theGiant);
@@ -41,5 +42,19 @@ public class Fight extends Node {
         return Players.getLocal().getInteracting() != null && Players.getLocal().getInteracting().validate() ?
                 Players.getLocal().getInteracting() : null;
     }
+
+    private class MoveCamera extends Thread{
+        private NPC n;
+
+        public MoveCamera(final NPC npc){
+            this.n = npc;
+        }
+
+        public void run(){
+            Camera.turnTo(n);
+        }
+    }
+
+
 
 } //End of Node

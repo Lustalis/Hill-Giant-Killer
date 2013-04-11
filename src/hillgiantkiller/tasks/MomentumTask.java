@@ -1,4 +1,4 @@
-package hillgiantkiller.nodes;
+package hillgiantkiller.tasks;
 
 import hillgiantkiller.sk.action.ActionBar;
 import org.powerbot.core.script.job.Task;

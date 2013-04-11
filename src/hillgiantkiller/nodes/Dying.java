@@ -15,7 +15,7 @@ import org.powerbot.game.api.methods.interactive.Players;
  * To change this template use File | Settings | File Templates.
  */
 
-public class Dying extends Task {
+public class Dying extends Node {
 
     @Override
     public void execute() {
@@ -32,9 +32,12 @@ public class Dying extends Task {
                 Methods.droppedLoot();
             }
         }
-        getContainer().setPaused(false);
 
         //return Players.getLocal().getInteracting() != null && Fight.theGiant.getAnimation() == Variables.DEATH_ID;
 
     }
+
+    @Override
+    public boolean activate() {
+        return Players.getLocal().getInteracting() != null && Fight.theGiant.getAnimation() == Variables.DEATH_ID;    }
 }

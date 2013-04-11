@@ -154,6 +154,8 @@ public class Methods {
     }
 
 
+
+
     /*
     returns true when 1 npc has been killed
     and Variables.lootLocations has a Tile in it
@@ -162,7 +164,6 @@ public class Methods {
         return Variables.lootLocations.size() >= Variables.lootAfter;
 
     }
-
 
     public static boolean droppedLoot(){
         Tile x = Variables.deathLocation;
