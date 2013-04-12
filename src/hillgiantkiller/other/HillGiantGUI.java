@@ -370,6 +370,7 @@ public class HillGiantGUI extends JFrame {
         );
         startPanel.setLayout(gl_startPanel);
 
+
         btnUseAbilities.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

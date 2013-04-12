@@ -10,17 +10,13 @@ import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.tab.Inventory;
-import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Timer;
-import org.powerbot.game.api.util.net.GeItem;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Entity;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.node.GroundItem;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
-import java.awt.*;
 
 /**
  * User: Stefano Tabone
@@ -168,8 +164,8 @@ public class Methods {
     public static boolean droppedLoot(){
         Tile x = Variables.deathLocation;
         if(x!= null){
-            Area lootZone = new Area(new Tile(x.getX() + 3, x.getY() + 3, Game.getPlane())
-                    ,new Tile(x.getX() - 3, x.getY() - 3, Game.getPlane()) );
+            Area lootZone = new Area(new Tile(x.getX() + 4, x.getY() + 4, Game.getPlane())
+                    ,new Tile(x.getX() - 4, x.getY() - 4, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
                 GroundItem[] potential = GroundItems.getLoadedAt(t.getX(), t.getY());
                 if(Variables.lootByPrice && Loot.lootIds.isEmpty() && potential.length > 0){

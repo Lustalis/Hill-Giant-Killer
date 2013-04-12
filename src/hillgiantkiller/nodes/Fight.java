@@ -1,7 +1,6 @@
 package hillgiantkiller.nodes;
 
 import hillgiantkiller.other.Methods;
-import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;

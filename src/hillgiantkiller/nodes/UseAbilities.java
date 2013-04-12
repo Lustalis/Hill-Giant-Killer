@@ -16,6 +16,7 @@ public class UseAbilities extends Node {
 
     @Override
     public void execute() {
+        ActionBar.setExpanded(true);
         for(int i = x; i<12; i++){
             if(x == 2 && (Methods.getHpPercent() >= (Eat.HEAL_PERCENT + 10)) && !ActionBar.getReloadChild(1).visible()
                     && ActionBar.getAdrenaline() == 1000 ){
