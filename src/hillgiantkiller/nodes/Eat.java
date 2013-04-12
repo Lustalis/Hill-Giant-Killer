@@ -23,7 +23,7 @@ public class Eat extends Node {
         if(Variables.useRejuvenate && ActionBar.getAdrenaline() == 1000 && ActionBar.isReady(0)){
             ActionBar.useSlot(0);
             Task.sleep(1000);
-        }else{
+        }else if(Methods.getHpPercent() <= HEAL_PERCENT - 5){
             Inventory.getItem(Variables.foodId).getWidgetChild().interact("Eat");
         }
 

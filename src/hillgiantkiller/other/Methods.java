@@ -162,10 +162,10 @@ public class Methods {
     }
 
     public static boolean droppedLoot(){
-        Tile x = Variables.deathLocation;
-        if(x!= null){
-            Area lootZone = new Area(new Tile(x.getX() + 4, x.getY() + 4, Game.getPlane())
-                    ,new Tile(x.getX() - 4, x.getY() - 4, Game.getPlane()) );
+        Tile location = Variables.deathLocation;
+        if(location!= null){
+            Area lootZone = new Area(new Tile(location.getX() + 4, location.getY() + 4, Game.getPlane())
+                    ,new Tile(location.getX() - 4, location.getY() - 4, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
                 GroundItem[] potential = GroundItems.getLoadedAt(t.getX(), t.getY());
                 if(Variables.lootByPrice && Loot.lootIds.isEmpty() && potential.length > 0){
@@ -177,6 +177,7 @@ public class Methods {
                             if(i == p.getId()){
                                 addTile(t);
                                 System.out.println("Tiles in list(method): "+Variables.lootLocations.size());
+                                if(t != location) Task.sleep(1500);
                             }
                         }
 
