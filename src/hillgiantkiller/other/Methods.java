@@ -24,6 +24,9 @@ import org.powerbot.game.api.wrappers.widget.WidgetChild;
  * Time: 11:09 PM
  */
 public class Methods {
+    private static int price;
+
+
     public interface Condition{
         public boolean accept();
     }
@@ -175,7 +178,8 @@ public class Methods {
                     for(GroundItem p: potential){
                         for(int i: Loot.lootIds){
                             if(i == p.getId()){
-                                addTile(t);
+                                price = Loot.priceTable.get(p.getId());
+                                addTile(t, price);
                                 System.out.println("Tiles in list(method): "+Variables.lootLocations.size());
                                 if(t != location) Task.sleep(1500);
                             }
@@ -191,10 +195,20 @@ public class Methods {
 
     }
 
+    public static void addTile(Tile t, int p){
+        if(Variables.lootLocations.size() == 0 || (Variables.lootLocations.size() >0 && !Variables.lootLocations.contains(t))){
+            System.out.println("Added tile(method)");
+            Variables.lootLocations.add(t);
+            Paint.profit += p;
+
+        }
+    }
+
     public static void addTile(Tile t){
         if(Variables.lootLocations.size() == 0 || (Variables.lootLocations.size() >0 && !Variables.lootLocations.contains(t))){
             System.out.println("Added tile(method)");
             Variables.lootLocations.add(t);
+
         }
     }
 
