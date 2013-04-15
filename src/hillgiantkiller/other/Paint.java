@@ -1,5 +1,6 @@
 package hillgiantkiller.other;
 
+import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.util.SkillData;
 import org.powerbot.game.api.util.Timer;
 
@@ -26,10 +27,17 @@ public class Paint {
     private static final Image img1 = getImage("http://i.imgur.com/0Y6cxJI.jpg");
 
     private static SkillData sd = new SkillData();
-    public static int gKilled = 0;
     public static int profit = 0;
+    public static int skill = 0;
+    public static String status = "";
     private static Timer runTime = new Timer(0);
 
+
+    public static void drawMouse(Graphics g){
+        g.setColor(Color.RED);
+        g.drawLine(Mouse.getX() - 5, Mouse.getY() - 5, Mouse.getX() + 5, Mouse.getY() + 5);
+        g.drawLine(Mouse.getX() - 5, Mouse.getY() + 5, Mouse.getX() + 5, Mouse.getY() - 5);
+    }
 
     public static void drawPaint(Graphics g1, boolean hide) {
         Graphics2D g = (Graphics2D)g1;
@@ -39,17 +47,18 @@ public class Paint {
             g.setFont(font1);
             g.setColor(color1);
             g.drawString(runTime.toElapsedString(), 106, 403);
-            g.drawString("exp per hour", 98, 449);
-            g.drawString("total exp", 105, 427);
-            g.drawString("total profit", 308, 406);
-            g.drawString("profit per hour", 310, 427);
+            //TODO: left off here
+            g.drawString(Integer.toString(sd.experience(SkillData.Rate.HOUR, skill)), 98, 449);
+            g.drawString(Integer.toString(sd.experience(skill)), 105, 427);
+            g.drawString(Integer.toString(profit), 308, 406);
+            g.drawString(Integer.toString(profitPerHour()), 310, 427);
             g.setColor(color2);
             g.fillRect(578, 1, 98, 33);
             g.setColor(color3);
             g.setStroke(stroke1);
             g.drawRect(578, 1, 98, 33);
             g.setColor(color1);
-            g.drawString("status", 266, 451);
+            g.drawString(status, 266, 451);
             g.setFont(font2);
             g.setColor(color4);
             g.drawString("Hide", 609, 25);
@@ -72,6 +81,10 @@ public class Paint {
         } catch(IOException e) {
             return null;
         }
+    }
+
+    private static int profitPerHour(){
+        return (int) (profit * (3600000d / runTime.getElapsed()));
     }
 
 

@@ -15,15 +15,17 @@ public class Eat extends Node {
     @Override
     public boolean activate() {
 
-        return Methods.needToHeal() && Variables.eatFood;
+        return Methods.needToHeal() && ((Variables.useRejuvenate && ActionBar.isReady(0) && ActionBar.getAdrenaline() == 1000) ||
+                (Variables.eatFood && Methods.getHpPercent() <= HEAL_PERCENT - 5));
     }
 
     @Override
     public void execute() {
+
         if(Variables.useRejuvenate && ActionBar.getAdrenaline() == 1000 && ActionBar.isReady(0)){
             ActionBar.useSlot(0);
             Task.sleep(1000);
-        }else if(Methods.getHpPercent() <= HEAL_PERCENT - 5){
+        }else if(Variables.eatFood && Methods.getHpPercent() <= HEAL_PERCENT - 5){
             Inventory.getItem(Variables.foodId).getWidgetChild().interact("Eat");
         }
 

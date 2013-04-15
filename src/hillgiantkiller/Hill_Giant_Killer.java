@@ -13,7 +13,6 @@ import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.Manifest;
 import org.powerbot.game.api.methods.Game;
-import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.methods.widget.WidgetCache;
 import org.powerbot.game.api.util.Random;
@@ -26,7 +25,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@Manifest(authors = {"Kirinsoul"}, description = "Hill Giants v2", name = "Hill Giants v2")
+@Manifest(authors = {"__Meat"}, description = "Kills hill giants in the edgeville dungeon",
+        name = "__Meat's Hill Giant Killer", version = 1.0, topic = 982254)
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener, MouseListener {
     private Client client = Bot.client();
     private final List<Node> jobsCollection = Collections.synchronizedList(new ArrayList<Node>());
@@ -44,18 +44,17 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
     }
 
     public void onStart() {
-
+        Paint.status = "Starting";
         Camera.setPitch(true);
         HillGiantGUI gui = new HillGiantGUI();
         gui.setVisible(true);
         while(guiWait){
             Task.sleep(100);
         }
-        gui.dispose();
-        getContainer().submit(new CheckForDying());
+        System.out.println("Done Waiting......");
         if(Variables.useMomentum) getContainer().submit(new MomentumTask());
         provide(new Banking(), new ToHillGiants(), new Eat(), new Loot(), new Fight(),new UseAbilities());
-
+        getContainer().submit(new CheckForDying());
     }
 
     public void onStop() {
@@ -80,7 +79,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
 
         if (Game.isLoggedIn()) {
             for (Node node : jobsCollection) {
-                if (node.activate()) {
+                if (node!= null && node.activate()) {
                     node.execute();
                     return Random.nextInt(50, 100);
                 }
@@ -94,9 +93,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
 
     @Override
     public void onRepaint(Graphics g) {
-        g.setColor(Color.RED);
-        g.drawLine(Mouse.getX() - 5, Mouse.getY() - 5, Mouse.getX() + 5, Mouse.getY() + 5);
-        g.drawLine(Mouse.getX() - 5, Mouse.getY() + 5, Mouse.getX() + 5, Mouse.getY() - 5);
+        Paint.drawMouse(g);
         Paint.drawPaint(g,hide);
     }
 

@@ -1,12 +1,12 @@
 package hillgiantkiller.other;
 
+import com.sun.org.apache.bcel.internal.generic.VariableLengthInstruction;
 import hillgiantkiller.nodes.Eat;
 import hillgiantkiller.nodes.Loot;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Widgets;
-import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.tab.Inventory;
@@ -24,8 +24,6 @@ import org.powerbot.game.api.wrappers.widget.WidgetChild;
  * Time: 11:09 PM
  */
 public class Methods {
-    private static int price;
-
 
     public interface Condition{
         public boolean accept();
@@ -60,13 +58,13 @@ public class Methods {
         }
     }
 
-    public static void waitForInvChange(final int item){
+    public static void waitForInvChange(){
         Timer t = new Timer(3000);
-        final int a = Inventory.getCount(item);
+        final int a = Inventory.getCount();
         Condition x = new Condition() {
             @Override
             public boolean accept() {
-                return a != Inventory.getCount(item);
+                return a != Inventory.getCount();
             }
         };
         while(t.isRunning() && !x.accept()){
@@ -141,18 +139,6 @@ public class Methods {
     }
 
 
-    public static NPC getMonster(){
-        if(NPCs.getNearest(Variables.priorityNPCFilter) != null){
-            return  NPCs.getNearest(Variables.priorityNPCFilter);
-        }else{
-            return NPCs.getNearest(Variables.npcFilter);
-        }
-
-
-
-    }
-
-
 
 
     /*
@@ -160,15 +146,15 @@ public class Methods {
     and Variables.lootLocations has a Tile in it
      */
     public static boolean needToLoot(){
-        return Variables.lootLocations.size() >= Variables.lootAfter;
+        return Loot.lootLocations.size() >= Variables.lootAfter;
 
     }
 
     public static boolean droppedLoot(){
         Tile location = Variables.deathLocation;
         if(location!= null){
-            Area lootZone = new Area(new Tile(location.getX() + 4, location.getY() + 4, Game.getPlane())
-                    ,new Tile(location.getX() - 4, location.getY() - 4, Game.getPlane()) );
+            Area lootZone = new Area(new Tile(location.getX() + 3, location.getY() + 3, Game.getPlane())
+                    ,new Tile(location.getX() - 3, location.getY() - 3, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
                 GroundItem[] potential = GroundItems.getLoadedAt(t.getX(), t.getY());
                 if(Variables.lootByPrice && Loot.lootIds.isEmpty() && potential.length > 0){
@@ -178,10 +164,8 @@ public class Methods {
                     for(GroundItem p: potential){
                         for(int i: Loot.lootIds){
                             if(i == p.getId()){
-                                price = Loot.priceTable.get(p.getId());
-                                addTile(t, price);
-                                System.out.println("Tiles in list(method): "+Variables.lootLocations.size());
-                                if(t != location) Task.sleep(1500);
+                                addTile(t);
+                                System.out.println("Tiles in list(method): "+ Loot.lootLocations.size());
                             }
                         }
 
@@ -189,25 +173,17 @@ public class Methods {
                 }
 
             }
-            if(Variables.lootLocations.size() >=1) return true;
+            if(Loot.lootLocations.size() >=1) return true;
         }
+        System.out.println("no loot is detected");
         return false;
 
     }
 
-    public static void addTile(Tile t, int p){
-        if(Variables.lootLocations.size() == 0 || (Variables.lootLocations.size() >0 && !Variables.lootLocations.contains(t))){
-            System.out.println("Added tile(method)");
-            Variables.lootLocations.add(t);
-            Paint.profit += p;
-
-        }
-    }
-
     public static void addTile(Tile t){
-        if(Variables.lootLocations.size() == 0 || (Variables.lootLocations.size() >0 && !Variables.lootLocations.contains(t))){
+        if(Loot.lootLocations.size() == 0 || (Loot.lootLocations.size() >0 && !Loot.lootLocations.contains(t))){
             System.out.println("Added tile(method)");
-            Variables.lootLocations.add(t);
+            Loot.lootLocations.add(t);
 
         }
     }

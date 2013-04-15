@@ -1,6 +1,7 @@
 package hillgiantkiller.nodes;
 
 import hillgiantkiller.other.Methods;
+import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
@@ -34,11 +35,12 @@ public class ToHillGiants extends Node {
 
     @Override
     public void execute() {
+        Paint.status = "Walking back to dungeon";
         if(!AROUND_LADDER_DOWN.contains(Players.getLocal())){
             if(!DUNGEON_ENTRANCE.contains(Players.getLocal())){
                 TO_DUNGEON.traverse();
             }else {
-                door = SceneEntities.getNearest(Variables.DOOR_ID);
+                door = SceneEntities.getNearest(Banking.DOOR_ID);
                 if(door != null && door.interact("Open")){
                     Methods.waitForArea(AROUND_LADDER_DOWN);
                 }
@@ -46,7 +48,7 @@ public class ToHillGiants extends Node {
 
         }else{
             ladderDown = SceneEntities.getNearest(LADDER_DOWN);
-            if(ladderDown.interact("Climb-down")){
+            if(ladderDown != null && ladderDown.interact("Climb-down")){
                 Methods.waitForArea(INSIDE_DUNGEON);
             }
         }

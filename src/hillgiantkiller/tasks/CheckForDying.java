@@ -1,11 +1,14 @@
 package hillgiantkiller.tasks;
 
-import hillgiantkiller.nodes.Dying;
+import hillgiantkiller.nodes.Fight;
+import hillgiantkiller.other.Methods;
+import hillgiantkiller.other.Paint;
+import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.LoopTask;
 import org.powerbot.core.script.job.Task;
-import org.powerbot.core.script.job.state.Node;
+import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.util.Random;
-import org.powerbot.game.api.util.Timer;
+import org.powerbot.game.api.wrappers.interactive.Character;
 
 /**
  * User: Stefano Tabone
@@ -13,19 +16,41 @@ import org.powerbot.game.api.util.Timer;
  * Time: 9:33 PM
  */
 public class CheckForDying extends LoopTask {
-    private final Node dying = new Dying();
+    private Character npc;
     @Override
     public int loop() {
-        if(dying.activate()){
+        npc = Players.getLocal().getInteracting();
+        if(npc != null && npc.getAnimation() == Variables.DEATH_ID && !getContainer().isPaused()){
+            Variables.gKilled++;
+            System.out.println("starting task and pausing container");
             getContainer().setPaused(true);
-            dying.execute();
-            Timer t = new Timer(2000);
-            while(dying.activate() && t.isRunning()){
-                Task.sleep(500);
+            //getContainer().submit(dying);
+            //dying.execute();
+
+
+            System.out.println("Giant is deeeead");
+            if(Fight.theGiant != null){
+                Variables.deathLocation = Fight.theGiant.getLocation();
             }
-            getContainer().setPaused(false);
+
+            if (Variables.shouldLoot) {
+                if (Variables.lootAfter == 1) {
+                    System.out.println("Waiting for loot");
+                    Paint.status = "Waiting for loot...";
+                    Methods.waitForDrop();
+                }else{
+                    Methods.droppedLoot();
+                    Task.sleep(750,950);
+                }
+                System.out.println("Done waiting for loot");
+                getContainer().setPaused(false);
+            }
+
+            if(getContainer().isPaused()){
+                getContainer().setPaused(false);
+            }
 
         }
-        return Random.nextInt(25, 50);
+        return Random.nextInt(10, 20);
     }
 }

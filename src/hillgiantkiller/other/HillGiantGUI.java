@@ -3,6 +3,7 @@ package hillgiantkiller.other;
 import hillgiantkiller.Hill_Giant_Killer;
 import hillgiantkiller.enums.FoodEnum;
 import hillgiantkiller.enums.LootEnum;
+import hillgiantkiller.enums.SkillsEnum;
 import hillgiantkiller.nodes.Loot;
 
 import javax.swing.*;
@@ -46,7 +47,7 @@ public class HillGiantGUI extends JFrame {
      */
     public HillGiantGUI() {
         setTitle("Kirinsoul's Hill Giant Fighter");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 396, 326);
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -129,8 +130,8 @@ public class HillGiantGUI extends JFrame {
 
         JLabel lblTrainingWhatSkill = new JLabel("Training what skill: ");
 
-        final JComboBox<String> skillTraining = new JComboBox<>();
-        skillTraining.setModel(new DefaultComboBoxModel<>(new String[] {"Attack", "Strength", "Defense", "[A,S,D]", "Ranged", "Magic"}));
+        final JComboBox<SkillsEnum> skillTraining = new JComboBox<>();
+        skillTraining.setModel(new DefaultComboBoxModel<>(SkillsEnum.values()));
         GroupLayout gl_panel_2 = new GroupLayout(panel_2);
         gl_panel_2.setHorizontalGroup(
                 gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -479,10 +480,12 @@ public class HillGiantGUI extends JFrame {
                     Variables.withdrawFoodAmount = Integer.parseInt(foodAmount.getText());
 
                 }
-                Variables.skillTraining = skillTraining.getSelectedIndex();
+
+                SkillsEnum skill = (SkillsEnum) skillTraining.getSelectedItem();
+                Paint.skill = skill.getSkillID();
+
                 if(btnShouldLoot.isSelected()){
                     Variables.shouldLoot = true;
-                    System.out.println(Variables.shouldLoot);
                     int tempLootAfter = Integer.parseInt(txtLootAfter.getText());
                     if(tempLootAfter == 0){
                         Variables.lootAfter = 1;
@@ -497,12 +500,10 @@ public class HillGiantGUI extends JFrame {
                     }
                     if(btnLootByPrice.isSelected()){
                         Variables.lootByPrice = true;
-                        System.out.println(Variables.lootByPrice);
                         Variables.minPriceToLoot = Integer.parseInt(txtLootPrice.getText());
                     }
                     //LootEnum[] temp = (LootEnum[]) lootList.getSelectedValuesList().toArray();
                     Object[] temp = lootList.getSelectedValuesList().toArray();
-                    System.out.println(temp);
                     if(temp != null){
                         for(Object  x: temp){
                             LootEnum casted = (LootEnum) x;
@@ -520,6 +521,7 @@ public class HillGiantGUI extends JFrame {
                 }
 
                 Hill_Giant_Killer.guiWait = false;
+                destroy();
             }
         });
 
@@ -528,6 +530,8 @@ public class HillGiantGUI extends JFrame {
 
     }
 
-
+    public void destroy(){
+        this.dispose();
+    }
 
 }

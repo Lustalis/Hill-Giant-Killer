@@ -1,11 +1,6 @@
 package hillgiantkiller.other;
 
-import org.powerbot.game.api.methods.interactive.Players;
-import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.interactive.NPC;
-
-import java.util.ArrayList;
 
 /**
  * User: Stefano Tabone
@@ -22,20 +17,6 @@ public class Variables {
     public static final int[] NPC_IDS = {117, 4689, 4690, 4691, 4692, 4693};
     public static Tile deathLocation = null;
     public static final int DEATH_ID = 4653;
-
-
-    /*
-    Looting stuff
-     */
-    public static ArrayList<Tile> lootLocations = new ArrayList<>();
-
-
-    /*
-    Scene Entity stuff
-     */
-
-    public static final int DOOR_ID = 1804;
-
 
 
     /*
@@ -59,6 +40,7 @@ public class Variables {
     public static int minPriceToLoot = 1000;
     public static int lootAfter = 1;
     public static boolean shouldWaitForLoot = false;
+    public static int gKilled = 0;
 
 
 
@@ -67,22 +49,6 @@ public class Variables {
     /*
     Filters
      */
-
-
-    public static Filter<NPC> npcFilter = new Filter<NPC>() {
-        @Override
-        public boolean accept(NPC n) {
-            return n.getName().equalsIgnoreCase("hill giant") && (n.getInteracting() == null )
-                    && n.getAnimation() != DEATH_ID;
-        }
-    };
-    public static Filter<NPC> priorityNPCFilter = new Filter<NPC>() {
-        @Override
-        public boolean accept(NPC n) {
-            return n.getInteracting() != null && n.getInteracting().equals(Players.getLocal());
-        }
-    };
-
 
 
 }
