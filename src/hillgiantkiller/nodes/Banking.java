@@ -73,6 +73,7 @@ public class Banking extends Node {
             Paint.status = "Banking...";
             ActionBar.setExpanded(false);
             if(!Players.getLocal().isMoving() && Bank.open()){
+
                 Bank.depositInventory();
                 Methods.waitForInvChange();
                 if(Bank.getItemCount(983) == 0 || Bank.getItemCount(Variables.foodId) == 0){
