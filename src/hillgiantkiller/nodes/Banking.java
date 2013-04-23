@@ -70,7 +70,7 @@ public class Banking extends Node {
             TO_BANK.traverse();
         }else{
             Paint.status = "Banking...";
-            ActionBar.setExpanded(false);
+            ActionBar.expand(false);
             if(!Players.getLocal().isMoving() && Bank.open()){
 
                 Bank.depositInventory();

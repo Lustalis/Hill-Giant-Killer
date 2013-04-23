@@ -21,10 +21,15 @@ public class CheckForDying extends LoopTask {
     public int loop() {
         try {
             npc = Players.getLocal().getInteracting();
-            if(npc != null && npc.getAnimation() == Variables.DEATH_ID && !getContainer().isPaused()){
+            if((npc != null && npc.getAnimation() == Variables.DEATH_ID)
+                    || (npc == null && Fight.theGiant != null && Fight.theGiant.getHealthPercent() == 0 && Fight.theGiant.isOnScreen())
+                    && !getContainer().isPaused()){
                 Variables.gKilled++;
                 System.out.println("starting task and pausing container");
                 getContainer().setPaused(true);
+                //getContainer().submit(dying);
+                //dying.execute();
+
 
                 System.out.println("Giant is deeeead");
                 if(Fight.theGiant != null){
@@ -42,10 +47,12 @@ public class CheckForDying extends LoopTask {
                     }
                     System.out.println("Done waiting for loot");
                     getContainer().setPaused(false);
+                    Fight.theGiant = null;
                 }
 
                 if(getContainer().isPaused()){
                     getContainer().setPaused(false);
+                    Fight.theGiant = null;
                 }
 
             }
