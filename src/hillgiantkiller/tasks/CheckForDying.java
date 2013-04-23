@@ -19,37 +19,38 @@ public class CheckForDying extends LoopTask {
     private Character npc;
     @Override
     public int loop() {
-        npc = Players.getLocal().getInteracting();
-        if(npc != null && npc.getAnimation() == Variables.DEATH_ID && !getContainer().isPaused()){
-            Variables.gKilled++;
-            System.out.println("starting task and pausing container");
-            getContainer().setPaused(true);
-            //getContainer().submit(dying);
-            //dying.execute();
+        try {
+            npc = Players.getLocal().getInteracting();
+            if(npc != null && npc.getAnimation() == Variables.DEATH_ID && !getContainer().isPaused()){
+                Variables.gKilled++;
+                System.out.println("starting task and pausing container");
+                getContainer().setPaused(true);
 
-
-            System.out.println("Giant is deeeead");
-            if(Fight.theGiant != null){
-                Variables.deathLocation = Fight.theGiant.getLocation();
-            }
-
-            if (Variables.shouldLoot) {
-                if (Variables.lootAfter == 1) {
-                    System.out.println("Waiting for loot");
-                    Paint.status = "Waiting for loot...";
-                    Methods.waitForDrop();
-                }else{
-                    Methods.droppedLoot();
-                    Task.sleep(750,950);
+                System.out.println("Giant is deeeead");
+                if(Fight.theGiant != null){
+                    Variables.deathLocation = Fight.theGiant.getLocation();
                 }
-                System.out.println("Done waiting for loot");
-                getContainer().setPaused(false);
-            }
 
-            if(getContainer().isPaused()){
-                getContainer().setPaused(false);
-            }
+                if (Variables.shouldLoot) {
+                    if (Variables.lootAfter == 1) {
+                        System.out.println("Waiting for loot");
+                        Paint.status = "Waiting for loot...";
+                        Methods.waitForDrop();
+                    }else{
+                        Methods.droppedLoot();
+                        Task.sleep(750,950);
+                    }
+                    System.out.println("Done waiting for loot");
+                    getContainer().setPaused(false);
+                }
 
+                if(getContainer().isPaused()){
+                    getContainer().setPaused(false);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         return Random.nextInt(10, 20);
     }

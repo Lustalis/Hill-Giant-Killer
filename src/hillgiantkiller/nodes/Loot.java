@@ -116,19 +116,10 @@ public class Loot extends Node {
     }//End of Execute
 
     private static int getPrice(final int id) {
-        try {
-            final BufferedReader in = new BufferedReader(new InputStreamReader(new URL("http://scriptwith.us/api/?return=text&item=" + id)
-                    .openConnection().getInputStream()));
+        final String add = "http://scriptwith.us/api/?return=text&item=" + id;
+        try (final BufferedReader in = new BufferedReader(new InputStreamReader(
+                new URL(add).openConnection().getInputStream()))) {
             final String line = in.readLine();
-            in.close();
-            if(Integer.parseInt(line.split("[:]")[1]) == 0){
-                final BufferedReader in2 = new BufferedReader(new InputStreamReader(new URL("http://scriptwith.us/api/?return=text&item=" + (id-1))
-                        .openConnection().getInputStream()));
-                final String line2 = in2.readLine();
-                in.close();
-                return Integer.parseInt(line2.split("[:]")[1]);
-            }
-
             return Integer.parseInt(line.split("[:]")[1]);
         } catch (Exception e) {
             e.printStackTrace();

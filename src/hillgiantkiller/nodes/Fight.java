@@ -37,12 +37,11 @@ public class Fight extends Node {
     @Override
     public boolean activate() {
 
-        return isInteracting() == null && !Players.getLocal().isMoving() && Players.getLocal().getAnimation() == -1;
+        return isInteracting() == null && Players.getLocal().getAnimation() == -1;
     }
 
     @Override
     public void execute() {
-        System.out.println("Finding npc.....");
         Paint.status = "Finding a giant";
         theGiant = getMonster();
 
