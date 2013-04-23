@@ -22,26 +22,25 @@ public class ToHillGiants extends Node {
     private final Area AROUND_LADDER_DOWN = new Area(new Tile(3113,3453,0), new Tile(3116,3450,0));
     private final Area INSIDE_DUNGEON = new Area(new Tile(3115,9854,0), new Tile(3117,9854,0), new Tile(3117,9850,0),
             new Tile(3115,9850,0));
-    private final Area DUNGEON_ENTRANCE = new Area(new Tile(3112,3448,0), new Tile(3118,3444,0));
+    public static final Area DUNGEON_ENTRANCE = new Area(new Tile(3112,3448,0), new Tile(3118,3444,0));
     private final Tile[] PATH_1 = new Tile[] { new Tile(3150, 3474, 0), new Tile(3146, 3464, 0), new Tile(3136, 3456, 0),
             new Tile(3127, 3455, 0), new Tile(3114, 3446, 0) };
     private TilePath TO_DUNGEON = Walking.newTilePath(PATH_1);
 
     @Override
     public boolean activate() {
-        NPC x = NPCs.getNearest(Variables.NPC_IDS);
-        return (!Inventory.isFull() || Methods.haveFood(Variables.foodId)) && x == null;
+        return (!Inventory.isFull() || Methods.haveFood(Variables.foodId)) && NPCs.getNearest(Variables.NPC_IDS) == null;
     }
 
     @Override
     public void execute() {
         Paint.status = "Walking back to dungeon";
         if(!AROUND_LADDER_DOWN.contains(Players.getLocal())){
-            if(!DUNGEON_ENTRANCE.contains(Players.getLocal())){
+            if(!DUNGEON_ENTRANCE.getTileArray()[1].isOnScreen()){
                 TO_DUNGEON.traverse();
             }else {
                 door = SceneEntities.getNearest(Banking.DOOR_ID);
-                if(door != null && door.interact("Open")){
+                if(door.interact("Open")){
                     Methods.waitForArea(AROUND_LADDER_DOWN);
                 }
             }

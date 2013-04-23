@@ -5,6 +5,7 @@ import hillgiantkiller.other.HillGiantGUI;
 import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Variables;
 import hillgiantkiller.tasks.CheckForDying;
+import hillgiantkiller.tasks.FailSafe;
 import hillgiantkiller.tasks.MomentumTask;
 import org.powerbot.core.Bot;
 import org.powerbot.core.event.listeners.PaintListener;
@@ -26,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Manifest(authors = {"__Meat"}, description = "Kills hill giants in the edgeville dungeon",
-        name = "__Meat's Hill Giant Killer", version = 1.0, topic = 982254)
+        name = "__Meat's Hill Giant Killer", version = 1.4, topic = 982254)
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener, MouseListener {
     private Client client = Bot.client();
     private final List<Node> jobsCollection = Collections.synchronizedList(new ArrayList<Node>());
@@ -55,6 +56,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
         if(Variables.useMomentum) getContainer().submit(new MomentumTask());
         provide(new Banking(), new ToHillGiants(), new Eat(), new Loot(), new Fight(),new UseAbilities());
         getContainer().submit(new CheckForDying());
+        getContainer().submit(new FailSafe());
     }
 
     public void onStop() {
@@ -63,31 +65,35 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
 
     }
 
-
     @Override
     public int loop() {
 
-        if (Game.getClientState() != Game.INDEX_MAP_LOADED) {
-            return 1000;
-        }
-
-        if (client != Bot.client()) {
-            WidgetCache.purge();
-            Bot.context().getEventManager().addListener(this);
-            client = Bot.client();
-        }
-
-        if (Game.isLoggedIn()) {
-            for (Node node : jobsCollection) {
-                if (node!= null && node.activate()) {
-                    node.execute();
-                    return Random.nextInt(50, 100);
-                }
-
+        try {
+            if (Game.getClientState() != Game.INDEX_MAP_LOADED) {
+                return 1000;
             }
+
+            if (client != Bot.client()) {
+                WidgetCache.purge();
+                Bot.context().getEventManager().addListener(this);
+                client = Bot.client();
+            }
+
+            if (Game.isLoggedIn()) {
+                for (Node node : jobsCollection) {
+                    if (node!= null && node.activate()) {
+                        node.execute();
+                        return Random.nextInt(50, 100);
+                    }
+
+                }
+            }
+            return Random.nextInt(50, 100);
+
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
-
-
         return Random.nextInt(50, 100);
     }
 

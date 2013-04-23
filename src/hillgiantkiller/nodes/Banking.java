@@ -45,8 +45,7 @@ public class Banking extends Node {
         if(!BANK_AREA.contains(Players.getLocal())){
             Paint.status = "Walking to bank";
             if(!AROUND_LADDER_DOWN.contains(Players.getLocal())){
-                final NPC x = NPCs.getNearest(Variables.NPC_IDS);
-                if(x != null){
+                if(NPCs.getNearest(Variables.NPC_IDS) != null){
                     //Walking up ladder
                     System.out.println("In the dungeon; going up");
                     ladderUp = SceneEntities.getNearest(LADDER_UP);
@@ -60,13 +59,13 @@ public class Banking extends Node {
                 //Opening door
                 door = SceneEntities.getNearest(DOOR_ID);
                 System.out.println("Opening door");
-                if(door != null && door.interact("Open")){
-                    Timer t = new Timer(1500);
-                    while(t.isRunning() && AROUND_LADDER_DOWN.contains(Players.getLocal())){
-                        Task.sleep(500);
+                if(door != null){
+                    Camera.turnTo(door);
+                    if(door.interact("Open")){
+                        Methods.waitForArea(AROUND_LADDER_DOWN);
                     }
-
                 }
+
             }
             TO_BANK.traverse();
         }else{
