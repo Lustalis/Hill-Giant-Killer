@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Manifest(authors = {"__Meat"}, description = "Kills hill giants in the edgeville dungeon",
-        name = "__Meat's Hill Giant Killer", version = 1.4, topic = 982254)
+        name = "__Meat's Hill Giant Killer", version = 1.5, topic = 982254)
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener, MouseListener {
     private Client client = Bot.client();
     private final List<Node> jobsCollection = Collections.synchronizedList(new ArrayList<Node>());
@@ -54,7 +54,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
         }
         System.out.println("Done Waiting......");
         if(Variables.useMomentum) getContainer().submit(new MomentumTask());
-        provide(new Banking(), new ToHillGiants(), new Eat(), new Loot(), new Fight(),new UseAbilities());
+        provide(new Banking(), new ToHillGiants(), new Eat(), new Looting(), new Fight(),new UseAbilities());
         getContainer().submit(new CheckForDying());
         getContainer().submit(new FailSafe());
     }

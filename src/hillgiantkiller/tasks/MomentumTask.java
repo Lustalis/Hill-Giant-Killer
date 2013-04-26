@@ -14,7 +14,7 @@ public class MomentumTask extends Task {
     public void execute() {
         if(Settings.get(682) == 0x240026){
             System.out.println("Activating Momentum");
-            ActionBar.interactSlot(0, "Activate");
+            ActionBar.getNode(0).interact("Activate");
         }else{
             System.out.println("Momentum already active");
         }

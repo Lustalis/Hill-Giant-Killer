@@ -1,8 +1,7 @@
 package hillgiantkiller.other;
 
-import com.sun.org.apache.bcel.internal.generic.VariableLengthInstruction;
 import hillgiantkiller.nodes.Eat;
-import hillgiantkiller.nodes.Loot;
+import hillgiantkiller.nodes.Looting;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Game;
@@ -146,7 +145,7 @@ public class Methods {
     and Variables.lootLocations has a Tile in it
      */
     public static boolean needToLoot(){
-        return Loot.lootLocations.size() >= Variables.lootAfter;
+        return Looting.lootLocations.size() >= Variables.lootAfter;
 
     }
 
@@ -157,15 +156,15 @@ public class Methods {
                     ,new Tile(location.getX() - 3, location.getY() - 3, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
                 GroundItem[] potential = GroundItems.getLoadedAt(t.getX(), t.getY());
-                if(Variables.lootByPrice && Loot.lootIds.isEmpty() && potential.length > 0){
+                if(Variables.lootByPrice && Looting.lootIds.isEmpty() && potential.length > 0){
                     System.out.println("No loot id's selected; adding tile");
                     addTile(t);
                 }else{
                     for(GroundItem p: potential){
-                        for(int i: Loot.lootIds){
+                        for(int i: Looting.lootIds){
                             if(i == p.getId()){
                                 addTile(t);
-                                System.out.println("Tiles in list(method): "+ Loot.lootLocations.size());
+                                System.out.println("Tiles in list(method): "+ Looting.lootLocations.size());
                             }
                         }
 
@@ -173,17 +172,16 @@ public class Methods {
                 }
 
             }
-            if(Loot.lootLocations.size() >=1) return true;
+            if(Looting.lootLocations.size() >=1) return true;
         }
-        System.out.println("no loot is detected");
         return false;
 
     }
 
     public static void addTile(Tile t){
-        if(Loot.lootLocations.size() == 0 || (Loot.lootLocations.size() >0 && !Loot.lootLocations.contains(t))){
+        if(Looting.lootLocations.size() == 0 || (Looting.lootLocations.size() >0 && !Looting.lootLocations.contains(t))){
             System.out.println("Added tile(method)");
-            Loot.lootLocations.add(t);
+            Looting.lootLocations.add(t);
 
         }
     }

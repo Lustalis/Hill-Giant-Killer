@@ -5,7 +5,7 @@ package hillgiantkiller.enums;
  * Date: 06/04/13
  * Time: 2:38 AM
  */
-public enum FoodEnum {
+public enum Food {
     LOBSTER("Lobster",379),
     SWORDFISH("Swordfish",373),
     SHARK("Shark",385),
@@ -15,7 +15,7 @@ public enum FoodEnum {
     private int id;
     private String name;
 
-    private FoodEnum(String n, int i){
+    private Food(String n, int i){
         name = n;
         id = i;
 

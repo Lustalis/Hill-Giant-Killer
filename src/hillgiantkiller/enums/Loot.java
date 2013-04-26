@@ -5,7 +5,7 @@ package hillgiantkiller.enums;
  * Date: 4/5/13
  * Time: 11:33 AM
  */
-public enum LootEnum {
+public enum Loot {
 
     GOLD_CHARM("Gold Charm",12158),
     GREEN_CHARM("Green Charm",12159),
@@ -50,7 +50,7 @@ public enum LootEnum {
     private int[] id;
     private String name;
 
-    private LootEnum(String itemName, int... itemID){
+    private Loot(String itemName, int... itemID){
         id = itemID;
         name = itemName;
     }

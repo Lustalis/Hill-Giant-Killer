@@ -3,6 +3,7 @@ package hillgiantkiller.tasks;
 import org.powerbot.core.script.job.LoopTask;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.util.Random;
+import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Timer;
@@ -28,7 +29,7 @@ public class FailSafe extends LoopTask {
     }
 
     private static boolean isIdle(){
-        return Players.getLocal().isIdle() && Players.getLocal().getAnimation() == -1
+        return Game.isLoggedIn() && Players.getLocal().isIdle() && Players.getLocal().getAnimation() == -1
                 && !Players.getLocal().isMoving();
     }
 }

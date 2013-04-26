@@ -1,10 +1,10 @@
 package hillgiantkiller.other;
 
 import hillgiantkiller.Hill_Giant_Killer;
-import hillgiantkiller.enums.FoodEnum;
-import hillgiantkiller.enums.LootEnum;
-import hillgiantkiller.enums.SkillsEnum;
-import hillgiantkiller.nodes.Loot;
+import hillgiantkiller.enums.Food;
+import hillgiantkiller.enums.Loot;
+import hillgiantkiller.enums.Skills;
+import hillgiantkiller.nodes.Looting;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
@@ -69,10 +69,8 @@ public class HillGiantGUI extends JFrame {
 
         final JRadioButton btnEatFood = new JRadioButton("Eat Food");
 
-        final JComboBox<FoodEnum> foodList = new JComboBox<>();
+        final JComboBox<Food> foodList = new JComboBox<>(new DefaultComboBoxModel<>(Food.values()));
         foodList.setEnabled(false);
-        DefaultComboBoxModel<FoodEnum> fromEnum = new DefaultComboBoxModel<>(FoodEnum.values());
-        foodList.setModel(fromEnum);
 
         customFood = new JTextField();
         customFood.setEnabled(false);
@@ -130,8 +128,7 @@ public class HillGiantGUI extends JFrame {
 
         JLabel lblTrainingWhatSkill = new JLabel("Training what skill: ");
 
-        final JComboBox<SkillsEnum> skillTraining = new JComboBox<>();
-        skillTraining.setModel(new DefaultComboBoxModel<>(SkillsEnum.values()));
+        final JComboBox<Skills> skillTraining = new JComboBox<>(new DefaultComboBoxModel<>(Skills.values()));
         GroupLayout gl_panel_2 = new GroupLayout(panel_2);
         gl_panel_2.setHorizontalGroup(
                 gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -223,10 +220,10 @@ public class HillGiantGUI extends JFrame {
         tabbedPane.addTab("Looting", null, lootingTab, null);
 
         JScrollPane panel_3 = new JScrollPane();
-        panel_3.setBorder(new TitledBorder(null, "Loot Choices", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        panel_3.setBorder(new TitledBorder(null, "Looting Choices", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
         JPanel panel_4 = new JPanel();
-        panel_4.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Loot Options", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        panel_4.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Looting Options", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         GroupLayout gl_lootingTab = new GroupLayout(lootingTab);
         gl_lootingTab.setHorizontalGroup(
                 gl_lootingTab.createParallelGroup(Alignment.LEADING)
@@ -258,7 +255,7 @@ public class HillGiantGUI extends JFrame {
 
         final JRadioButton btnShouldLoot = new JRadioButton("Should loot");
 
-        JLabel lblNewLabel = new JLabel("Loot after");
+        JLabel lblNewLabel = new JLabel("Looting after");
 
         txtLootAfter = new JTextField();
         txtLootAfter.setEnabled(false);
@@ -267,7 +264,7 @@ public class HillGiantGUI extends JFrame {
 
         JLabel lblKill = new JLabel("kill(s)");
 
-        final JRadioButton btnLootByPrice = new JRadioButton("Loot by price");
+        final JRadioButton btnLootByPrice = new JRadioButton("Looting by price");
         btnLootByPrice.setEnabled(false);
 
         JLabel lblAnythingOver = new JLabel("Anything over");
@@ -331,19 +328,19 @@ public class HillGiantGUI extends JFrame {
         JScrollBar scrollBar = new JScrollBar();
         panel_3.add(scrollBar);
 
-        final JList<LootEnum> lootList = new JList<>();
+        final JList<Loot> lootList = new JList<>();
         panel_3.setViewportView(lootList);
         lootList.setEnabled(false);
         panel_3.setViewportView(lootList);
         lootList.setAutoscrolls(false);
-        lootList.setModel(new DefaultListModel<LootEnum>() {
-            final LootEnum[] values = LootEnum.values();
+        lootList.setModel(new DefaultListModel<Loot>() {
+            final Loot[] values = Loot.values();
 
             public int getSize() {
                 return values.length;
             }
 
-            public LootEnum getElementAt(int index) {
+            public Loot getElementAt(int index) {
                 return values[index];
             }
         });
@@ -471,7 +468,7 @@ public class HillGiantGUI extends JFrame {
                 }
                 if(btnEatFood.isSelected()){
                     Variables.eatFood = true;
-                    FoodEnum temp = (FoodEnum) foodList.getSelectedItem();
+                    Food temp = (Food) foodList.getSelectedItem();
                     if(temp.getId() == 1){
                         Variables.foodId = Integer.parseInt(customFood.getText());
                     }else{
@@ -481,7 +478,7 @@ public class HillGiantGUI extends JFrame {
 
                 }
 
-                SkillsEnum skill = (SkillsEnum) skillTraining.getSelectedItem();
+                Skills skill = (Skills) skillTraining.getSelectedItem();
                 Paint.skill = skill.getSkillID();
 
                 if(btnShouldLoot.isSelected()){
@@ -502,14 +499,14 @@ public class HillGiantGUI extends JFrame {
                         Variables.lootByPrice = true;
                         Variables.minPriceToLoot = Integer.parseInt(txtLootPrice.getText());
                     }
-                    //LootEnum[] temp = (LootEnum[]) lootList.getSelectedValuesList().toArray();
+                    //Loot[] temp = (Loot[]) lootList.getSelectedValuesList().toArray();
                     Object[] temp = lootList.getSelectedValuesList().toArray();
                     if(temp != null){
                         for(Object  x: temp){
-                            LootEnum casted = (LootEnum) x;
+                            Loot casted = (Loot) x;
                             for(int i: casted.getId()){
                                 if(i != 1){
-                                    Loot.lootIds.add(i);
+                                    Looting.lootIds.add(i);
                                 }
                             }
 

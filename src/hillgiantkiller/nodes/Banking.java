@@ -49,10 +49,13 @@ public class Banking extends Node {
                     //Walking up ladder
                     System.out.println("In the dungeon; going up");
                     ladderUp = SceneEntities.getNearest(LADDER_UP);
-                    if(ladderUp != null && !Methods.isOnScreen(ladderUp)){
-                        Walking.walk(ladderUp);
-                    }else if(ladderUp.interact("Climb-up")){
-                        Methods.waitForArea(AROUND_LADDER_DOWN);
+                    if(ladderUp != null){
+                        if(ladderUp.isOnScreen() && ladderUp.interact("Climb-up")){
+                            Methods.waitForArea(AROUND_LADDER_DOWN);
+
+                        } else{
+                            Walking.walk(ladderUp);
+                        }
                     }
                 }
             }else{

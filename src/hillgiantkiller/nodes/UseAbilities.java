@@ -24,7 +24,7 @@ public class UseAbilities extends Node {
                         && ActionBar.getAdrenaline() == 1000){
                     return bn.getSlot() == 1;
                 } else{
-                    return bn.canUse();
+                    return bn != null && bn.canUse();
                 }
 
             }
