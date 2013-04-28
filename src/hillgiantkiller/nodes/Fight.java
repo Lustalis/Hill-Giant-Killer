@@ -26,6 +26,14 @@ public class Fight extends Node {
             return false;
         }
     };
+
+    private static Filter<NPC> multipleNpcFilter = new Filter<NPC>() {
+        @Override
+        public boolean accept(NPC n) {
+             return n.getInteracting() != null && n.getInteracting().equals(Players.getLocal()) && n.getHealthPercent() < 100;
+        }
+    };
+
     private static Filter<NPC> priorityNPCFilter = new Filter<NPC>() {
         @Override
         public boolean accept(NPC n) {
@@ -67,8 +75,10 @@ public class Fight extends Node {
 
     public static NPC getMonster(){
 
-        if(NPCs.getNearest(priorityNPCFilter) != null){
+        if(priorityNPCFilter != null){
             return  NPCs.getNearest(priorityNPCFilter);
+        }else if(multipleNpcFilter != null){
+            return NPCs.getNearest(multipleNpcFilter);
         }else{
             return NPCs.getNearest(npcFilter);
         }

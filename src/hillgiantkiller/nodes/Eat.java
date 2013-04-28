@@ -15,8 +15,8 @@ public class Eat extends Node {
     @Override
     public boolean activate() {
 
-        return Methods.needToHeal() && ((Variables.useRejuvenate && ActionBar.getNode(0).canUse() && ActionBar.getAdrenaline() == 1000) ||
-                (Variables.eatFood && Methods.getHpPercent() <= HEAL_PERCENT - 5));
+        return Methods.needToHeal() && (Variables.useRejuvenate && ActionBar.getNode(0).canUse() && ActionBar.getAdrenaline() == 1000) ||
+                (Variables.eatFood && Methods.getHpPercent() <= HEAL_PERCENT - 5);
     }
 
     @Override

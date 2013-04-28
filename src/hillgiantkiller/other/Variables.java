@@ -40,13 +40,4 @@ public class Variables {
     public static boolean shouldWaitForLoot = false;
     public static int gKilled = 0;
 
-
-
-
-
-    /*
-    Filters
-     */
-
-
 }

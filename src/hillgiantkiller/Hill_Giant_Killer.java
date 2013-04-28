@@ -26,8 +26,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@Manifest(authors = {"__Meat"}, description = "Kills hill giants in the edgeville dungeon",
-        name = "__Meat's Hill Giant Killer", version = 1.5, topic = 982254)
+@Manifest(authors = {"__Meat"}, description = "Kills hill giants in the Edgeville dungeon",
+        name = "__Meat's Hill Giant Killer", version = 1.6, topic = 982254)
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener, MouseListener {
     private Client client = Bot.client();
     private final List<Node> jobsCollection = Collections.synchronizedList(new ArrayList<Node>());

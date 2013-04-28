@@ -6,7 +6,6 @@ import hillgiantkiller.other.Variables;
 import hillgiantkiller.sk.action.ActionBar;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
-import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
@@ -14,10 +13,8 @@ import org.powerbot.game.api.methods.node.SceneEntities;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.methods.widget.Camera;
-import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.map.TilePath;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
@@ -77,13 +74,12 @@ public class Banking extends Node {
             if(!Players.getLocal().isMoving() && Bank.open()){
 
                 Bank.depositInventory();
-                Methods.waitForInvChange();
-                if(Bank.getItemCount(983) == 0 || Bank.getItemCount(Variables.foodId) == 0){
-                    Game.logout(true);
+                if(Variables.eatFood){
+                    Bank.withdraw(Variables.foodId, Variables.withdrawFoodAmount);
                 }
-                Bank.withdraw(Variables.foodId, Variables.withdrawFoodAmount);
                 Bank.withdraw(983, 1);
                 Bank.close();
+                Task.sleep(250, 750);
             }
         }
 
