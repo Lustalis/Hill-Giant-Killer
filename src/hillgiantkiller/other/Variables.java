@@ -28,10 +28,8 @@ public class Variables {
     public static boolean useRejuvenate = false;
 
     public static boolean eatFood = false;
-    public static int foodId = 373;
+    public static int foodId;
     public static int withdrawFoodAmount = 15;
-
-    public static int skillTraining = 1;
 
     public static boolean shouldLoot = false;
     public static boolean burryBones = false;
