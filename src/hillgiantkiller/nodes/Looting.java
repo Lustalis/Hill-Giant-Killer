@@ -48,7 +48,7 @@ public class Looting extends Node {
             final GroundItem[] item = GroundItems.getLoadedAt(tile.getX(), tile.getY());//get all items on tile
             for(GroundItem i: item){
                 if (lootIds.contains(i.getId())) {//if its a preset loot id
-                    new MoveCamera(i);
+                    new Fight.MoveCamera(i);
                     if(!i.isOnScreen()){//Making sure item is on screen
                         Task.sleep(500);
                         if(!Methods.isOnScreen(i)){
@@ -72,7 +72,7 @@ public class Looting extends Node {
                     if((price != 0) && price*i.getGroundItem().getStackSize() >= Variables.minPriceToLoot){
                         System.out.println("Added to list");
                         lootIds.add(i.getId());
-                        new MoveCamera(i);
+                        new Fight.MoveCamera(i);
                         if(!i.isOnScreen()){
                             Task.sleep(500);
                             if(!i.isOnScreen()){
@@ -125,19 +125,6 @@ public class Looting extends Node {
             e.printStackTrace();
         }
         return -1;
-    }
-
-
-    private class MoveCamera extends Thread{
-        private GroundItem g;
-
-        public MoveCamera(final GroundItem npc){
-            this.g = npc;
-        }
-
-        public void run(){
-            Camera.turnTo(g);
-        }
     }
 
 } //End of Node

@@ -9,6 +9,8 @@ import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Filter;
+import org.powerbot.game.api.wrappers.Entity;
+import org.powerbot.game.api.wrappers.Locatable;
 import org.powerbot.game.api.wrappers.interactive.Character;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 
@@ -73,12 +75,12 @@ public class Fight extends Node {
                 Players.getLocal().getInteracting() : null;
     }
 
-    public static NPC getMonster(){
+    private static NPC getMonster(){
 
-        if(priorityNPCFilter != null){
-            return  NPCs.getNearest(priorityNPCFilter);
-        }else if(multipleNpcFilter != null){
-            return NPCs.getNearest(multipleNpcFilter);
+        if(NPCs.getNearest(multipleNpcFilter) != null){
+            return  NPCs.getNearest(multipleNpcFilter);
+        }else if(NPCs.getNearest(priorityNPCFilter) != null){
+            return NPCs.getNearest(priorityNPCFilter);
         }else{
             return NPCs.getNearest(npcFilter);
         }
@@ -86,11 +88,11 @@ public class Fight extends Node {
     }
 
 
-    private class MoveCamera extends Thread{
-        private NPC n;
-
-        public MoveCamera(final NPC npc){
-            this.n = npc;
+    public static class MoveCamera extends Thread{
+//        private NPC n;
+        private Locatable n;
+        public MoveCamera(final Locatable locatable){
+            this.n = locatable;
         }
 
         public void run(){

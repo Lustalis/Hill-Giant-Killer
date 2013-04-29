@@ -51,6 +51,7 @@ public class Banking extends Node {
                             Methods.waitForArea(AROUND_LADDER_DOWN);
 
                         } else{
+                            new Fight.MoveCamera(ladderUp).start();
                             Walking.walk(ladderUp);
                         }
                     }
@@ -74,6 +75,7 @@ public class Banking extends Node {
             if(!Players.getLocal().isMoving() && Bank.open()){
 
                 Bank.depositInventory();
+                Task.sleep(500, 900);
                 if(Variables.eatFood){
                     Bank.withdraw(Variables.foodId, Variables.withdrawFoodAmount);
                 }
