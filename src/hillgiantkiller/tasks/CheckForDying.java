@@ -31,9 +31,6 @@ public class CheckForDying extends LoopTask {
                 Variables.gKilled++;
                 System.out.println("starting task and pausing container");
                 getContainer().setPaused(true);
-                //getContainer().submit(dying);
-                //dying.execute();
-
 
                 System.out.println("Giant is deeeead");
                 if(Fight.theGiant != null){
@@ -61,7 +58,7 @@ public class CheckForDying extends LoopTask {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         return Random.nextInt(10, 20);
     }
