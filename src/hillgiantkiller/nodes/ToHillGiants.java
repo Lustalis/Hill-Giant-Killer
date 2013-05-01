@@ -26,30 +26,52 @@ public class ToHillGiants extends Node {
     private final Tile[] PATH_1 = new Tile[] { new Tile(3150, 3474, 0), new Tile(3146, 3464, 0), new Tile(3136, 3456, 0),
             new Tile(3127, 3455, 0), new Tile(3114, 3446, 0) };
     private TilePath TO_DUNGEON = Walking.newTilePath(PATH_1);
+    private int outsideResource = 52853;
+    private int insideResource = 52868;
+    private SceneObject resourceDoor;
+    private final Area INSIDE_RESOURCE_DUNGEON = new Area(new Tile(1132,4589,0), new Tile(1136,4588,0));
+    private final Area AROUND_MYSTERIOUS_ENTRANCE = new Area(new Tile(3107,9825,0), new Tile(3102,9827,0));
 
     @Override
     public boolean activate() {
-        return (!Inventory.isFull() || Methods.haveFood(Variables.foodId)) && NPCs.getNearest(Variables.NPC_IDS) == null;
+        return Variables.useResourceDungeon ? SceneEntities.getNearest(insideResource) == null
+                : NPCs.getNearest(Variables.NPC_IDS) == null;
     }
 
     @Override
     public void execute() {
         Paint.status = "Walking back to dungeon";
-        if(!AROUND_LADDER_DOWN.contains(Players.getLocal())){
-            if(!DUNGEON_ENTRANCE.getTileArray()[1].isOnScreen()){
-                TO_DUNGEON.traverse();
-            }else {
-                door = SceneEntities.getNearest(Banking.DOOR_ID);
-                if(door.interact("Open")){
-                    Methods.waitForArea(AROUND_LADDER_DOWN);
+
+        if (NPCs.getNearest(Variables.NPC_IDS) == null) {
+            if(!AROUND_LADDER_DOWN.contains(Players.getLocal())){
+                if(!DUNGEON_ENTRANCE.getTileArray()[1].isOnScreen()){
+                    TO_DUNGEON.traverse();
+                }else {
+                    door = SceneEntities.getNearest(Banking.DOOR_ID);
+                    if(door.interact("Open")){
+                        Methods.waitForArea(AROUND_LADDER_DOWN);
+                    }
+                }
+
+            }else{
+                ladderDown = SceneEntities.getNearest(LADDER_DOWN);
+                if(ladderDown != null && ladderDown.interact("Climb-down")){
+                    Methods.waitForArea(INSIDE_DUNGEON);
+                }
+            }
+        } else{
+            resourceDoor = SceneEntities.getNearest(outsideResource);
+            if(resourceDoor != null){
+                if(resourceDoor.isOnScreen() && resourceDoor.interact("Enter")){
+                    Methods.waitForArea(INSIDE_RESOURCE_DUNGEON);
+                }else{
+                    System.out.println("walking to door");
+                    new Fight.MoveCamera(resourceDoor);
+                    Walking.findPath(AROUND_MYSTERIOUS_ENTRANCE.getTileArray()[1]).traverse();
                 }
             }
 
-        }else{
-            ladderDown = SceneEntities.getNearest(LADDER_DOWN);
-            if(ladderDown != null && ladderDown.interact("Climb-down")){
-                Methods.waitForArea(INSIDE_DUNGEON);
-            }
+
         }
 
     }//End of Execute

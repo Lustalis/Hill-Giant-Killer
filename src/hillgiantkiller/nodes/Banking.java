@@ -22,14 +22,19 @@ public class Banking extends Node {
     public static final Area BANK_AREA = new Area(new Tile(3140, 3491, 0), new Tile(3140, 3472, 0), new Tile(3151, 3465, 0),
             new Tile(3158, 3465, 0), new Tile(3157, 3490, 0));
     public static final int DOOR_ID = 1804;
-    private SceneObject ladderUp;
     public static final int LADDER_UP = 29355;
-    private SceneObject door;
-    private static final Area AROUND_LADDER_DOWN = new Area(new Tile(3113,3453,0), new Tile(3116,3450,0));
     public static final Tile[] PATH_2 = new Tile[] { new Tile(3115, 3445, 0), new Tile(3124, 3451, 0), new Tile(3131, 3455, 0),
             new Tile(3139, 3456, 0), new Tile(3145, 3456, 0), new Tile(3152, 3456, 0),
             new Tile(3158, 3460, 0), new Tile(3150, 3474, 0) };
+
+
+    private SceneObject ladderUp;
+    private SceneObject door;
+    public static SceneObject resourceDungeon;
+    private int insideResource = 52868;
+    private final Area AROUND_LADDER_DOWN = new Area(new Tile(3113,3453,0), new Tile(3116,3450,0));
     private final TilePath TO_BANK = Walking.newTilePath(PATH_2);
+    private final Area AROUND_MYSTERIOUS_ENTRANCE = new Area(new Tile(3107,9825,0), new Tile(3102,9827,0));
 
     @Override
     public boolean activate() {
@@ -42,20 +47,33 @@ public class Banking extends Node {
         if(!BANK_AREA.contains(Players.getLocal())){
             Paint.status = "Walking to bank";
             if(!AROUND_LADDER_DOWN.contains(Players.getLocal())){
-                if(NPCs.getNearest(Variables.NPC_IDS) != null){
-                    //Walking up ladder
-                    System.out.println("In the dungeon; going up");
-                    ladderUp = SceneEntities.getNearest(LADDER_UP);
-                    if(ladderUp != null){
-                        if(ladderUp.isOnScreen() && ladderUp.interact("Climb-up")){
-                            Methods.waitForArea(AROUND_LADDER_DOWN);
+                if(Variables.useResourceDungeon ){
+                    resourceDungeon = SceneEntities.getNearest(insideResource);
+                    if(resourceDungeon != null){
+                        if(resourceDungeon.isOnScreen() && resourceDungeon.interact("Exit")){
+                            Methods.waitForArea(AROUND_MYSTERIOUS_ENTRANCE);
+                        }else {
+                            new Fight.MoveCamera(resourceDungeon).start();
+                            Walking.findPath(resourceDungeon).traverse();
+                        }
+                    }
+                }else{
+                    if(NPCs.getNearest(Variables.NPC_IDS) != null){
+                        //Walking up ladder
+                        System.out.println("In the dungeon; going up");
+                        ladderUp = SceneEntities.getNearest(LADDER_UP);
+                        if(ladderUp != null){
+                            if(ladderUp.isOnScreen() && ladderUp.interact("Climb-up")){
+                                Methods.waitForArea(AROUND_LADDER_DOWN);
 
-                        } else{
-                            new Fight.MoveCamera(ladderUp).start();
-                            Walking.walk(ladderUp);
+                            } else{
+                                new Fight.MoveCamera(ladderUp).start();
+                                Walking.walk(ladderUp);
+                            }
                         }
                     }
                 }
+
             }else{
                 //Opening door
                 door = SceneEntities.getNearest(DOOR_ID);

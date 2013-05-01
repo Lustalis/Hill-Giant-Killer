@@ -621,6 +621,11 @@ public class gui2 extends JFrame {
         btnStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                if(btnResourceDung.isSelected()){
+                   Variables.useResourceDungeon = true;
+                }
+
                 if(btnUseAbilities.isSelected()){
                     Variables.useAbilities = true;
                     if(btnUseMomentum.isSelected()) Variables.useMomentum = true;

@@ -22,6 +22,8 @@ public class Variables {
     /*
     GUI Variables
      */
+    public static boolean useResourceDungeon = false;
+
 
     public static boolean useAbilities = false;
     public static boolean useMomentum = false;

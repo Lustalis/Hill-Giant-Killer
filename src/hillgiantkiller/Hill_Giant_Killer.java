@@ -4,6 +4,7 @@ import hillgiantkiller.nodes.*;
 import hillgiantkiller.other.HillGiantGUI;
 import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Variables;
+import hillgiantkiller.other.gui2;
 import hillgiantkiller.tasks.CheckForDying;
 import hillgiantkiller.tasks.FailSafe;
 import hillgiantkiller.tasks.MomentumTask;
@@ -47,7 +48,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
     public void onStart() {
         Paint.status = "Starting";
         Camera.setPitch(true);
-        HillGiantGUI gui = new HillGiantGUI();
+        gui2 gui = new gui2();
         gui.setVisible(true);
         while(guiWait){
             Task.sleep(100);
