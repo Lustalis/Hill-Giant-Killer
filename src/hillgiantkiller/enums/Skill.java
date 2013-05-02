@@ -5,7 +5,7 @@ package hillgiantkiller.enums;
  * Date: 4/12/13
  * Time: 9:59 PM
  */
-public enum Skills {
+public enum Skill {
     ATTACK("Attack", org.powerbot.game.api.methods.tab.Skills.ATTACK),
     STRENGTH("Strnegth", org.powerbot.game.api.methods.tab.Skills.STRENGTH),
     DEFENSE("Defense", org.powerbot.game.api.methods.tab.Skills.DEFENSE),
@@ -16,7 +16,7 @@ public enum Skills {
     private String name;
     private int skillID;
 
-    private Skills(String name, int skillID){
+    private Skill(String name, int skillID){
         this.name = name;
         this.skillID = skillID;
     }

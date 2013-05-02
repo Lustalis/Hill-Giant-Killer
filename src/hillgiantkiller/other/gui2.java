@@ -3,7 +3,7 @@ package hillgiantkiller.other;
 import hillgiantkiller.Hill_Giant_Killer;
 import hillgiantkiller.enums.Food;
 import hillgiantkiller.enums.Loot;
-import hillgiantkiller.enums.Skills;
+import hillgiantkiller.enums.Skill;
 import hillgiantkiller.nodes.Looting;
 
 import javax.swing.*;
@@ -129,7 +129,7 @@ public class gui2 extends JFrame {
 
         JLabel lblTrainingWhatSkill = new JLabel("Training what skill: ");
 
-        final JComboBox<Skills> skillTraining = new JComboBox<>(new DefaultComboBoxModel<>(Skills.values()));
+        final JComboBox<Skill> skillTraining = new JComboBox<>(new DefaultComboBoxModel<>(Skill.values()));
 
         final JRadioButton btnResourceDung = new JRadioButton("Use resource dungeon");
         GroupLayout gl_mainTab = new GroupLayout(mainTab);
@@ -554,7 +554,7 @@ public class gui2 extends JFrame {
                     lootList.setEnabled(true);
                     lootRadiusSlider.setEnabled(true);
                     txtLootIds.setEditable(true);
-
+                    txtLootIds.setText("");
 
                 }else{
                     btnShouldBurry.setEnabled(false);
@@ -651,7 +651,7 @@ public class gui2 extends JFrame {
 
                 }
 
-                Skills skill = (Skills) skillTraining.getSelectedItem();
+                Skill skill = (Skill) skillTraining.getSelectedItem();
                 Paint.skill = skill.getSkillID();
 
                 if(btnShouldLoot.isSelected()){

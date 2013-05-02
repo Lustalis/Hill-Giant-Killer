@@ -3,7 +3,7 @@ package hillgiantkiller.other;
 import hillgiantkiller.Hill_Giant_Killer;
 import hillgiantkiller.enums.Food;
 import hillgiantkiller.enums.Loot;
-import hillgiantkiller.enums.Skills;
+import hillgiantkiller.enums.Skill;
 import hillgiantkiller.nodes.Looting;
 
 import javax.swing.*;
@@ -124,11 +124,11 @@ public class HillGiantGUI extends JFrame {
         panel_1.setLayout(gl_panel_1);
 
         JPanel panel_2 = new JPanel();
-        panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Skills", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Skill", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
         JLabel lblTrainingWhatSkill = new JLabel("Training what skill: ");
 
-        final JComboBox<Skills> skillTraining = new JComboBox<>(new DefaultComboBoxModel<>(Skills.values()));
+        final JComboBox<Skill> skillTraining = new JComboBox<>(new DefaultComboBoxModel<>(Skill.values()));
         GroupLayout gl_panel_2 = new GroupLayout(panel_2);
         gl_panel_2.setHorizontalGroup(
                 gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -478,7 +478,7 @@ public class HillGiantGUI extends JFrame {
 
                 }
 
-                Skills skill = (Skills) skillTraining.getSelectedItem();
+                Skill skill = (Skill) skillTraining.getSelectedItem();
                 Paint.skill = skill.getSkillID();
 
                 if(btnShouldLoot.isSelected()){
