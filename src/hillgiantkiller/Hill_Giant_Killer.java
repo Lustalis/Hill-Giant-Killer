@@ -48,8 +48,17 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
     public void onStart() {
         Paint.status = "Starting";
         Camera.setPitch(true);
-        gui2 gui = new gui2();
-        gui.setVisible(true);
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    gui2 frame = new gui2();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         while(guiWait){
             Task.sleep(100);
         }

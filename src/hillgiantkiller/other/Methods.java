@@ -150,10 +150,11 @@ public class Methods {
     }
 
     public static boolean droppedLoot(){
+        int lootRad = Variables.lootRadius;
         Tile location = Variables.deathLocation;
         if(location!= null){
-            Area lootZone = new Area(new Tile(location.getX() + 3, location.getY() + 3, Game.getPlane())
-                    ,new Tile(location.getX() - 3, location.getY() - 3, Game.getPlane()) );
+            Area lootZone = new Area(new Tile(location.getX() + lootRad, location.getY() + lootRad, Game.getPlane())
+                    ,new Tile(location.getX() - lootRad, location.getY() - lootRad, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
                 GroundItem[] potential = GroundItems.getLoadedAt(t.getX(), t.getY());
                 if(Variables.lootByPrice && Looting.lootIds.isEmpty() && potential.length > 0){

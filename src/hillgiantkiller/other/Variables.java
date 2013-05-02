@@ -23,7 +23,7 @@ public class Variables {
     GUI Variables
      */
     public static boolean useResourceDungeon = false;
-
+    public static int lootRadius;
 
     public static boolean useAbilities = false;
     public static boolean useMomentum = false;

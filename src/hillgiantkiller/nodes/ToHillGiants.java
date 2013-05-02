@@ -48,7 +48,7 @@ public class ToHillGiants extends Node {
                     TO_DUNGEON.traverse();
                 }else {
                     door = SceneEntities.getNearest(Banking.DOOR_ID);
-                    if(door.interact("Open")){
+                    if(door != null && door.interact("Open")){
                         Methods.waitForArea(AROUND_LADDER_DOWN);
                     }
                 }

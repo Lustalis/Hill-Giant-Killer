@@ -49,7 +49,7 @@ public class gui2 extends JFrame {
      */
     public gui2() {
         setTitle("Hill Giant Fighter");
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(100, 100, 396, 402);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -294,7 +294,7 @@ public class gui2 extends JFrame {
                                 .addContainerGap())
         );
 
-        JEditorPane txtLootIds = new JEditorPane();
+        final JEditorPane txtLootIds = new JEditorPane();
         txtLootIds.setEditable(false);
         txtLootIds.setText("Enter Loot ID's here");
         scrollPane.setViewportView(txtLootIds);
@@ -553,6 +553,8 @@ public class gui2 extends JFrame {
                     txtLootAfter.setEnabled(true);
                     lootList.setEnabled(true);
                     lootRadiusSlider.setEnabled(true);
+                    txtLootIds.setEditable(true);
+
 
                 }else{
                     btnShouldBurry.setEnabled(false);
@@ -572,6 +574,9 @@ public class gui2 extends JFrame {
                     lootList.setEnabled(false);
                     lootList.clearSelection();
                     lootRadiusSlider.setEnabled(false);
+                    txtLootIds.setEditable(false);
+                    txtLootIds.setText("");
+
 
                 }
             }
@@ -626,6 +631,8 @@ public class gui2 extends JFrame {
                    Variables.useResourceDungeon = true;
                 }
 
+                Variables.lootRadius = lootRadiusSlider.getValue();
+
                 if(btnUseAbilities.isSelected()){
                     Variables.useAbilities = true;
                     if(btnUseMomentum.isSelected()) Variables.useMomentum = true;
@@ -678,6 +685,14 @@ public class gui2 extends JFrame {
 
                         }
                     }
+
+                    String[] split = txtLootIds.getText().split("\\r?\\n");
+                    if(!split[0].equals("")){
+                        for(String s: split){
+                            Looting.lootIds.add(Integer.parseInt(s));
+                        }
+                    }
+
 
 
 

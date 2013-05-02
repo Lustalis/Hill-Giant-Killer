@@ -47,15 +47,13 @@ public class Banking extends Node {
         if(!BANK_AREA.contains(Players.getLocal())){
             Paint.status = "Walking to bank";
             if(!AROUND_LADDER_DOWN.contains(Players.getLocal())){
-                if(Variables.useResourceDungeon ){
-                    resourceDungeon = SceneEntities.getNearest(insideResource);
-                    if(resourceDungeon != null){
-                        if(resourceDungeon.isOnScreen() && resourceDungeon.interact("Exit")){
-                            Methods.waitForArea(AROUND_MYSTERIOUS_ENTRANCE);
-                        }else {
-                            new Fight.MoveCamera(resourceDungeon).start();
-                            Walking.findPath(resourceDungeon).traverse();
-                        }
+                resourceDungeon = SceneEntities.getNearest(insideResource);
+                if(Variables.useResourceDungeon && resourceDungeon != null){
+                    if(resourceDungeon.isOnScreen() && resourceDungeon.interact("Exit")){
+                        Methods.waitForArea(AROUND_MYSTERIOUS_ENTRANCE);
+                    }else {
+                        new Fight.MoveCamera(resourceDungeon).start();
+                        Walking.findPath(new Tile(1134,4589,0)).traverse();
                     }
                 }else{
                     if(NPCs.getNearest(Variables.NPC_IDS) != null){
@@ -68,7 +66,7 @@ public class Banking extends Node {
 
                             } else{
                                 new Fight.MoveCamera(ladderUp).start();
-                                Walking.walk(ladderUp);
+                                Walking.findPath(new Tile(3115,9850,0)).traverse();
                             }
                         }
                     }
