@@ -1,14 +1,13 @@
 package hillgiantkiller.sk.general;
 
+import hillgiantkiller.sk.Script;
+import org.powerbot.core.script.job.Task;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.powerbot.core.script.job.Task;
-
-import hillgiantkiller.sk.Script;
 
 public class PriceUtil {
 

@@ -1,28 +1,19 @@
 package hillgiantkiller.sk.graphics.main;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.geom.Area;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.powerbot.game.api.util.Time;
-
 import hillgiantkiller.sk.Script;
 import hillgiantkiller.sk.Universal;
 import hillgiantkiller.sk.graphics.Anchor;
 import hillgiantkiller.sk.graphics.Paintable;
 import hillgiantkiller.sk.graphics.RectangleUtil;
 import hillgiantkiller.sk.graphics.TextUtil;
+import org.powerbot.game.api.util.Time;
+
+import java.awt.*;
+import java.awt.geom.Area;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MainPaint implements Paintable {
 

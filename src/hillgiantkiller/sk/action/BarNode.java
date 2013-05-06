@@ -1,12 +1,11 @@
 package hillgiantkiller.sk.action;
 
-import org.powerbot.core.script.job.Task;
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.action.ActionBar.SlotData;
 import hillgiantkiller.sk.general.EntityUtil;
 import hillgiantkiller.sk.general.TimedCondition;
 import hillgiantkiller.sk.general.WidgetUtil;
+import org.powerbot.core.script.job.Task;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 /**
  * Holds the information about a slot on the Action Bar

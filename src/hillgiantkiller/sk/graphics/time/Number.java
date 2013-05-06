@@ -1,6 +1,6 @@
 package hillgiantkiller.sk.graphics.time;
-import java.awt.Color;
-import java.awt.Graphics2D;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Number {

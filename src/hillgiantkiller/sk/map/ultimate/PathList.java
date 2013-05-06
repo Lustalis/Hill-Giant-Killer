@@ -1,11 +1,10 @@
 package hillgiantkiller.sk.map.ultimate;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
+import hillgiantkiller.sk.map.MapUtil;
 import org.powerbot.game.api.wrappers.Tile;
 
-import hillgiantkiller.sk.map.MapUtil;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class PathList extends ArrayList<PathPart> implements Comparable<PathList> {
 

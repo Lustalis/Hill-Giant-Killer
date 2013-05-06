@@ -1,9 +1,10 @@
 package hillgiantkiller.sk.map;
 
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.LinkedList;
-
+import hillgiantkiller.sk.Script;
+import hillgiantkiller.sk.general.EntityUtil;
+import hillgiantkiller.sk.general.TimedCondition;
+import hillgiantkiller.sk.widget.Chatbox;
+import hillgiantkiller.sk.widget.Chatbox.Option;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Walking;
@@ -16,11 +17,9 @@ import org.powerbot.game.api.wrappers.interactive.Player;
 import org.powerbot.game.api.wrappers.map.Path;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
-import hillgiantkiller.sk.Script;
-import hillgiantkiller.sk.general.EntityUtil;
-import hillgiantkiller.sk.general.TimedCondition;
-import hillgiantkiller.sk.widget.Chatbox;
-import hillgiantkiller.sk.widget.Chatbox.Option;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.LinkedList;
 
 public class FastPath extends Path {
 

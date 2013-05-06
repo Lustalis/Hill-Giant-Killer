@@ -1,13 +1,12 @@
 package hillgiantkiller.sk.action.magic;
 
-import org.powerbot.game.api.methods.tab.Skills;
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.action.BookUtil;
 import hillgiantkiller.sk.item.DefinedItem;
 import hillgiantkiller.sk.item.RequiredGroup;
 import hillgiantkiller.sk.tab.InnerAbilityTabs;
 import hillgiantkiller.sk.tab.Tab;
+import org.powerbot.game.api.methods.tab.Skills;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 public enum LunarSpell implements Spell {
 	CURE_ME(InnerAbilityTabs.COMBAT_SPELL_TAB, 114, 14421, 1830, 71, new Rune(RuneType.COSMIC, 2), new Rune(

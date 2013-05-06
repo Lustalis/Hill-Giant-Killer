@@ -1,10 +1,9 @@
 package hillgiantkiller.sk.action.draggable;
 
-import org.powerbot.game.api.methods.Widgets;
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.action.Draggable;
 import hillgiantkiller.sk.general.WidgetUtil;
+import org.powerbot.game.api.methods.Widgets;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 /**
  * Icons near the map in the top left part of the screen.

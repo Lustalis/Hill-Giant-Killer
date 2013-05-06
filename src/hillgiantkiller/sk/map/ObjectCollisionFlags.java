@@ -1,14 +1,14 @@
 package hillgiantkiller.sk.map;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.powerbot.game.api.methods.node.SceneEntities;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.node.SceneObject;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ObjectCollisionFlags extends CollisionFlags {
 

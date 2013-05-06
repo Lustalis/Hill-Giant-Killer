@@ -1,8 +1,7 @@
 package hillgiantkiller.sk.action;
 
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.tab.Tab;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 public interface BookDraggable extends Draggable {
 	public Tab getTab();

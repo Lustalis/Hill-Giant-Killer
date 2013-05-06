@@ -1,13 +1,12 @@
 package hillgiantkiller.sk.action.magic;
 
-import org.powerbot.game.api.methods.tab.Skills;
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.action.BookUtil;
 import hillgiantkiller.sk.item.DefinedItem;
 import hillgiantkiller.sk.item.RequiredGroup;
 import hillgiantkiller.sk.tab.InnerAbilityTabs;
 import hillgiantkiller.sk.tab.Tab;
+import org.powerbot.game.api.methods.tab.Skills;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 public enum AncientSpell implements Spell {
 	PADDEWWA_TELEPORT(InnerAbilityTabs.TELEPORT_TAB, 83, 14477, 1334, 54, new Rune(RuneType.AIR, 1), new Rune(

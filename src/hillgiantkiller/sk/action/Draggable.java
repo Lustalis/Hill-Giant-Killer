@@ -1,9 +1,9 @@
 package hillgiantkiller.sk.action;
 
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 /**
  * Something that can be dragged onto the action bar

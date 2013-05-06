@@ -1,14 +1,10 @@
 package hillgiantkiller.sk.item;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.wrappers.node.Item;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class MultiItemInformation extends ItemInformation {
 

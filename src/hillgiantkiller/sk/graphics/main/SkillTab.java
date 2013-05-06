@@ -1,24 +1,19 @@
 package hillgiantkiller.sk.graphics.main;
 
-import static hillgiantkiller.sk.graphics.main.MainPaint.FONT;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.RenderingHints;
-import java.util.PriorityQueue;
-import java.util.Queue;
-
-import org.powerbot.game.api.methods.tab.Skills;
-import org.powerbot.game.api.util.SkillData;
-import org.powerbot.game.api.util.Time;
-
 import hillgiantkiller.sk.Script;
 import hillgiantkiller.sk.Universal;
 import hillgiantkiller.sk.general.ImageCodes;
 import hillgiantkiller.sk.graphics.Anchor;
 import hillgiantkiller.sk.graphics.TextUtil;
+import org.powerbot.game.api.methods.tab.Skills;
+import org.powerbot.game.api.util.SkillData;
+import org.powerbot.game.api.util.Time;
+
+import java.awt.*;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+import static hillgiantkiller.sk.graphics.main.MainPaint.FONT;
 
 public class SkillTab extends StaticPaintTab {
 

@@ -1,10 +1,6 @@
 package hillgiantkiller.sk.general;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+
+import java.util.*;
 
 public class Combination<T> implements Iterable<List<T>>, Iterator<List<T>> {
 

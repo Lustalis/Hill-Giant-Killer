@@ -1,10 +1,9 @@
 package hillgiantkiller.sk.map.ultimate;
 
-import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.map.Path;
-
 import hillgiantkiller.sk.map.FastPath;
 import hillgiantkiller.sk.map.MapUtil;
+import org.powerbot.game.api.wrappers.Tile;
+import org.powerbot.game.api.wrappers.map.Path;
 
 public class TilePathPart implements PathPart {
 

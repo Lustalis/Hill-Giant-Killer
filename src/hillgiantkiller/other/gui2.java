@@ -82,6 +82,7 @@ public class gui2 extends JFrame {
         JLabel lblWithdraw = new JLabel("Withdraw");
 
         foodAmount = new JTextField();
+        foodAmount.setText("4");
         foodAmount.setEnabled(false);
         foodAmount.setColumns(10);
 
@@ -169,8 +170,8 @@ public class gui2 extends JFrame {
         lootRadiusSlider.setPaintLabels(true);
         lootRadiusSlider.setSnapToTicks(true);
         lootRadiusSlider.setPaintTicks(true);
-        lootRadiusSlider.setValue(1);
-        lootRadiusSlider.setMaximum(25);
+        lootRadiusSlider.setValue(2);
+        lootRadiusSlider.setMaximum(10);
         lootRadiusSlider.setMinimum(1);
         lootRadiusSlider.setMajorTickSpacing(4);
 
@@ -322,6 +323,7 @@ public class gui2 extends JFrame {
         JLabel lblAnythingOver = new JLabel("Anything over");
 
         txtLootPrice = new JTextField();
+        txtLootPrice.setText("1000");
         txtLootPrice.setEnabled(false);
         txtLootPrice.setColumns(10);
         GroupLayout gl_panel_4 = new GroupLayout(panel_4);

@@ -1,13 +1,12 @@
 package hillgiantkiller.sk.action.magic;
 
-import org.powerbot.game.api.methods.tab.Skills;
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.action.BookUtil;
 import hillgiantkiller.sk.item.DefinedItem;
 import hillgiantkiller.sk.item.RequiredGroup;
 import hillgiantkiller.sk.tab.InnerAbilityTabs;
 import hillgiantkiller.sk.tab.Tab;
+import org.powerbot.game.api.methods.tab.Skills;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 public enum FreeSpell implements Spell {
 	AIR_STRIKE(InnerAbilityTabs.COMBAT_SPELL_TAB, 14, 14348, 230, 0, new Rune(RuneType.AIR, 1)),

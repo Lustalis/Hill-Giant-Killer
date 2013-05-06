@@ -1,5 +1,6 @@
 package hillgiantkiller.sk.graphics.time;
-import java.awt.Color;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.LinkedList;

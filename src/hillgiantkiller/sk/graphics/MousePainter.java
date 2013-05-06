@@ -1,14 +1,10 @@
 package hillgiantkiller.sk.graphics;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-
-import org.powerbot.game.api.methods.input.Mouse;
-
 import hillgiantkiller.sk.general.Getter;
 import hillgiantkiller.sk.general.STimer;
+import org.powerbot.game.api.methods.input.Mouse;
+
+import java.awt.*;
 
 public class MousePainter implements Paintable {
 

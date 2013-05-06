@@ -1,14 +1,12 @@
 package hillgiantkiller.sk;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
-import java.util.EventListener;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
+import hillgiantkiller.sk.general.TimeAfterCondition;
+import hillgiantkiller.sk.graphics.MousePainter;
+import hillgiantkiller.sk.graphics.PaintHandler;
+import hillgiantkiller.sk.graphics.Paintable;
+import hillgiantkiller.sk.graphics.main.LogTab;
+import hillgiantkiller.sk.graphics.main.MainPaint;
+import hillgiantkiller.sk.graphics.main.PaintTab;
 import org.powerbot.core.event.EventManager;
 import org.powerbot.core.script.ActiveScript;
 import org.powerbot.core.script.job.Container;
@@ -20,13 +18,10 @@ import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.interactive.Player;
 import org.powerbot.game.bot.Context;
 
-import hillgiantkiller.sk.general.TimeAfterCondition;
-import hillgiantkiller.sk.graphics.MousePainter;
-import hillgiantkiller.sk.graphics.PaintHandler;
-import hillgiantkiller.sk.graphics.Paintable;
-import hillgiantkiller.sk.graphics.main.LogTab;
-import hillgiantkiller.sk.graphics.main.MainPaint;
-import hillgiantkiller.sk.graphics.main.PaintTab;
+import java.awt.event.*;
+import java.util.EventListener;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Script {
 

@@ -1,23 +1,27 @@
 package hillgiantkiller;
 
 import hillgiantkiller.nodes.*;
-import hillgiantkiller.other.HillGiantGUI;
 import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Variables;
 import hillgiantkiller.other.gui2;
 import hillgiantkiller.tasks.CheckForDying;
-import hillgiantkiller.tasks.FailSafe;
 import hillgiantkiller.tasks.MomentumTask;
 import org.powerbot.core.Bot;
 import org.powerbot.core.event.listeners.PaintListener;
+import org.powerbot.core.randoms.SpinTickets;
 import org.powerbot.core.script.ActiveScript;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.Manifest;
+import org.powerbot.game.api.methods.Environment;
 import org.powerbot.game.api.methods.Game;
+import org.powerbot.game.api.methods.Settings;
+import org.powerbot.game.api.methods.tab.Inventory;
+import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.methods.widget.WidgetCache;
 import org.powerbot.game.api.util.Random;
+import org.powerbot.game.api.wrappers.node.Item;
 import org.powerbot.game.client.Client;
 
 import java.awt.*;
@@ -32,6 +36,7 @@ import java.util.List;
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener, MouseListener {
     private Client client = Bot.client();
     private final List<Node> jobsCollection = Collections.synchronizedList(new ArrayList<Node>());
+    private static final ClaimSpinTickets ticketRandom = new ClaimSpinTickets();
     public static boolean guiWait = true;
     private Point p;
     private boolean hide;
@@ -47,6 +52,13 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
 
     public void onStart() {
         Paint.status = "Starting";
+        getContainer().submit(new Task() {
+            @Override
+            public void execute() {
+                sleep(5000);
+                Environment.enableRandom(SpinTickets.class, false);
+            }
+        });
         Camera.setPitch(true);
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -62,11 +74,9 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
         while(guiWait){
             Task.sleep(100);
         }
-        System.out.println("Done Waiting......");
         if(Variables.useMomentum) getContainer().submit(new MomentumTask());
-        provide(new Banking(), new ToHillGiants(), new Eat(), new Looting(), new Fight(),new UseAbilities());
+        provide(new EmergancyEscape(), new Banking(), new ToHillGiants(), new Eat(), new Looting(), new Fight(), new NotMyGiant(), new UseAbilities());
         getContainer().submit(new CheckForDying());
-        getContainer().submit(new FailSafe());
     }
 
     public void onStop() {
@@ -81,6 +91,11 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
         try {
             if (Game.getClientState() != Game.INDEX_MAP_LOADED) {
                 return 1000;
+            }
+
+            if (ticketRandom.activate()) {
+                ticketRandom.execute();
+                return 100;
             }
 
             if (client != Bot.client()) {
@@ -144,4 +159,23 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
     public void mouseExited(MouseEvent e) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    private static class ClaimSpinTickets extends SpinTickets {
+        @Override
+        public void execute() {
+            if (Bank.isOpen()) {
+                if(Bank.close()) {
+                    sleep(1000);
+                }
+            } else if (((Settings.get(1448) & 0xFF00) >>> 8) < 10) {
+                final Item item = Inventory.getItem(SpinTickets.ITEM_ID_SPIN_TICKET);
+                if (item != null && item.getWidgetChild().interact("Claim spin")) {
+                    sleep(1000);
+                }
+            } else {
+                super.execute();
+            }
+        }
+    }
+
 }//end of class

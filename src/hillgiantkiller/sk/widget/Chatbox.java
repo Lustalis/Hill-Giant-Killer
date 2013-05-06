@@ -1,13 +1,12 @@
 package hillgiantkiller.sk.widget;
 
-import java.awt.event.KeyEvent;
-import java.util.Arrays;
-
+import hillgiantkiller.sk.general.TimedCondition;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.input.Keyboard;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
-import hillgiantkiller.sk.general.TimedCondition;
+import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
 public class Chatbox {
 	private static final int WIDGET = 1188, TITLE = 20, OPTIONS[] = { 3, 24, 29, 34, 39 }, KEYS[] = {

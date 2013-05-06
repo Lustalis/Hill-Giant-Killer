@@ -1,16 +1,15 @@
 package hillgiantkiller.sk.action.magic;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
-import org.powerbot.game.api.methods.tab.Skills;
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.action.BookUtil;
 import hillgiantkiller.sk.item.DefinedItem;
 import hillgiantkiller.sk.item.RequiredGroup;
 import hillgiantkiller.sk.tab.InnerAbilityTabs;
 import hillgiantkiller.sk.tab.Tab;
+import org.powerbot.game.api.methods.tab.Skills;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
+
+import java.util.Arrays;
+import java.util.Comparator;
 
 public enum StandardSpell implements Spell {
 	SNARE(InnerAbilityTabs.COMBAT_SPELL_TAB, 43, 14393, 694, 50, new Rune(RuneType.NATURE, 2)),

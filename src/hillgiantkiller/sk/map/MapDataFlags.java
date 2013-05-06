@@ -1,10 +1,9 @@
 package hillgiantkiller.sk.map;
 
+import hillgiantkiller.sk.Universal;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.Tile.Flag;
-
-import hillgiantkiller.sk.Universal;
 
 public class MapDataFlags extends Obstacles {
 

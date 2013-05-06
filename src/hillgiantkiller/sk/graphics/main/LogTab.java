@@ -1,8 +1,8 @@
 package hillgiantkiller.sk.graphics.main;
 
-import java.util.LinkedList;
-
 import hillgiantkiller.sk.general.ImageCodes;
+
+import java.util.LinkedList;
 
 public class LogTab extends PaintTab {
 

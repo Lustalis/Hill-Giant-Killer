@@ -1,10 +1,6 @@
 package hillgiantkiller.sk.graphics;
 
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.StringTokenizer;
 

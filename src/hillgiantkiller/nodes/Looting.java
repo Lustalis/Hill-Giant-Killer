@@ -5,11 +5,9 @@ import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
-import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.tab.Inventory;
-import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.node.GroundItem;
 import org.powerbot.game.api.wrappers.node.Item;
@@ -45,63 +43,66 @@ public class Looting extends Node {
         System.out.println("Tiles in list: "+ lootLocations.size());
         Collections.reverse(lootLocations);
         for(Tile tile: lootLocations){
-            final GroundItem[] item = GroundItems.getLoadedAt(tile.getX(), tile.getY());//get all items on tile
-            for(GroundItem i: item){
-                if (lootIds.contains(i.getId())) {//if its a preset loot id
-                    new Fight.MoveCamera(i);
-                    if(!i.isOnScreen()){//Making sure item is on screen
-                        Task.sleep(500);
-                        if(!Methods.isOnScreen(i)){
-                            Walking.walk(i);
-                            Methods.waitForOnScreen(i);
-                        }
-                    }
-                    if(!priceTable.containsKey(i.getId())){
-                        priceTable.put(i.getId(), getPrice(i.getId())); //temp place
-                    }
-                    i.interact("Take", i.getGroundItem().getName());
-                    Paint.profit += priceTable.get(i.getId());
-                    Methods.waitForInvChange();
-                    System.out.println("Picked up: " +i.getGroundItem().getName());
-                } else if(Variables.lootByPrice && !priceTable.containsKey(i.getId())){//if its not a preset id but looting by price is enabled
-                                                                                     //and price has not been cached
-                    System.out.println("Item not in list: " + i.getGroundItem().getName() + ". Looking up price");
-                    priceTable.put(i.getId(), getPrice(i.getId())); //temp place
-                    final int price = priceTable.get(i.getId());
-                    System.out.println("Item price: " + priceTable.get(i.getId()));
-                    if((price != 0) && price*i.getGroundItem().getStackSize() >= Variables.minPriceToLoot){
-                        System.out.println("Added to list");
-                        lootIds.add(i.getId());
+            if (!Inventory.isFull()) {
+                final GroundItem[] item = GroundItems.getLoadedAt(tile.getX(), tile.getY());//get all items on tile
+                for(GroundItem i: item){
+                    if (lootIds.contains(i.getId())) {//if its a preset loot id
                         new Fight.MoveCamera(i);
-                        if(!i.isOnScreen()){
+                        if(!i.isOnScreen()){//Making sure item is on screen
                             Task.sleep(500);
-                            if(!i.isOnScreen()){
+                            if(!Methods.isOnScreen(i)){
                                 Walking.walk(i);
                                 Methods.waitForOnScreen(i);
                             }
+                        }
+                        if(!priceTable.containsKey(i.getId())){
+                            priceTable.put(i.getId(), getPrice(i.getId())); //temp place
                         }
                         i.interact("Take", i.getGroundItem().getName());
                         Paint.profit += priceTable.get(i.getId());
                         Methods.waitForInvChange();
                         System.out.println("Picked up: " +i.getGroundItem().getName());
+                    } else if(Variables.lootByPrice && !priceTable.containsKey(i.getId())){//if its not a preset id but looting by price is enabled
+                                                                                         //and price has not been cached
+                        System.out.println("Item not in list: " + i.getGroundItem().getName() + ". Looking up price");
+                        priceTable.put(i.getId(), getPrice(i.getId())); //temp place
+                        final int price = priceTable.get(i.getId());
+                        System.out.println("Item price: " + priceTable.get(i.getId()));
+                        if((price != 0) && price*i.getGroundItem().getStackSize() >= Variables.minPriceToLoot){
+                            System.out.println("Added to list");
+                            lootIds.add(i.getId());
+                            new Fight.MoveCamera(i);
+                            if(!i.isOnScreen()){
+                                Task.sleep(500);
+                                if(!i.isOnScreen()){
+                                    Walking.walk(i);
+                                    Methods.waitForOnScreen(i);
+                                }
+                            }
+                            i.interact("Take", i.getGroundItem().getName());
+                            Paint.profit += priceTable.get(i.getId());
+                            Methods.waitForInvChange();
+                            System.out.println("Picked up: " +i.getGroundItem().getName());
 
+                        }
                     }
                 }
+            } else {
+                break;
             }
         }
         Variables.gKilled = 0;
         lootLocations.clear();
         System.out.println("Checking for loot another time");
         Methods.droppedLoot();
+
+        //Eat food for space
         if(Variables.eatFoodForSpace && Inventory.isFull() && Inventory.getCount(Variables.foodId) != 0){
             Inventory.getItem(Variables.foodId).getWidgetChild().interact("Eat");
         }
+
+        //Bone Burying
         if(Variables.burryBones && Inventory.isFull()){
-            Camera.turnTo(insideSafeZone);
-            System.out.println("Inventory full; going to burry bones");
-            do{
-                Walking.findPath(insideSafeZone).traverse();
-            }while(Calculations.distanceTo(insideSafeZone) >=2 );
 
             for(Item x: Inventory.getItems()){
                 if(x.getId() == 532){

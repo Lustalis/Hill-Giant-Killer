@@ -1,11 +1,10 @@
 package hillgiantkiller.sk.map.ultimate.teleport;
 
-import org.powerbot.game.api.wrappers.Tile;
-
 import hillgiantkiller.sk.item.RequiredGroup;
 import hillgiantkiller.sk.requirement.Requirement;
 import hillgiantkiller.sk.widget.Lodestone;
 import hillgiantkiller.sk.widget.Lodestone.Location;
+import org.powerbot.game.api.wrappers.Tile;
 
 public class LodestoneTeleport implements Teleport {
 

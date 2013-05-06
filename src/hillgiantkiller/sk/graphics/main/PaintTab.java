@@ -1,13 +1,10 @@
 package hillgiantkiller.sk.graphics.main;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-
 import hillgiantkiller.sk.graphics.Paintable;
 import hillgiantkiller.sk.graphics.TextUtil;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class PaintTab implements Paintable {
 

@@ -1,5 +1,11 @@
 package hillgiantkiller.sk.widget;
 
+import hillgiantkiller.sk.Script;
+import hillgiantkiller.sk.action.BookUtil;
+import hillgiantkiller.sk.action.magic.AllSpell;
+import hillgiantkiller.sk.general.EntityUtil;
+import hillgiantkiller.sk.general.TimedCondition;
+import hillgiantkiller.sk.map.MapUtil;
 import org.powerbot.game.api.methods.Settings;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.interactive.Players;
@@ -9,13 +15,6 @@ import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.interactive.Player;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
-import hillgiantkiller.sk.Script;
-import hillgiantkiller.sk.action.BookUtil;
-import hillgiantkiller.sk.action.magic.AllSpell;
-import hillgiantkiller.sk.general.EntityUtil;
-import hillgiantkiller.sk.general.TimedCondition;
-import hillgiantkiller.sk.map.MapUtil;
 
 public class Lodestone {
 

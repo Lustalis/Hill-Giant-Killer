@@ -20,8 +20,7 @@ public class UseAbilities extends Node {
         BarNode x = ActionBar.getNode(new Filter<BarNode>() {
             @Override
             public boolean accept(BarNode bn) {
-                if ( Variables.useRejuvenate && Methods.getHpPercent() >= (Eat.HEAL_PERCENT +5) && ActionBar.getNode(1).canUse()
-                        && ActionBar.getAdrenaline() == 1000){
+                if (useUlt()){
                     return bn.getSlot() == 1;
                 } else{
                     return bn != null && bn.canUse();
@@ -38,4 +37,33 @@ public class UseAbilities extends Node {
 
     }//End of Execute
 
+    private boolean useRejuv(){
+        return Variables.useRejuvenate && Methods.needToHeal() && ActionBar.getAdrenaline() == 1000 && ActionBar.getNode(0).canUse() &&
+            ActionBar.getNode(0).canUse();
+    }
+
+    private boolean useUlt(){
+        return Variables.useRejuvenate ?  Methods.getHpPercent() >= (Eat.HEAL_PERCENT +5) && ActionBar.getNode(1).canUse()
+                && ActionBar.getAdrenaline() == 1000 : ActionBar.getNode(1).canUse() && ActionBar.getAdrenaline() == 1000;
+    }
+
 } //End of Node
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

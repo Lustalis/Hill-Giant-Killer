@@ -1,11 +1,11 @@
 package hillgiantkiller.sk.graphics;
 
-import java.awt.Graphics;
+import org.powerbot.core.event.listeners.PaintListener;
+
+import java.awt.*;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.powerbot.core.event.listeners.PaintListener;
 
 public class PaintHandler implements PaintListener, Paintable {
 

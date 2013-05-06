@@ -1,8 +1,8 @@
 package hillgiantkiller.sk.widget;
 
-import java.awt.Point;
-import java.util.Arrays;
-
+import hillgiantkiller.sk.general.ArrayUtil;
+import hillgiantkiller.sk.general.TimeAfterCondition;
+import hillgiantkiller.sk.general.TimedCondition;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.input.Keyboard;
@@ -11,9 +11,8 @@ import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.node.Item;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
-import hillgiantkiller.sk.general.ArrayUtil;
-import hillgiantkiller.sk.general.TimeAfterCondition;
-import hillgiantkiller.sk.general.TimedCondition;
+import java.awt.*;
+import java.util.Arrays;
 
 public class Creation {
 	private static final int SELECT_WIDGET = 1371, ITEM_LIST = 44, ITEM_LIST_SCROLLBAR = 47, CATEGORY = 51,

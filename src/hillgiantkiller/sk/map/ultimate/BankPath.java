@@ -1,7 +1,7 @@
 package hillgiantkiller.sk.map.ultimate;
 
-import java.util.EnumSet;
-
+import hillgiantkiller.sk.general.EntityUtil;
+import hillgiantkiller.sk.map.MapUtil;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.wrappers.Entity;
@@ -9,8 +9,7 @@ import org.powerbot.game.api.wrappers.Locatable;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.map.Path;
 
-import hillgiantkiller.sk.general.EntityUtil;
-import hillgiantkiller.sk.map.MapUtil;
+import java.util.EnumSet;
 
 public class BankPath extends Path {
 

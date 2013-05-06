@@ -1,15 +1,14 @@
 package hillgiantkiller.sk.item;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import hillgiantkiller.sk.general.TimedCondition;
 import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.node.Item;
 
-import hillgiantkiller.sk.general.TimedCondition;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ItemInformation {
 	private int itemId;

@@ -1,13 +1,12 @@
 package hillgiantkiller.sk.widget;
 
-import java.awt.event.KeyEvent;
-
+import hillgiantkiller.sk.general.TimedCondition;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.input.Keyboard;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
-import hillgiantkiller.sk.general.TimedCondition;
+import java.awt.event.KeyEvent;
 
 public class InputValue {
 

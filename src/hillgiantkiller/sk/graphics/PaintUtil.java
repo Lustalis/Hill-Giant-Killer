@@ -1,17 +1,13 @@
 package hillgiantkiller.sk.graphics;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
+import hillgiantkiller.sk.map.MapUtil;
+import org.powerbot.game.api.wrappers.Tile;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-
-import javax.imageio.ImageIO;
-
-import org.powerbot.game.api.wrappers.Tile;
-
-import hillgiantkiller.sk.map.MapUtil;
 
 public class PaintUtil {
 

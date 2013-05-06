@@ -1,10 +1,9 @@
 package hillgiantkiller.sk.map.ultimate;
 
-import org.powerbot.game.api.wrappers.Tile;
-
 import hillgiantkiller.sk.item.ItemCache;
 import hillgiantkiller.sk.map.ultimate.teleport.Teleport;
 import hillgiantkiller.sk.map.ultimate.teleport.TeleportUtil;
+import org.powerbot.game.api.wrappers.Tile;
 
 public class TeleportPathPart implements PathPart {
 

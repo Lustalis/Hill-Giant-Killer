@@ -1,13 +1,12 @@
 package hillgiantkiller.sk.map.ultimate.teleport;
 
-import org.powerbot.game.api.methods.interactive.NPCs;
-import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.interactive.NPC;
-
 import hillgiantkiller.sk.general.EntityUtil;
 import hillgiantkiller.sk.item.RequiredGroup;
 import hillgiantkiller.sk.map.ultimate.Network;
 import hillgiantkiller.sk.requirement.Requirement;
+import org.powerbot.game.api.methods.interactive.NPCs;
+import org.powerbot.game.api.wrappers.Tile;
+import org.powerbot.game.api.wrappers.interactive.NPC;
 
 public class Shipping implements Network {
 

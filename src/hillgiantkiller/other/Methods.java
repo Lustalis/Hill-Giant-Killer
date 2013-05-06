@@ -116,7 +116,10 @@ public class Methods {
 
     public static boolean isOnScreen(Entity e){
         final WidgetChild actionBar = Widgets.get(640, 6);
-        return e != null && e.isOnScreen() && (actionBar == null || !actionBar.isOnScreen() || !actionBar.contains(e.getCentralPoint()));
+        return e != null && e.isOnScreen() && (actionBar == null || !(actionBar != null && actionBar.isOnScreen()
+                && actionBar.getBoundingRectangle().contains(e.getCentralPoint())));
+
+//        return e != null && e.isOnScreen() && (actionBar == null || !actionBar.isOnScreen() || !actionBar.contains(e.getCentralPoint()));
     }
 
     public static boolean fullInv(){

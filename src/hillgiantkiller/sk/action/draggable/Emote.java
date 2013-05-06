@@ -1,13 +1,12 @@
 package hillgiantkiller.sk.action.draggable;
 
-import java.util.Arrays;
-
-import org.powerbot.game.api.methods.Widgets;
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.action.Draggable;
 import hillgiantkiller.sk.tab.MainTabs;
 import hillgiantkiller.sk.tab.Tab;
+import org.powerbot.game.api.methods.Widgets;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
+
+import java.util.Arrays;
 
 public enum Emote implements Draggable {
 	YES(0, 9, 855),

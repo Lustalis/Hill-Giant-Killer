@@ -1,14 +1,13 @@
 package hillgiantkiller.sk.map.ultimate.teleport;
 
-import java.util.Collection;
-import java.util.HashSet;
-
-import org.powerbot.game.api.methods.interactive.Players;
-
 import hillgiantkiller.sk.general.EntityUtil;
 import hillgiantkiller.sk.item.ItemCache;
 import hillgiantkiller.sk.map.MapUtil;
 import hillgiantkiller.sk.map.ultimate.Network;
+import org.powerbot.game.api.methods.interactive.Players;
+
+import java.util.Collection;
+import java.util.HashSet;
 
 public class TeleportUtil {
 

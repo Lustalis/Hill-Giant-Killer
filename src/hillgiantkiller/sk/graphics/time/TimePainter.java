@@ -1,13 +1,11 @@
 package hillgiantkiller.sk.graphics.time;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-
 import hillgiantkiller.sk.Script;
 import hillgiantkiller.sk.graphics.PaintUtil;
 import hillgiantkiller.sk.graphics.Paintable;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class TimePainter implements Paintable {
 

@@ -1,11 +1,10 @@
 package hillgiantkiller.sk.action.ability;
 
-import org.powerbot.game.api.methods.tab.Skills;
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.action.BookUtil;
 import hillgiantkiller.sk.tab.InnerAbilityTabs;
 import hillgiantkiller.sk.tab.Tab;
+import org.powerbot.game.api.methods.tab.Skills;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 public enum DefenseAbility implements Ability {
 	ANTICIPATION(AbilityType.BASIC, 3, 1, 14219, 19, 25),

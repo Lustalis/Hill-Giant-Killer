@@ -1,10 +1,5 @@
 package hillgiantkiller.sk.map.ultimate.teleport;
 
-import java.util.EnumSet;
-
-import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.node.Item;
-
 import hillgiantkiller.sk.Script;
 import hillgiantkiller.sk.general.EntityUtil;
 import hillgiantkiller.sk.general.TimedCondition;
@@ -14,6 +9,10 @@ import hillgiantkiller.sk.item.MultiItemInformation;
 import hillgiantkiller.sk.item.RequiredGroup;
 import hillgiantkiller.sk.requirement.Requirement;
 import hillgiantkiller.sk.widget.Chatbox;
+import org.powerbot.game.api.wrappers.Tile;
+import org.powerbot.game.api.wrappers.node.Item;
+
+import java.util.EnumSet;
 
 public class ItemTeleport implements Teleport {
 

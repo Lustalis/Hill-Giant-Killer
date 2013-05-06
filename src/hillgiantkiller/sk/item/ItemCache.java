@@ -1,5 +1,8 @@
 package hillgiantkiller.sk.item;
 
+import hillgiantkiller.sk.Script;
+import hillgiantkiller.sk.general.PriceUtil;
+import hillgiantkiller.sk.tab.MainTabs;
 import org.powerbot.core.script.job.LoopTask;
 import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
@@ -7,10 +10,6 @@ import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.methods.widget.DepositBox;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.node.Item;
-
-import hillgiantkiller.sk.Script;
-import hillgiantkiller.sk.general.PriceUtil;
-import hillgiantkiller.sk.tab.MainTabs;
 
 public class ItemCache {
 

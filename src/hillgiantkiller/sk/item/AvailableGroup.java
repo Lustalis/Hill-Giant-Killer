@@ -1,11 +1,11 @@
 package hillgiantkiller.sk.item;
 
+import org.powerbot.game.api.wrappers.node.Item;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.powerbot.game.api.wrappers.node.Item;
 
 public class AvailableGroup {
 

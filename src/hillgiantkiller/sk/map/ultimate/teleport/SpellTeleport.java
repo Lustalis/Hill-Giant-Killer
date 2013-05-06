@@ -1,22 +1,17 @@
 package hillgiantkiller.sk.map.ultimate.teleport;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.powerbot.game.api.methods.tab.Skills;
-import org.powerbot.game.api.wrappers.Tile;
-
 import hillgiantkiller.sk.action.BookUtil;
-import hillgiantkiller.sk.action.magic.AncientSpell;
-import hillgiantkiller.sk.action.magic.FreeSpell;
-import hillgiantkiller.sk.action.magic.LunarSpell;
-import hillgiantkiller.sk.action.magic.Spell;
-import hillgiantkiller.sk.action.magic.StandardSpell;
+import hillgiantkiller.sk.action.magic.*;
 import hillgiantkiller.sk.item.RequiredGroup;
 import hillgiantkiller.sk.requirement.MultiRequirement;
 import hillgiantkiller.sk.requirement.Requirement;
 import hillgiantkiller.sk.requirement.SkillRequirement;
+import org.powerbot.game.api.methods.tab.Skills;
+import org.powerbot.game.api.wrappers.Tile;
+
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SpellTeleport implements Teleport {
 

@@ -58,7 +58,6 @@ public class Banking extends Node {
                 }else{
                     if(NPCs.getNearest(Variables.NPC_IDS) != null){
                         //Walking up ladder
-                        System.out.println("In the dungeon; going up");
                         ladderUp = SceneEntities.getNearest(LADDER_UP);
                         if(ladderUp != null){
                             if(ladderUp.isOnScreen() && ladderUp.interact("Climb-up")){
@@ -75,7 +74,6 @@ public class Banking extends Node {
             }else{
                 //Opening door
                 door = SceneEntities.getNearest(DOOR_ID);
-                System.out.println("Opening door");
                 if(door != null){
                     Camera.turnTo(door);
                     if(door.interact("Open")){

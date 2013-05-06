@@ -6,7 +6,6 @@ import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.LoopTask;
 import org.powerbot.core.script.job.Task;
-import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.util.Random;
 import org.powerbot.game.api.wrappers.interactive.Character;
@@ -21,9 +20,6 @@ public class CheckForDying extends LoopTask {
     @Override
     public int loop() {
         try {
-            if(Methods.getHpPercent() < 20){
-                Game.logout(true);
-            }
             npc = Players.getLocal().getInteracting();
             if((npc != null && npc.getAnimation() == Variables.DEATH_ID)
                     || (npc == null && Fight.theGiant != null && Fight.theGiant.getHealthPercent() == 0 && Fight.theGiant.isOnScreen())

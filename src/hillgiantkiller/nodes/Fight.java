@@ -4,12 +4,12 @@ import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.state.Node;
+import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Filter;
-import org.powerbot.game.api.wrappers.Entity;
 import org.powerbot.game.api.wrappers.Locatable;
 import org.powerbot.game.api.wrappers.interactive.Character;
 import org.powerbot.game.api.wrappers.interactive.NPC;
@@ -58,14 +58,22 @@ public class Fight extends Node {
         if(theGiant != null){
             Variables.deathLocation = theGiant.getLocation();
             Paint.status = "Fighting giant";
-            new MoveCamera(theGiant).start();
-            if(!theGiant.isOnScreen() && !Players.getLocal().isMoving()){
-                Walking.walk(theGiant);
-                //Methods.waitForOnScreen(theGiant);
-            }
-            if(!theGiant.isInCombat() && theGiant.interact("Attack")){
+            if(Methods.isOnScreen(theGiant) && !theGiant.isInCombat() && theGiant.interact("Attack")){
                 Methods.waitForCombat();
+            }else if(Calculations.distanceTo(theGiant) >= 9 ){
+                Walking.walk(theGiant);
+            } else{
+                new MoveCamera(theGiant).start();
             }
+
+
+//            if(!theGiant.isOnScreen() && !Players.getLocal().isMoving()){
+//                Walking.walk(theGiant);
+//                //Methods.waitForOnScreen(theGiant);
+//            }
+//            if(!theGiant.isInCombat() && theGiant.interact("Attack")){
+//                Methods.waitForCombat();
+//            }
         }
 
     }//End of Execute

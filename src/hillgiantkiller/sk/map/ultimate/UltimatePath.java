@@ -1,15 +1,14 @@
 package hillgiantkiller.sk.map.ultimate;
 
-import java.util.EnumSet;
-import java.util.Iterator;
-
+import hillgiantkiller.sk.Script;
+import hillgiantkiller.sk.item.ItemCache;
+import hillgiantkiller.sk.map.MapUtil;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.map.Path;
 
-import hillgiantkiller.sk.Script;
-import hillgiantkiller.sk.item.ItemCache;
-import hillgiantkiller.sk.map.MapUtil;
+import java.util.EnumSet;
+import java.util.Iterator;
 
 public class UltimatePath extends Path {
 

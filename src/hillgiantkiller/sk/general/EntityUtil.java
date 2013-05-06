@@ -1,10 +1,10 @@
 package hillgiantkiller.sk.general;
 
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-import java.util.HashSet;
-
+import hillgiantkiller.sk.action.ActionBar;
+import hillgiantkiller.sk.map.CollisionFlags;
+import hillgiantkiller.sk.map.FastPath;
+import hillgiantkiller.sk.map.MapUtil;
+import hillgiantkiller.sk.map.OffsetPoint;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Widgets;
@@ -28,11 +28,9 @@ import org.powerbot.game.api.wrappers.widget.Widget;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 import org.powerbot.game.bot.Context;
 
-import hillgiantkiller.sk.action.ActionBar;
-import hillgiantkiller.sk.map.CollisionFlags;
-import hillgiantkiller.sk.map.FastPath;
-import hillgiantkiller.sk.map.MapUtil;
-import hillgiantkiller.sk.map.OffsetPoint;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.HashSet;
 
 public class EntityUtil {
 

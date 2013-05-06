@@ -1,10 +1,9 @@
 package hillgiantkiller.sk.action;
 
-import org.powerbot.game.api.methods.Widgets;
-import org.powerbot.game.api.wrappers.widget.WidgetChild;
-
 import hillgiantkiller.sk.general.EntityUtil;
 import hillgiantkiller.sk.general.WidgetUtil;
+import org.powerbot.game.api.methods.Widgets;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 public class BookUtil {
 

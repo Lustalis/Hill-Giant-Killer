@@ -8,10 +8,8 @@ import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.SceneEntities;
-import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.map.TilePath;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
@@ -65,7 +63,6 @@ public class ToHillGiants extends Node {
                 if(resourceDoor.isOnScreen() && resourceDoor.interact("Enter")){
                     Methods.waitForArea(INSIDE_RESOURCE_DUNGEON);
                 }else{
-                    System.out.println("walking to door");
                     new Fight.MoveCamera(resourceDoor);
                     Walking.findPath(AROUND_MYSTERIOUS_ENTRANCE.getTileArray()[1]).traverse();
                 }
