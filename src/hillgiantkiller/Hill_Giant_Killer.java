@@ -37,7 +37,6 @@ import java.util.List;
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener, MouseListener {
     private Client client = Bot.client();
     private final List<Node> jobsCollection = Collections.synchronizedList(new ArrayList<Node>());
-    private static final ClaimSpinTickets ticketRandom = new ClaimSpinTickets();
     public static boolean guiWait = true;
     private Point p;
     private boolean hide;
@@ -53,13 +52,6 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
 
     public void onStart() {
         Paint.status = "Starting";
-        getContainer().submit(new Task() {
-            @Override
-            public void execute() {
-                sleep(5000);
-                Environment.enableRandom(SpinTickets.class, false);
-            }
-        });
         Looting.arrowId = Equipment.getItem(Equipment.Slot.AMMO).getId();
         Camera.setPitch(true);
         EventQueue.invokeLater(new Runnable() {
@@ -77,7 +69,9 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
             Task.sleep(100);
         }
         if(Variables.useMomentum) getContainer().submit(new MomentumTask());
-        provide(new EmergancyEscape(), new Banking(), new ToHillGiants(), new Eat(), new Looting(), new Fight(), new NotMyGiant(), new UseAbilities());
+        provide(new EmergancyEscape(), new Banking(), new ToHillGiants(), new Eat(),
+                new Looting(), new LeaveDungeon(), new Fight(), new NotMyGiant(), new UseAbilities());
+
         getContainer().submit(new CheckForDying());
     }
 
@@ -95,10 +89,6 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
                 return 1000;
             }
 
-            if (ticketRandom.activate()) {
-                ticketRandom.execute();
-                return 100;
-            }
 
             if (client != Bot.client()) {
                 WidgetCache.purge();
@@ -162,22 +152,6 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    private static class ClaimSpinTickets extends SpinTickets {
-        @Override
-        public void execute() {
-            if (Bank.isOpen()) {
-                if(Bank.close()) {
-                    sleep(1000);
-                }
-            } else if (((Settings.get(1448) & 0xFF00) >>> 8) < 10) {
-                final Item item = Inventory.getItem(SpinTickets.ITEM_ID_SPIN_TICKET);
-                if (item != null && item.getWidgetChild().interact("Claim spin")) {
-                    sleep(1000);
-                }
-            } else {
-                super.execute();
-            }
-        }
-    }
+
 
 }//end of class

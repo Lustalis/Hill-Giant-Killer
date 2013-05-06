@@ -25,9 +25,9 @@ public class Looting extends Node {
     */
     public static final Tile insideSafeZone = new Tile(3109,9848,0);
     public static int arrowId;
-    public static List<Integer> lootIds;
+    public static List<Integer> lootIds = new ArrayList<>();
     public static Map<Integer, Integer> priceTable = new HashMap<>();
-    public static List<Tile> lootLocations;
+    public static List<Tile> lootLocations = new ArrayList<>();
 
     private Filter<Item> arrowFilter = new Filter<Item>() {
         @Override

@@ -29,7 +29,7 @@ public class Banking extends Node {
     public static final Tile[] PATH_2 = new Tile[] { new Tile(3115, 3445, 0), new Tile(3124, 3451, 0), new Tile(3131, 3455, 0),
             new Tile(3139, 3456, 0), new Tile(3145, 3456, 0), new Tile(3152, 3456, 0),
             new Tile(3158, 3460, 0), new Tile(3150, 3474, 0) };
-    public static List<Integer> runesToKeep;
+    public static List<Integer> runesToKeep = new ArrayList<>();
 
     private SceneObject ladderUp;
     private SceneObject door;
@@ -95,6 +95,12 @@ public class Banking extends Node {
                 Task.sleep(500, 900);
                 if(Variables.eatFood){
                     Bank.withdraw(Variables.foodId, Variables.withdrawFoodAmount);
+                }
+                if(Variables.isMage){
+                    for (int i: runesToKeep){
+                        Bank.withdraw(i, Bank.Amount.ALL);
+                        Methods.waitForInvChange();
+                    }
                 }
                 Bank.withdraw(983, 1);
                 Bank.close();

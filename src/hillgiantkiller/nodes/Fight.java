@@ -16,7 +16,7 @@ import org.powerbot.game.api.wrappers.interactive.NPC;
 
 public class Fight extends Node {
     public static NPC theGiant = null;
-    private static final int[] NPC_IDS = {117,4689,4690,4691,4692,4693};
+    public static final int[] NPC_IDS = {117,4689,4690,4691,4692,4693};
     private static Filter<NPC> npcFilter = new Filter<NPC>() {
         @Override
         public boolean accept(NPC n) {
