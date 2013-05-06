@@ -64,6 +64,12 @@ public enum Loot {
         return name;
     }
 
+    public static String[] getRunes(){
+        String[] runes = {WATER_RUNE.getName(), FIRE_RUNE.getName(), COSMIC_RUNE.getName(), LAW_RUNE.getName(),
+        NATURE_RUNE.getName(), MIND_RUNE.getName(), DEATH_RUNE.getName(), CHAOS_RUNE.getName()};
+        return runes;
+    }
+
     @Override
     public String toString() {
         return getName();

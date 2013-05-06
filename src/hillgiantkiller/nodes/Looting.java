@@ -7,7 +7,9 @@ import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.node.GroundItems;
+import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
+import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.node.GroundItem;
 import org.powerbot.game.api.wrappers.node.Item;
@@ -15,20 +17,24 @@ import org.powerbot.game.api.wrappers.node.Item;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Looting extends Node {
     /*
     Map and walking stuff
     */
     public static final Tile insideSafeZone = new Tile(3109,9848,0);
-    public static ArrayList<Integer> lootIds =  new ArrayList<>();
+    public static int arrowId;
+    public static List<Integer> lootIds;
     public static Map<Integer, Integer> priceTable = new HashMap<>();
+    public static List<Tile> lootLocations;
 
-    public static ArrayList<Tile> lootLocations = new ArrayList<>();
+    private Filter<Item> arrowFilter = new Filter<Item>() {
+        @Override
+        public boolean accept(Item item) {
+            return item.getId() == arrowId;
+        }
+    };
 
     @Override
     public boolean activate() {
@@ -110,8 +116,15 @@ public class Looting extends Node {
                     Methods.waitForInvChange();
                 }
             }
+        }
 
+        //Arrows
 
+        if(Variables.isRange && Inventory.contains(arrowId)){
+            for(Item i: Inventory.getItems(arrowFilter)){
+                i.getWidgetChild().interact("Wield");
+                Methods.waitForInvChange();
+            }
         }
 
     }//End of Execute

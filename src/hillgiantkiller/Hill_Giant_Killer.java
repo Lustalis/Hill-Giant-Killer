@@ -16,6 +16,7 @@ import org.powerbot.game.api.Manifest;
 import org.powerbot.game.api.methods.Environment;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Settings;
+import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.methods.widget.Camera;
@@ -59,6 +60,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
                 Environment.enableRandom(SpinTickets.class, false);
             }
         });
+        Looting.arrowId = Equipment.getItem(Equipment.Slot.AMMO).getId();
         Camera.setPitch(true);
         EventQueue.invokeLater(new Runnable() {
             public void run() {

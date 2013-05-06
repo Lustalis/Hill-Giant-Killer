@@ -3,7 +3,9 @@ package hillgiantkiller.other;
 import hillgiantkiller.Hill_Giant_Killer;
 import hillgiantkiller.enums.Food;
 import hillgiantkiller.enums.Loot;
+import hillgiantkiller.enums.Rune;
 import hillgiantkiller.enums.Skill;
+import hillgiantkiller.nodes.Banking;
 import hillgiantkiller.nodes.Looting;
 
 import javax.swing.*;
@@ -17,6 +19,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Collections;
+import java.util.List;
 
 
 public class gui2 extends JFrame {
@@ -472,7 +476,19 @@ public class gui2 extends JFrame {
                                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
-        final JList lstRunes = new JList();
+        final JList<Rune> lstRunes = new JList<>();
+        lstRunes.setListData(Rune.values());
+//        lstRunes.setModel(new DefaultListModel<Rune>(){
+//            final Rune[] values = Rune.values();
+//            public int getSize() {
+//                return values.length;
+//            }
+//
+//            public Rune getElementAt(int index) {
+//                return values[index];
+//            }
+//
+//        });
         lstRunes.setEnabled(false);
         scrollPane_1.setViewportView(lstRunes);
         mage_rangeTab.setLayout(gl_mage_rangeTab);
@@ -535,10 +551,10 @@ public class gui2 extends JFrame {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 String x = String.valueOf(foodList.getSelectedItem());
-                if(x.equalsIgnoreCase("custom id")){
+                if (x.equalsIgnoreCase("custom id")) {
                     customFood.setEnabled(true);
                     customFood.setText("");
-                }else{
+                } else {
                     customFood.setEnabled(false);
                     customFood.setText("Custom ID");
                 }
@@ -600,10 +616,9 @@ public class gui2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(btnMage.isSelected()){
-                    btnKeepRunes.setEnabled(true);
+                    btnKeepRunes.setSelected(true);
                     lstRunes.setEnabled(true);
                 } else{
-                    btnKeepRunes.setEnabled(false);
                     btnKeepRunes.setSelected(false);
 
                     lstRunes.setEnabled(false);
@@ -615,9 +630,8 @@ public class gui2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(btnRange.isSelected()){
-                    btnEquipArrows.setEnabled(true);
+                    btnEquipArrows.setSelected(true);
                 } else{
-                    btnEquipArrows.setEnabled(false);
                     btnEquipArrows.setSelected(false);
                 }
             }
@@ -674,18 +688,13 @@ public class gui2 extends JFrame {
                         Variables.lootByPrice = true;
                         Variables.minPriceToLoot = Integer.parseInt(txtLootPrice.getText());
                     }
-                    //Loot[] temp = (Loot[]) lootList.getSelectedValuesList().toArray();
-                    Object[] temp = lootList.getSelectedValuesList().toArray();
-                    if(temp != null){
-                        for(Object  x: temp){
-                            Loot casted = (Loot) x;
-                            for(int i: casted.getId()){
-                                if(i != 1){
-                                    Looting.lootIds.add(i);
-                                }
-                            }
-
-                        }
+                    List<Loot> lootList1 = lootList.getSelectedValuesList();
+                    if(lootList1 != null){
+                       for(Loot x: lootList1){
+                           for(int i: x.getId()){
+                               Looting.lootIds.add(i);
+                           }
+                       }
                     }
 
                     String[] split = txtLootIds.getText().split("\\r?\\n");
@@ -694,10 +703,13 @@ public class gui2 extends JFrame {
                             Looting.lootIds.add(Integer.parseInt(s));
                         }
                     }
+                }
 
-
-
-
+                if(btnMage.isSelected()){
+                    List<Rune> runes = lstRunes.getSelectedValuesList();
+                    for(Rune x: runes){
+                        Banking.runesToKeep.add(x.getId());
+                    }
                 }
 
                 Hill_Giant_Killer.guiWait = false;

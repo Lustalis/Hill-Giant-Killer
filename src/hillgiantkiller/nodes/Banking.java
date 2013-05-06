@@ -18,6 +18,9 @@ import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.map.TilePath;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Banking extends Node {
     public static final Area BANK_AREA = new Area(new Tile(3140, 3491, 0), new Tile(3140, 3472, 0), new Tile(3151, 3465, 0),
             new Tile(3158, 3465, 0), new Tile(3157, 3490, 0));
@@ -26,7 +29,7 @@ public class Banking extends Node {
     public static final Tile[] PATH_2 = new Tile[] { new Tile(3115, 3445, 0), new Tile(3124, 3451, 0), new Tile(3131, 3455, 0),
             new Tile(3139, 3456, 0), new Tile(3145, 3456, 0), new Tile(3152, 3456, 0),
             new Tile(3158, 3460, 0), new Tile(3150, 3474, 0) };
-
+    public static List<Integer> runesToKeep;
 
     private SceneObject ladderUp;
     private SceneObject door;

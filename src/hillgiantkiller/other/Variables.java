@@ -25,6 +25,10 @@ public class Variables {
     public static boolean useResourceDungeon = false;
     public static int lootRadius;
 
+    public static boolean isMage = false;
+    public static boolean isRange = false;
+
+
     public static boolean useAbilities = false;
     public static boolean useMomentum = false;
     public static boolean useRejuvenate = false;
