@@ -24,10 +24,10 @@ public class LeaveDungeon extends Node {
 
     @Override
     public boolean activate() {
-        return !Variables.useResourceDungeon && NPCs.getLoaded(Fight.NPC_IDS) != null && SceneEntities.getLoaded(outsideResource) == null;
+        return !Variables.useResourceDungeon && NPCs.getNearest(Fight.NPC_IDS) != null
+                && SceneEntities.getNearest(outsideResource) == null;
     }
 
-    //TODO: Test this node tomorrow, sign in as stabone009 and start in resource dungeon but no resource dungeon checked in gui
 
     @Override
     public void execute() {

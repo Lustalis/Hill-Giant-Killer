@@ -1,9 +1,9 @@
 package hillgiantkiller;
 
 import hillgiantkiller.nodes.*;
+import hillgiantkiller.other.HillGiantGUI;
 import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Variables;
-import hillgiantkiller.other.HillGiantGui;
 import hillgiantkiller.tasks.CheckForDying;
 import hillgiantkiller.tasks.MomentumTask;
 import org.powerbot.core.Bot;
@@ -51,7 +51,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    HillGiantGui frame = new HillGiantGui();
+                    HillGiantGUI frame = new HillGiantGUI();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -22,7 +22,7 @@ import java.awt.event.ItemListener;
 import java.util.List;
 
 
-public class HillGiantGui extends JFrame {
+public class HillGiantGUI extends JFrame {
 
     private JPanel contentPane;
     private JTextField customFood;
@@ -38,7 +38,7 @@ public class HillGiantGui extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    HillGiantGui frame = new HillGiantGui();
+                    HillGiantGUI frame = new HillGiantGUI();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -50,7 +50,7 @@ public class HillGiantGui extends JFrame {
     /**
      * Create the frame.
      */
-    public HillGiantGui() {
+    public HillGiantGUI() {
         setTitle("Hill Giant Fighter");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(100, 100, 396, 402);

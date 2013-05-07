@@ -17,7 +17,7 @@ public enum Loot {
     IRON_ARROW("Iron Arrow", 884),
     MITHRIL_ARROW("Mithril Arrow",888),
     ADAMANT_ARROW("Adamant Arrow",890),
-    BOTH_ARROWS("Both Arrows",888,890,884),
+    BOTH_ARROWS("Expensive Arrows",888,890,884),
     SPACE2(" ",1),
 
     WATER_RUNE("Water Rune",555),
