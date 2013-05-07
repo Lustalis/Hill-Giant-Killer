@@ -3,26 +3,20 @@ package hillgiantkiller;
 import hillgiantkiller.nodes.*;
 import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Variables;
-import hillgiantkiller.other.gui2;
+import hillgiantkiller.other.HillGiantGui;
 import hillgiantkiller.tasks.CheckForDying;
 import hillgiantkiller.tasks.MomentumTask;
 import org.powerbot.core.Bot;
 import org.powerbot.core.event.listeners.PaintListener;
-import org.powerbot.core.randoms.SpinTickets;
 import org.powerbot.core.script.ActiveScript;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.Manifest;
-import org.powerbot.game.api.methods.Environment;
 import org.powerbot.game.api.methods.Game;
-import org.powerbot.game.api.methods.Settings;
 import org.powerbot.game.api.methods.tab.Equipment;
-import org.powerbot.game.api.methods.tab.Inventory;
-import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.methods.widget.WidgetCache;
 import org.powerbot.game.api.util.Random;
-import org.powerbot.game.api.wrappers.node.Item;
 import org.powerbot.game.client.Client;
 
 import java.awt.*;
@@ -57,7 +51,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    gui2 frame = new gui2();
+                    HillGiantGui frame = new HillGiantGui();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

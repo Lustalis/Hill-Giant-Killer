@@ -17,7 +17,7 @@ public enum Loot {
     IRON_ARROW("Iron Arrow", 884),
     MITHRIL_ARROW("Mithril Arrow",888),
     ADAMANT_ARROW("Adamant Arrow",890),
-    BOTH_ARROWS("Both Arrows",888,890, 884),
+    BOTH_ARROWS("Both Arrows",888,890,884),
     SPACE2(" ",1),
 
     WATER_RUNE("Water Rune",555),
@@ -43,6 +43,8 @@ public enum Loot {
     LANTADYME("Lantadyme",2481),
     SPACE4(" ",1),
 
+    GEMS("Uncut Gems", 1617,1619,1621,1623,1625,1627,1629,1631),
+
     BIG_BONE("Big Bones",532),
     LIMPWURT("Limpwurt Root",225),
     BODY_TAL("Body talisman",1446),
@@ -62,12 +64,6 @@ public enum Loot {
 
     String getName() {
         return name;
-    }
-
-    public static String[] getRunes(){
-        String[] runes = {WATER_RUNE.getName(), FIRE_RUNE.getName(), COSMIC_RUNE.getName(), LAW_RUNE.getName(),
-        NATURE_RUNE.getName(), MIND_RUNE.getName(), DEATH_RUNE.getName(), CHAOS_RUNE.getName()};
-        return runes;
     }
 
     @Override

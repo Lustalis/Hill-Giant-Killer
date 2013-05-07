@@ -1,6 +1,7 @@
 package hillgiantkiller.nodes;
 
 import hillgiantkiller.other.Methods;
+import hillgiantkiller.other.Paint;
 import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
@@ -26,8 +27,12 @@ public class LeaveDungeon extends Node {
         return !Variables.useResourceDungeon && NPCs.getLoaded(Fight.NPC_IDS) != null && SceneEntities.getLoaded(outsideResource) == null;
     }
 
+    //TODO: Test this node tomorrow, sign in as stabone009 and start in resource dungeon but no resource dungeon checked in gui
+
     @Override
     public void execute() {
+        Paint.status = "Exiting resource dungeon";
+        System.out.println("Accidentally went into dungeon");
         resourceDungeon = SceneEntities.getNearest(insideResource);
         if(resourceDungeon.isOnScreen() && resourceDungeon.interact("Exit")){
             Methods.waitForArea(AROUND_MYSTERIOUS_ENTRANCE);
