@@ -1,7 +1,7 @@
 package hillgiantkiller.nodes;
 
+import hillgiantkiller.other.Global;
 import hillgiantkiller.other.Methods;
-import hillgiantkiller.other.Variables;
 import hillgiantkiller.sk.action.ActionBar;
 import hillgiantkiller.sk.action.BarNode;
 import org.powerbot.core.script.job.state.Node;
@@ -11,7 +11,7 @@ public class UseAbilities extends Node {
     @Override
     public boolean activate() {
 
-        return Variables.useAbilities && !Variables.useMomentum;
+        return Global.useAbilities && !Global.useMomentum;
     }
 
     @Override
@@ -38,12 +38,12 @@ public class UseAbilities extends Node {
     }//End of Execute
 
     private boolean useRejuv(){
-        return Variables.useRejuvenate && Methods.needToHeal() && ActionBar.getAdrenaline() == 1000 && ActionBar.getNode(0).canUse() &&
+        return Global.useRejuvenate && Methods.needToHeal() && ActionBar.getAdrenaline() == 1000 && ActionBar.getNode(0).canUse() &&
             ActionBar.getNode(0).canUse();
     }
 
     private boolean useUlt(){
-        return Variables.useRejuvenate ?  Methods.getHpPercent() >= (Eat.HEAL_PERCENT +5) && ActionBar.getNode(1).canUse()
+        return Global.useRejuvenate ?  Methods.getHpPercent() >= (Eat.HEAL_PERCENT +5) && ActionBar.getNode(1).canUse()
                 && ActionBar.getAdrenaline() == 1000 : ActionBar.getNode(1).canUse() && ActionBar.getAdrenaline() == 1000;
     }
 

@@ -1,13 +1,12 @@
 package hillgiantkiller.nodes;
 
+import hillgiantkiller.other.Global;
 import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Paint;
-import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.node.GroundItems;
-import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.Tile;
@@ -39,7 +38,7 @@ public class Looting extends Node {
     @Override
     public boolean activate() {
 
-        return Variables.shouldLoot && Methods.needToLoot() ;
+        return Global.shouldLoot && Methods.needToLoot() ;
     }
 
     @Override
@@ -53,7 +52,8 @@ public class Looting extends Node {
                 final GroundItem[] item = GroundItems.getLoadedAt(tile.getX(), tile.getY());//get all items on tile
                 for(GroundItem i: item){
                     if (lootIds.contains(i.getId())) {//if its a preset loot id
-                        new Fight.MoveCamera(i);
+                        Global.stuffToDo.execute(new Global.MoveCamera(i));
+//                        new Fight.MoveCamera(i);
                         if(!i.isOnScreen()){//Making sure item is on screen
                             Task.sleep(500);
                             if(!Methods.isOnScreen(i)){
@@ -68,16 +68,17 @@ public class Looting extends Node {
                         Paint.profit += priceTable.get(i.getId());
                         Methods.waitForInvChange();
                         System.out.println("Picked up: " +i.getGroundItem().getName());
-                    } else if(Variables.lootByPrice && !priceTable.containsKey(i.getId())){//if its not a preset id but looting by price is enabled
+                    } else if(Global.lootByPrice && !priceTable.containsKey(i.getId())){//if its not a preset id but looting by price is enabled
                                                                                          //and price has not been cached
                         System.out.println("Item not in list: " + i.getGroundItem().getName() + ". Looking up price");
                         priceTable.put(i.getId(), getPrice(i.getId())); //temp place
                         final int price = priceTable.get(i.getId());
                         System.out.println("Item price: " + priceTable.get(i.getId()));
-                        if((price != 0) && price*i.getGroundItem().getStackSize() >= Variables.minPriceToLoot){
+                        if((price != 0) && price*i.getGroundItem().getStackSize() >= Global.minPriceToLoot){
                             System.out.println("Added to list");
                             lootIds.add(i.getId());
-                            new Fight.MoveCamera(i);
+                            Global.stuffToDo.execute(new Global.MoveCamera(i));
+//                            new Fight.MoveCamera(i);
                             if(!i.isOnScreen()){
                                 Task.sleep(500);
                                 if(!i.isOnScreen()){
@@ -97,18 +98,18 @@ public class Looting extends Node {
                 break;
             }
         }
-        Variables.gKilled = 0;
+        Global.gKilled = 0;
         lootLocations.clear();
         System.out.println("Checking for loot another time");
         Methods.droppedLoot();
 
         //Eat food for space
-        if(Variables.eatFoodForSpace && Inventory.isFull() && Inventory.getCount(Variables.foodId) != 0){
-            Inventory.getItem(Variables.foodId).getWidgetChild().interact("Eat");
+        if(Global.eatFoodForSpace && Inventory.isFull() && Inventory.getCount(Global.foodId) != 0){
+            Inventory.getItem(Global.foodId).getWidgetChild().interact("Eat");
         }
 
         //Bone Burying
-        if(Variables.burryBones && Inventory.isFull()){
+        if(Global.burryBones && Inventory.isFull()){
 
             for(Item x: Inventory.getItems()){
                 if(x.getId() == 532){
@@ -120,7 +121,7 @@ public class Looting extends Node {
 
         //Arrows
 
-        if(Variables.isRange && Inventory.contains(arrowId)){
+        if(Global.isRange && Inventory.contains(arrowId)){
             for(Item i: Inventory.getItems(arrowFilter)){
                 i.getWidgetChild().interact("Wield");
                 Methods.waitForInvChange();

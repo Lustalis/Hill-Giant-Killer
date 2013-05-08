@@ -1,7 +1,7 @@
 package hillgiantkiller.nodes;
 
+import hillgiantkiller.other.Global;
 import hillgiantkiller.other.Methods;
-import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Walking;
@@ -30,15 +30,16 @@ public class EmergancyEscape extends Node {
     public void execute() {
         if(!AROUND_LADDER_DOWN.contains(Players.getLocal())){
             resourceDungeon = SceneEntities.getNearest(insideResource);
-            if(Variables.useResourceDungeon && resourceDungeon != null){
+            if(Global.useResourceDungeon && resourceDungeon != null){
                 if(resourceDungeon.isOnScreen() && resourceDungeon.interact("Exit")){
                     Methods.waitForArea(AROUND_MYSTERIOUS_ENTRANCE);
                 }else {
-                    new Fight.MoveCamera(resourceDungeon).start();
+                    Global.stuffToDo.execute(new Global.MoveCamera(resourceDungeon));
+//                    new Fight.MoveCamera(resourceDungeon).start();
                     Walking.findPath(new Tile(1134, 4589, 0)).traverse();
                 }
             }else{
-                if(NPCs.getNearest(Variables.NPC_IDS) != null){
+                if(NPCs.getNearest(Global.NPC_IDS) != null){
                     //Walking up ladder
                     ladderUp = SceneEntities.getNearest(LADDER_UP);
                     if(ladderUp != null){
@@ -46,7 +47,8 @@ public class EmergancyEscape extends Node {
                             Methods.waitForArea(AROUND_LADDER_DOWN);
 
                         } else{
-                            new Fight.MoveCamera(ladderUp).start();
+                            Global.stuffToDo.execute(new Global.MoveCamera(ladderUp));
+//                            new Fight.MoveCamera(ladderUp).start();
                             Walking.findPath(new Tile(3115,9850,0)).traverse();
                         }
                     }

@@ -145,22 +145,22 @@ public class Methods {
 
     /*
     returns true when 1 npc has been killed
-    and Variables.lootLocations has a Tile in it
+    and Global.lootLocations has a Tile in it
      */
     public static boolean needToLoot(){
-        return Looting.lootLocations.size() >= Variables.lootAfter;
+        return Looting.lootLocations.size() >= Global.lootAfter;
 
     }
 
     public static boolean droppedLoot(){
-        int lootRad = Variables.lootRadius;
-        Tile location = Variables.deathLocation;
+        int lootRad = Global.lootRadius;
+        Tile location = Global.deathLocation;
         if(location!= null){
             Area lootZone = new Area(new Tile(location.getX() + lootRad, location.getY() + lootRad, Game.getPlane())
                     ,new Tile(location.getX() - lootRad, location.getY() - lootRad, Game.getPlane()) );
             for(Tile t: lootZone.getTileArray()){
                 GroundItem[] potential = GroundItems.getLoadedAt(t.getX(), t.getY());
-                if(Variables.lootByPrice && Looting.lootIds.isEmpty() && potential.length > 0){
+                if(Global.lootByPrice && Looting.lootIds.isEmpty() && potential.length > 0){
                     System.out.println("No loot id's selected; adding tile");
                     addTile(t);
                 }else{

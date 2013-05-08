@@ -1,9 +1,9 @@
 package hillgiantkiller.tasks;
 
 import hillgiantkiller.nodes.Fight;
+import hillgiantkiller.other.Global;
 import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Paint;
-import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.LoopTask;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.interactive.Players;
@@ -21,20 +21,20 @@ public class CheckForDying extends LoopTask {
     public int loop() {
         try {
             npc = Players.getLocal().getInteracting();
-            if((npc != null && npc.getAnimation() == Variables.DEATH_ID)
+            if((npc != null && npc.getAnimation() == Global.DEATH_ID)
                     || (npc == null && Fight.theGiant != null && Fight.theGiant.getHealthPercent() == 0 && Fight.theGiant.isOnScreen())
                     && !getContainer().isPaused()){
-                Variables.gKilled++;
+                Global.gKilled++;
                 System.out.println("starting task and pausing container");
                 getContainer().setPaused(true);
 
                 System.out.println("Giant is deeeead");
                 if(Fight.theGiant != null){
-                    Variables.deathLocation = Fight.theGiant.getLocation();
+                    Global.deathLocation = Fight.theGiant.getLocation();
                 }
 
-                if (Variables.shouldLoot) {
-                    if (Variables.lootAfter == 1) {
+                if (Global.shouldLoot) {
+                    if (Global.lootAfter == 1) {
                         System.out.println("Waiting for loot");
                         Paint.status = "Waiting for loot...";
                         Methods.waitForDrop();

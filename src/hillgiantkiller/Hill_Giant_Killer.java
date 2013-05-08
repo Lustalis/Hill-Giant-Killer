@@ -1,9 +1,9 @@
 package hillgiantkiller;
 
 import hillgiantkiller.nodes.*;
+import hillgiantkiller.other.Global;
 import hillgiantkiller.other.HillGiantGUI;
 import hillgiantkiller.other.Paint;
-import hillgiantkiller.other.Variables;
 import hillgiantkiller.tasks.CheckForDying;
 import hillgiantkiller.tasks.MomentumTask;
 import org.powerbot.core.Bot;
@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Manifest(authors = {"__Meat"}, description = "Kills hill giants in the Edgeville dungeon",
-        name = "__Meat's Hill Giant Killer", version = 1.65, topic = 982254)
+        name = "__Meat's Hill Giant Killer", version = 2.0, topic = 982254)
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener, MouseListener {
     private Client client = Bot.client();
     private final List<Node> jobsCollection = Collections.synchronizedList(new ArrayList<Node>());
@@ -62,7 +62,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
         while(guiWait){
             Task.sleep(100);
         }
-        if(Variables.useMomentum) getContainer().submit(new MomentumTask());
+        if(Global.useMomentum) getContainer().submit(new MomentumTask());
         provide(new EmergancyEscape(), new Banking(), new ToHillGiants(), new Eat(),
                 new Looting(), new LeaveDungeon(), new Fight(), new NotMyGiant(), new UseAbilities());
 

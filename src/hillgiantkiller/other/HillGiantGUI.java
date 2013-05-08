@@ -31,28 +31,12 @@ public class HillGiantGUI extends JFrame {
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private JTextField txtLootPrice;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    HillGiantGUI frame = new HillGiantGUI();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     /**
      * Create the frame.
      */
     public HillGiantGUI() {
         setTitle("Hill Giant Fighter");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(100, 100, 396, 402);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -622,26 +606,26 @@ public class HillGiantGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 if(btnResourceDung.isSelected()){
-                   Variables.useResourceDungeon = true;
+                   Global.useResourceDungeon = true;
                 }
 
-                Variables.lootRadius = lootRadiusSlider.getValue();
+                Global.lootRadius = lootRadiusSlider.getValue();
 
                 if(btnUseAbilities.isSelected()){
-                    Variables.useAbilities = true;
-                    if(btnUseMomentum.isSelected()) Variables.useMomentum = true;
-                    if(btnUseRejuvenate.isSelected()) Variables.useRejuvenate = true;
+                    Global.useAbilities = true;
+                    if(btnUseMomentum.isSelected()) Global.useMomentum = true;
+                    if(btnUseRejuvenate.isSelected()) Global.useRejuvenate = true;
 
                 }
                 if(btnEatFood.isSelected()){
-                    Variables.eatFood = true;
+                    Global.eatFood = true;
                     Food temp = (Food) foodList.getSelectedItem();
                     if(temp.getId() == 1){
-                        Variables.foodId = Integer.parseInt(customFood.getText());
+                        Global.foodId = Integer.parseInt(customFood.getText());
                     }else{
-                        Variables.foodId = temp.getId();
+                        Global.foodId = temp.getId();
                     }
-                    Variables.withdrawFoodAmount = Integer.parseInt(foodAmount.getText());
+                    Global.withdrawFoodAmount = Integer.parseInt(foodAmount.getText());
 
                 }
 
@@ -649,22 +633,22 @@ public class HillGiantGUI extends JFrame {
                 Paint.skill = skill.getSkillID();
 
                 if(btnShouldLoot.isSelected()){
-                    Variables.shouldLoot = true;
+                    Global.shouldLoot = true;
                     int tempLootAfter = Integer.parseInt(txtLootAfter.getText());
                     if(tempLootAfter == 0){
-                        Variables.lootAfter = 1;
-                        Variables.shouldWaitForLoot = true;
+                        Global.lootAfter = 1;
+                        Global.shouldWaitForLoot = true;
                     }
-                    Variables.lootAfter = Integer.parseInt(txtLootAfter.getText());
+                    Global.lootAfter = Integer.parseInt(txtLootAfter.getText());
                     if(btnShouldBurry.isSelected()){
-                        Variables.burryBones = true;
+                        Global.burryBones = true;
                     }
                     if(btnEatFoodForLoot.isSelected()){
-                        Variables.eatFoodForSpace = true;
+                        Global.eatFoodForSpace = true;
                     }
                     if(btnLootByPrice.isSelected()){
-                        Variables.lootByPrice = true;
-                        Variables.minPriceToLoot = Integer.parseInt(txtLootPrice.getText());
+                        Global.lootByPrice = true;
+                        Global.minPriceToLoot = Integer.parseInt(txtLootPrice.getText());
                     }
                     List<Loot> lootList1 = lootList.getSelectedValuesList();
                     if(lootList1 != null){

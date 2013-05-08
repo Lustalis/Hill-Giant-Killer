@@ -1,8 +1,8 @@
 package hillgiantkiller.nodes;
 
+import hillgiantkiller.other.Global;
 import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Paint;
-import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.NPCs;
@@ -32,15 +32,15 @@ public class ToHillGiants extends Node {
 
     @Override
     public boolean activate() {
-        return Variables.useResourceDungeon ? SceneEntities.getNearest(insideResource) == null
-                : NPCs.getNearest(Variables.NPC_IDS) == null;
+        return Global.useResourceDungeon ? SceneEntities.getNearest(insideResource) == null
+                : NPCs.getNearest(Global.NPC_IDS) == null;
     }
 
     @Override
     public void execute() {
         Paint.status = "Walking back to dungeon";
 
-        if (NPCs.getNearest(Variables.NPC_IDS) == null) {
+        if (NPCs.getNearest(Global.NPC_IDS) == null) {
             if(!AROUND_LADDER_DOWN.contains(Players.getLocal())){
                 if(!DUNGEON_ENTRANCE.getTileArray()[1].isOnScreen()){
                     TO_DUNGEON.traverse();
@@ -63,7 +63,8 @@ public class ToHillGiants extends Node {
                 if(resourceDoor.isOnScreen() && resourceDoor.interact("Enter")){
                     Methods.waitForArea(INSIDE_RESOURCE_DUNGEON);
                 }else{
-                    new Fight.MoveCamera(resourceDoor);
+                    Global.stuffToDo.execute(new Global.MoveCamera(resourceDoor));
+//                    new Fight.MoveCamera(resourceDoor);
                     Walking.findPath(AROUND_MYSTERIOUS_ENTRANCE.getTileArray()[1]).traverse();
                 }
             }

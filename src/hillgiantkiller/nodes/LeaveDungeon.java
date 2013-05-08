@@ -1,8 +1,8 @@
 package hillgiantkiller.nodes;
 
+import hillgiantkiller.other.Global;
 import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Paint;
-import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.NPCs;
@@ -24,7 +24,7 @@ public class LeaveDungeon extends Node {
 
     @Override
     public boolean activate() {
-        return !Variables.useResourceDungeon && NPCs.getNearest(Fight.NPC_IDS) != null
+        return !Global.useResourceDungeon && NPCs.getNearest(Fight.NPC_IDS) != null
                 && SceneEntities.getNearest(outsideResource) == null;
     }
 
@@ -37,7 +37,8 @@ public class LeaveDungeon extends Node {
         if(resourceDungeon.isOnScreen() && resourceDungeon.interact("Exit")){
             Methods.waitForArea(AROUND_MYSTERIOUS_ENTRANCE);
         }else {
-            new Fight.MoveCamera(resourceDungeon).start();
+            Global.stuffToDo.execute(new Global.MoveCamera(resourceDungeon));
+//            new Fight.MoveCamera(resourceDungeon).start();
             Walking.findPath(new Tile(1134, 4589, 0)).traverse();
         }
     }

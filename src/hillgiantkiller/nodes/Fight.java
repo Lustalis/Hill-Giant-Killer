@@ -1,16 +1,14 @@
 package hillgiantkiller.nodes;
 
+import hillgiantkiller.other.Global;
 import hillgiantkiller.other.Methods;
 import hillgiantkiller.other.Paint;
-import hillgiantkiller.other.Variables;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
-import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Filter;
-import org.powerbot.game.api.wrappers.Locatable;
 import org.powerbot.game.api.wrappers.interactive.Character;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 
@@ -21,7 +19,7 @@ public class Fight extends Node {
         @Override
         public boolean accept(NPC n) {
             for(int i: NPC_IDS){
-                if(n.getId() == i && n.getInteracting() == null && n.getAnimation() != Variables.DEATH_ID){
+                if(n.getId() == i && n.getInteracting() == null && n.getAnimation() != Global.DEATH_ID){
                     return true;
                 }
             }
@@ -56,14 +54,15 @@ public class Fight extends Node {
         theGiant = getMonster();
 
         if(theGiant != null){
-            Variables.deathLocation = theGiant.getLocation();
+            Global.deathLocation = theGiant.getLocation();
             Paint.status = "Fighting giant";
             if(Methods.isOnScreen(theGiant) && !theGiant.isInCombat() && theGiant.interact("Attack")){
                 Methods.waitForCombat();
             }else if(Calculations.distanceTo(theGiant) >= 9 ){
                 Walking.walk(theGiant);
             } else{
-                new MoveCamera(theGiant).start();
+                Global.stuffToDo.execute(new Global.MoveCamera(theGiant));
+                //new MoveCamera(theGiant).start();
             }
 
 
@@ -94,20 +93,6 @@ public class Fight extends Node {
         }
 
     }
-
-
-    public static class MoveCamera extends Thread{
-//        private NPC n;
-        private Locatable n;
-        public MoveCamera(final Locatable locatable){
-            this.n = locatable;
-        }
-
-        public void run(){
-            Camera.turnTo(n);
-        }
-    }
-
 
 
 } //End of Node

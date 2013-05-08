@@ -1,6 +1,6 @@
 package hillgiantkiller.nodes;
 
-import hillgiantkiller.other.Variables;
+import hillgiantkiller.other.Global;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.wrappers.interactive.NPC;
@@ -20,7 +20,7 @@ public class NotMyGiant extends Node {
     public void execute() {
         System.out.println("Retaliated against different giant");
         Fight.theGiant = (NPC) Players.getLocal().getInteracting();
-        Variables.deathLocation = Fight.theGiant.getLocation();
+        Global.deathLocation = Fight.theGiant.getLocation();
 
 
     }

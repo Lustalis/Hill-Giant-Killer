@@ -1,13 +1,21 @@
 package hillgiantkiller.other;
 
+import org.powerbot.game.api.methods.widget.Camera;
+import org.powerbot.game.api.wrappers.Locatable;
 import org.powerbot.game.api.wrappers.Tile;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * User: Stefano Tabone
  * Date: 4/8/13
  * Time: 11:00 PM
  */
-public class Variables {
+public class Global {
+
+    public static ExecutorService stuffToDo = Executors.newFixedThreadPool(10);
 
 
     /*
@@ -20,7 +28,7 @@ public class Variables {
 
 
     /*
-    GUI Variables
+    GUI Global
      */
     public static boolean useResourceDungeon = false;
     public static int lootRadius;
@@ -46,4 +54,15 @@ public class Variables {
     public static boolean shouldWaitForLoot = false;
     public static int gKilled = 0;
 
+    public static class MoveCamera extends Thread{
+        private Locatable n;
+        public MoveCamera(final Locatable locatable){
+            this.n = locatable;
+        }
+
+        public void run(){
+            Camera.turnTo(n);
+
+        }
+    }
 }
