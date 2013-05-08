@@ -22,7 +22,7 @@ import java.awt.event.ItemListener;
 import java.util.List;
 
 
-public class HillGiantGUI extends JFrame {
+public class GUI extends JFrame {
 
     private JPanel contentPane;
     private JTextField customFood;
@@ -35,7 +35,7 @@ public class HillGiantGUI extends JFrame {
     /**
      * Create the frame.
      */
-    public HillGiantGUI() {
+    public GUI() {
         setTitle("Hill Giant Fighter");
         setBounds(100, 100, 396, 402);
         contentPane = new JPanel();

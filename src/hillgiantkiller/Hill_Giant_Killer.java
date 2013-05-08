@@ -1,8 +1,8 @@
 package hillgiantkiller;
 
 import hillgiantkiller.nodes.*;
+import hillgiantkiller.other.GUI;
 import hillgiantkiller.other.Global;
-import hillgiantkiller.other.HillGiantGUI;
 import hillgiantkiller.other.Paint;
 import hillgiantkiller.tasks.CheckForDying;
 import hillgiantkiller.tasks.MomentumTask;
@@ -51,7 +51,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    HillGiantGUI frame = new HillGiantGUI();
+                    GUI frame = new GUI();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
