@@ -674,6 +674,10 @@ public class GUI extends JFrame {
                     }
                 }
 
+                if(btnRange.isSelected()){
+                    Global.isRange = true;
+                }
+
                 Hill_Giant_Killer.guiWait = false;
                 destroy();
 
