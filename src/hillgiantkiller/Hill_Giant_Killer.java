@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Manifest(authors = {"__Meat"}, description = "Kills hill giants in the Edgeville dungeon",
-        name = "__Meat's Hill Giant Killer", version = 2.0, topic = 982254)
+        name = "__Meat's Hill Giant Killer", version = 2.1, topic = 982254)
 public class Hill_Giant_Killer extends ActiveScript implements PaintListener, MouseListener {
     private Client client = Bot.client();
     private final List<Node> jobsCollection = Collections.synchronizedList(new ArrayList<Node>());
@@ -47,6 +47,7 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
     public void onStart() {
         Paint.status = "Starting";
         Looting.arrowId = Equipment.getItem(Equipment.Slot.AMMO).getId();
+        System.out.println(Looting.arrowId);
         Camera.setPitch(true);
         EventQueue.invokeLater(new Runnable() {
             public void run() {
