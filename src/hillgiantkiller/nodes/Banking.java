@@ -35,7 +35,7 @@ public class Banking extends Node {
     private SceneObject door;
     public static SceneObject resourceDungeon;
     private int insideResource = 52868;
-    private final Area AROUND_LADDER_DOWN = new Area(new Tile(3113,3453,0), new Tile(3116,3450,0));
+    private final Area AROUND_LADDER_DOWN = new Area(new Tile(3113,3455,0), new Tile(3117,3450,0));
     private final TilePath TO_BANK = Walking.newTilePath(PATH_2);
     private final Area AROUND_MYSTERIOUS_ENTRANCE = new Area(new Tile(3107,9825,0), new Tile(3102,9827,0));
 
@@ -56,12 +56,10 @@ public class Banking extends Node {
                         Methods.waitForArea(AROUND_MYSTERIOUS_ENTRANCE);
                     }else {
                         Global.stuffToDo.execute(new Global.MoveCamera(resourceDungeon));
-//                        new Fight.MoveCamera(resourceDungeon).start();
                         Walking.findPath(new Tile(1134,4589,0)).traverse();
                     }
                 }else{
                     if(NPCs.getNearest(Global.NPC_IDS) != null){
-                        //Walking up ladder
                         ladderUp = SceneEntities.getNearest(LADDER_UP);
                         if(ladderUp != null){
                             if(ladderUp.isOnScreen() && ladderUp.interact("Climb-up")){
@@ -69,7 +67,6 @@ public class Banking extends Node {
 
                             } else{
                                 Global.stuffToDo.execute(new Global.MoveCamera(ladderUp));
-//                                new Fight.MoveCamera(ladderUp).start();
                                 Walking.findPath(new Tile(3115,9850,0)).traverse();
                             }
                         }
@@ -97,11 +94,12 @@ public class Banking extends Node {
                 Task.sleep(500, 900);
                 if(Global.eatFood){
                     Bank.withdraw(Global.foodId, Global.withdrawFoodAmount);
+                    Task.sleep(250, 750);;
                 }
                 if(Global.isMage){
                     for (int i: runesToKeep){
                         Bank.withdraw(i, Bank.Amount.ALL);
-                        Methods.waitForInvChange();
+                        Task.sleep(250, 750);
                     }
                 }
                 Bank.withdraw(983, 1);

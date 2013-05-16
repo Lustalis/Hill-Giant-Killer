@@ -128,6 +128,7 @@ public class Looting extends Node {
             }
         }
 
+
     }//End of Execute
 
     private static int getPrice(final int id) {

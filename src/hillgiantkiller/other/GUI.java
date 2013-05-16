@@ -668,6 +668,8 @@ public class GUI extends JFrame {
                 }
 
                 if(btnMage.isSelected()){
+                    Global.isMage = true;
+                    Global.useAbilities = true;
                     List<Rune> runes = lstRunes.getSelectedValuesList();
                     for(Rune x: runes){
                         Banking.runesToKeep.add(x.getId());

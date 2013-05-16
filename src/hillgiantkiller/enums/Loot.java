@@ -20,6 +20,7 @@ public enum Loot {
     BOTH_ARROWS("Expensive Arrows",888,890,884),
     SPACE2(" ",1),
 
+    AIR_RUNE("Air Rune", 556),
     WATER_RUNE("Water Rune",555),
     FIRE_RUNE("Fire Rune",554),
     COSMIC_RUNE("Cosmic Rune",564),

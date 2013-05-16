@@ -23,7 +23,7 @@ public class EmergancyEscape extends Node {
     @Override
     public boolean activate() {
 
-        return Methods.getHpPercent() <= 20;
+        return Methods.getHpPercent() <= 25;
     }
 
     @Override
@@ -35,7 +35,6 @@ public class EmergancyEscape extends Node {
                     Methods.waitForArea(AROUND_MYSTERIOUS_ENTRANCE);
                 }else {
                     Global.stuffToDo.execute(new Global.MoveCamera(resourceDungeon));
-//                    new Fight.MoveCamera(resourceDungeon).start();
                     Walking.findPath(new Tile(1134, 4589, 0)).traverse();
                 }
             }else{
@@ -48,7 +47,6 @@ public class EmergancyEscape extends Node {
 
                         } else{
                             Global.stuffToDo.execute(new Global.MoveCamera(ladderUp));
-//                            new Fight.MoveCamera(ladderUp).start();
                             Walking.findPath(new Tile(3115,9850,0)).traverse();
                         }
                     }

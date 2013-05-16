@@ -17,7 +17,7 @@ public class ToHillGiants extends Node {
     private SceneObject door;
     private SceneObject ladderDown;
     private final int LADDER_DOWN = 12389;
-    private final Area AROUND_LADDER_DOWN = new Area(new Tile(3113,3453,0), new Tile(3116,3450,0));
+    private final Area AROUND_LADDER_DOWN = new Area(new Tile(3113,3455,0), new Tile(3117,3450,0));
     private final Area INSIDE_DUNGEON = new Area(new Tile(3115,9854,0), new Tile(3117,9854,0), new Tile(3117,9850,0),
             new Tile(3115,9850,0));
     public static final Area DUNGEON_ENTRANCE = new Area(new Tile(3112,3448,0), new Tile(3118,3444,0));

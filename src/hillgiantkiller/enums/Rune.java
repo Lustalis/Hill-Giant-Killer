@@ -8,6 +8,8 @@ package hillgiantkiller.enums;
  * To change this template use File | Settings | File Templates.
  */
 public enum Rune {
+
+    AIR_RUNE("Air Rune", 556),
     WATER_RUNE("Water Rune",555),
     FIRE_RUNE("Fire Rune",554),
     COSMIC_RUNE("Cosmic Rune",564),
