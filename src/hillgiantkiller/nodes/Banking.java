@@ -42,7 +42,8 @@ public class Banking extends Node {
     @Override
     public boolean activate() {
 
-        return (Inventory.isFull() || (Global.eatFood && !Methods.haveFood(Global.foodId)) || !Inventory.contains(983)) || Bank.isOpen();
+        return (Inventory.isFull() || (Global.eatFood && !Methods.haveFood(Global.foodId)) || !Inventory.contains(983) || Methods.getHpPercent() <=25)
+                || Bank.isOpen();
     }
 
     @Override
