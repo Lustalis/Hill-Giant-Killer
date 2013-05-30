@@ -64,8 +64,7 @@ public class ToHillGiants extends Node {
                     Methods.waitForArea(INSIDE_RESOURCE_DUNGEON);
                 }else{
                     Global.stuffToDo.execute(new Global.MoveCamera(resourceDoor));
-//                    new Fight.MoveCamera(resourceDoor);
-                    Walking.findPath(AROUND_MYSTERIOUS_ENTRANCE.getTileArray()[1]).traverse();
+                    //Walking.findPath(AROUND_MYSTERIOUS_ENTRANCE.getTileArray()[1]).traverse();
                 }
             }
 

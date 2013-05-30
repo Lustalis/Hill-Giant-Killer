@@ -26,9 +26,6 @@ public class Banking extends Node {
             new Tile(3158, 3465, 0), new Tile(3157, 3490, 0));
     public static final int DOOR_ID = 1804;
     public static final int LADDER_UP = 29355;
-    public static final Tile[] PATH_2 = new Tile[] { new Tile(3115, 3445, 0), new Tile(3124, 3451, 0), new Tile(3131, 3455, 0),
-            new Tile(3139, 3456, 0), new Tile(3145, 3456, 0), new Tile(3152, 3456, 0),
-            new Tile(3158, 3460, 0), new Tile(3150, 3474, 0) };
     public static List<Integer> runesToKeep = new ArrayList<>();
 
     private SceneObject ladderUp;
@@ -36,7 +33,16 @@ public class Banking extends Node {
     public static SceneObject resourceDungeon;
     private int insideResource = 52868;
     private final Area AROUND_LADDER_DOWN = new Area(new Tile(3113,3455,0), new Tile(3117,3450,0));
-    private final TilePath TO_BANK = Walking.newTilePath(PATH_2);
+    private final TilePath TO_BANK = Walking.newTilePath(new Tile[] { new Tile(3115, 3445, 0), new Tile(3124, 3451, 0), new Tile(3131, 3455, 0),
+            new Tile(3139, 3456, 0), new Tile(3145, 3456, 0), new Tile(3152, 3456, 0),
+            new Tile(3158, 3460, 0), new Tile(3150, 3474, 0) });
+
+    private final TilePath FIND_WAY_OUT_RESOURCE =  Walking.newTilePath(new Tile[] {new Tile(1107,4581,0), new Tile(112,4576,0),
+            new Tile(1117,4574,0), new Tile(1123,4574,0), new Tile(1132,4579,0), new Tile(1134,4587,0)});
+
+    private final TilePath FIND_WAY_OUT_DUNGEON = Walking.newTilePath(new Tile[] {new Tile(3104,9826,0), new Tile(3107,9834,0),
+            new Tile(3116,9838,0), new Tile(3116,9844,0)});
+
     private final Area AROUND_MYSTERIOUS_ENTRANCE = new Area(new Tile(3107,9825,0), new Tile(3102,9827,0));
 
     @Override
@@ -57,7 +63,7 @@ public class Banking extends Node {
                         Methods.waitForArea(AROUND_MYSTERIOUS_ENTRANCE);
                     }else {
                         Global.stuffToDo.execute(new Global.MoveCamera(resourceDungeon));
-                        Walking.findPath(new Tile(1134,4589,0)).traverse();
+                        FIND_WAY_OUT_RESOURCE.traverse();
                     }
                 }else{
                     if(NPCs.getNearest(Global.NPC_IDS) != null){
@@ -68,7 +74,7 @@ public class Banking extends Node {
 
                             } else{
                                 Global.stuffToDo.execute(new Global.MoveCamera(ladderUp));
-                                Walking.findPath(new Tile(3115,9850,0)).traverse();
+                                FIND_WAY_OUT_DUNGEON.traverse();
                             }
                         }
                     }

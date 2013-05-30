@@ -3,27 +3,26 @@ package hillgiantkiller.sk.map;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.Tile.Flag;
 
 public class CollisionFlags extends Obstacles {
 
-	protected final Tile base;
-	protected final Tile offset;
-	protected final int[][] flags;
+	protected final Tile base = null;
+	protected final Tile offset = null;
+	protected final int[][] flags = null;
 
 	public CollisionFlags() {
-		this(Game.getMapBase());
+
 	}
 
-	public CollisionFlags(final Tile base) {
-		this(base, Walking.getCollisionOffset(base.getPlane()), Walking.getCollisionFlags(base.getPlane()));
-	}
 
-	public CollisionFlags(final Tile base, final Tile offset, final int[][] flags) {
-		this.base = base;
-		this.offset = offset;
-		this.flags = flags;
-	}
+    public CollisionFlags(final Tile base) {
+
+    }
+
+    public CollisionFlags(final Tile base, final Tile offset, final int[][] flags) {
+
+    }
+
 
 	public boolean walkable(final Tile t) {
 		return walkable(toPoint(t));
@@ -82,41 +81,11 @@ public class CollisionFlags extends Obstacles {
 	}
 
 	private boolean checkBlocked(final OffsetPoint n, final OffsetPoint b) {
-		final int x = n.getX() - offset.getX();
-		final int y = n.getY() - offset.getY();
-		final int dx = n.getX() - b.getX();
-		final int dy = n.getY() - b.getY();
 
-		if (dx == 0) {
-			if (dy == 0) {
-				return false;
-			}
-			// Y direction only
-			return (flags[x][y] & Y_WALL[(dy + 1) / 2]) != 0;
-		} else if (dy == 0)
-		// X direction only
-		{
-			return (flags[x][y] & X_WALL[(dx + 1) / 2]) != 0;
-		} else {
-			// Both directions
-			final int diagNum = (dy + 1) | ((dx + 1) / 2);
-			if ((flags[x][y] & DIAG_WALL[diagNum]) != 0) {
-				return true;
-			}
-			if ((!walkable(n.derive(-dx, 0)) || (flags[x - dx][y] & DIAG_X[diagNum]) != 0)
-					&& (!walkable(n.derive(0, -dy)) || (flags[x][y - dy] & DIAG_Y[diagNum]) != 0)) {
-				return true;
-			}
-		}
 		return false;
 	}
 
-	private static final int[] X_WALL = { Flag.WALL_EAST, Flag.WALL_WEST }, Y_WALL = { Flag.WALL_NORTH,
-			Flag.WALL_SOUTH }, DIAG_WALL = { Flag.WALL_NORTHEAST, Flag.WALL_NORTHWEST, Flag.WALL_SOUTHEAST,
-			Flag.WALL_SOUTHWEST }, DIAG_X = { Flag.WALL_WEST | Flag.WALL_NORTH, Flag.WALL_EAST | Flag.WALL_NORTH,
-			Flag.WALL_WEST | Flag.WALL_SOUTH, Flag.WALL_EAST | Flag.WALL_SOUTH }, DIAG_Y = {
-			Flag.WALL_EAST | Flag.WALL_SOUTH, Flag.WALL_WEST | Flag.WALL_SOUTH, Flag.WALL_EAST | Flag.WALL_NORTH,
-			Flag.WALL_WEST | Flag.WALL_NORTH };
+
 
 	@Override
 	public boolean walkable(final OffsetPoint n) {

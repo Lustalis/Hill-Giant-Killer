@@ -65,7 +65,8 @@ public class Hill_Giant_Killer extends ActiveScript implements PaintListener, Mo
         }
         if(Global.useMomentum) getContainer().submit(new MomentumTask());
         provide(new Banking(), new ToHillGiants(), new Eat(),
-                new Looting(), new LeaveDungeon(), new Fight(), new NotMyGiant(), new UseAbilities());
+                new Looting(), new WentIntoDungeonByAccident(), new Fight(),
+                new NotMyGiant(), new UseAbilities());
 
         getContainer().submit(new CheckForDying());
     }

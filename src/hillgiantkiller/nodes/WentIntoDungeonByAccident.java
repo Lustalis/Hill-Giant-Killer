@@ -16,7 +16,7 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
  * Date: 5/6/13
  * Time: 3:34 PM
  */
-public class LeaveDungeon extends Node {
+public class WentIntoDungeonByAccident extends Node {
     private SceneObject resourceDungeon;
     private int insideResource = 52868;
     private int outsideResource = 52853;
@@ -38,8 +38,6 @@ public class LeaveDungeon extends Node {
             Methods.waitForArea(AROUND_MYSTERIOUS_ENTRANCE);
         }else {
             Global.stuffToDo.execute(new Global.MoveCamera(resourceDungeon));
-//            new Fight.MoveCamera(resourceDungeon).start();
-            Walking.findPath(new Tile(1134, 4589, 0)).traverse();
         }
     }
 }

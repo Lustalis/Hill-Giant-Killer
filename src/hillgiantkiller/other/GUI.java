@@ -399,8 +399,8 @@ public class GUI extends JFrame {
 
         JSeparator separator_3 = new JSeparator();
 
-        JCheckBox chkSafeSpot = new JCheckBox("Safe Spot");
-        chkSafeSpot.setEnabled(false);
+        JCheckBox chkSwitching = new JCheckBox("Weapon Switching");
+        chkSwitching.setEnabled(false);
         GroupLayout gl_mage_rangeTab = new GroupLayout(mage_rangeTab);
         gl_mage_rangeTab.setHorizontalGroup(
                 gl_mage_rangeTab.createParallelGroup(Alignment.LEADING)
@@ -422,7 +422,7 @@ public class GUI extends JFrame {
                                 .addComponent(separator_3, GroupLayout.PREFERRED_SIZE, 358, GroupLayout.PREFERRED_SIZE))
                         .addGroup(gl_mage_rangeTab.createSequentialGroup()
                                 .addGap(126)
-                                .addComponent(chkSafeSpot)
+                                .addComponent(chkSwitching)
                                 .addContainerGap(150, Short.MAX_VALUE))
         );
         gl_mage_rangeTab.setVerticalGroup(
@@ -445,7 +445,7 @@ public class GUI extends JFrame {
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addComponent(separator_3, GroupLayout.PREFERRED_SIZE, 5, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addComponent(chkSafeSpot)
+                                .addComponent(chkSwitching)
                                 .addContainerGap(92, Short.MAX_VALUE))
         );
 

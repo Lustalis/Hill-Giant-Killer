@@ -190,4 +190,17 @@ public class Methods {
         }
     }
 
+    public static void findPath(Tile choice1, Tile choice2, Tile choice3){
+
+
+    }
+
+
+
+
+
+
+
+
+
 }

@@ -3,7 +3,6 @@ package hillgiantkiller.sk.map;
 import hillgiantkiller.sk.Universal;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.Tile.Flag;
 
 public class MapDataFlags extends Obstacles {
 
@@ -40,33 +39,7 @@ public class MapDataFlags extends Obstacles {
 	}
 
 	private boolean checkBlocked(final OffsetPoint n, final OffsetPoint b) {
-		final int x = n.getX();
-		final int y = n.getY();
-		final int dx = n.getX() - b.getX();
-		final int dy = n.getY() - b.getY();
 
-		int flag = map.get(toTile(n));
-
-		if (dx == 0) {
-			if (dy == 0) {
-				return false;
-			}
-			int f = Y_WALL[(dy + 1) / 2];
-			return (flag & f) != f;
-		} else if (dy == 0) {
-			int f = X_WALL[(dx + 1) / 2];
-			return (flag & f) != f;
-		} else {
-			// Both directions
-			final int diagNum = (dy + 1) | ((dx + 1) / 2);
-			if ((flag & DIAG_WALL[diagNum]) == 0) {
-				return true;
-			}
-			if ((!walkable(n.derive(-dx, 0)) || (map.get(toTile(x - dx, y)) & DIAG_X[diagNum]) == 0)
-					&& (!walkable(n.derive(0, -dy)) || (map.get(toTile(x, y - dy)) & DIAG_Y[diagNum]) == 0)) {
-				return true;
-			}
-		}
 		return false;
 	}
 
@@ -78,12 +51,7 @@ public class MapDataFlags extends Obstacles {
 		return new Tile(x, y, (plane == -1 ? Game.getPlane() : plane));
 	}
 
-	private static final int[] X_WALL = { Flag.WALL_EAST, Flag.WALL_WEST }, Y_WALL = { Flag.WALL_NORTH,
-			Flag.WALL_SOUTH }, DIAG_WALL = { Flag.WALL_NORTHEAST, Flag.WALL_NORTHWEST, Flag.WALL_SOUTHEAST,
-			Flag.WALL_SOUTHWEST }, DIAG_X = { Flag.WALL_WEST | Flag.WALL_NORTH, Flag.WALL_EAST | Flag.WALL_NORTH,
-			Flag.WALL_WEST | Flag.WALL_SOUTH, Flag.WALL_EAST | Flag.WALL_SOUTH }, DIAG_Y = {
-			Flag.WALL_EAST | Flag.WALL_SOUTH, Flag.WALL_WEST | Flag.WALL_SOUTH, Flag.WALL_EAST | Flag.WALL_NORTH,
-			Flag.WALL_WEST | Flag.WALL_NORTH };
+	private static final int[] X_WALL = {  };
 
 	@Override
 	public boolean walkable(OffsetPoint n) {

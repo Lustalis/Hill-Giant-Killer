@@ -53,7 +53,6 @@ public class Looting extends Node {
                 for(GroundItem i: item){
                     if (lootIds.contains(i.getId())) {//if its a preset loot id
                         Global.stuffToDo.execute(new Global.MoveCamera(i));
-//                        new Fight.MoveCamera(i);
                         if(!i.isOnScreen()){//Making sure item is on screen
                             Task.sleep(500);
                             if(!Methods.isOnScreen(i)){
@@ -78,7 +77,6 @@ public class Looting extends Node {
                             System.out.println("Added to list");
                             lootIds.add(i.getId());
                             Global.stuffToDo.execute(new Global.MoveCamera(i));
-//                            new Fight.MoveCamera(i);
                             if(!i.isOnScreen()){
                                 Task.sleep(500);
                                 if(!i.isOnScreen()){
