@@ -15,7 +15,8 @@ import org.powerbot.core.script.job.state.Node;
 public class WeaponSwitching extends Node {
     @Override
     public boolean activate() {
-        return Global.useRejuvenate && Methods.getHpPercent() <= Eat.HEAL_PERCENT;
+        return Global.useRejuvenate && Methods.getHpPercent() <= Eat.HEAL_PERCENT
+                && Methods.getHpPercent() > Eat.HEAL_PERCENT - 5;
     }
 
     @Override

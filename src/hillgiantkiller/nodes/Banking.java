@@ -41,7 +41,7 @@ public class Banking extends Node {
     private final Tile[] FIND_WAY_OUT_RESOURCE =  {new Tile(1107,4581,0), new Tile(112,4576,0),
             new Tile(1117,4574,0), new Tile(1123,4574,0), new Tile(1132,4579,0), new Tile(1134,4587,0)};
 
-    private final Tile[] FIND_WAY_OUT_DUNGEON = {new Tile(3104,9826,0), new Tile(3107,9834,0),
+    private final Tile[] FIND_WAY_OUT_DUNGEON = {new Tile(3104,9830,0), new Tile(3104,9826,0), new Tile(3107,9834,0),
             new Tile(3116,9838,0), new Tile(3116,9844,0)};
 
     private final Area AROUND_MYSTERIOUS_ENTRANCE = new Area(new Tile(3107,9825,0), new Tile(3102,9827,0));
@@ -72,8 +72,10 @@ public class Banking extends Node {
                         if(ladderUp != null){
                             if(ladderUp.isOnScreen() && ladderUp.interact("Climb-up")){
                                 Methods.waitForArea(AROUND_LADDER_DOWN);
-
-                            } else{
+                            } else if(AROUND_MYSTERIOUS_ENTRANCE.contains(Players.getLocal()) && !Players.getLocal().isMoving()){
+                                Walking.walk(new Tile(3106,9832,0));
+                            }else{
+                                System.out.println("traversing");
                                 Global.stuffToDo.execute(new Global.MoveCamera(ladderUp));
                                 Walking.newTilePath(FIND_WAY_OUT_DUNGEON).traverse();
                             }
