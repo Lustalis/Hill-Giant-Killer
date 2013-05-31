@@ -99,7 +99,7 @@ public class Banking extends Node {
             Paint.status = "Banking...";
             ActionBar.expand(false);
             if(!Players.getLocal().isMoving() && Bank.open()){
-
+                Task.sleep(500, 900);
                 Bank.depositInventory();
                 Task.sleep(500, 900);
                 if(Global.eatFood){
