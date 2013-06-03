@@ -13,6 +13,7 @@ import org.powerbot.game.api.methods.node.SceneEntities;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.methods.widget.Camera;
+import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.map.TilePath;
@@ -33,6 +34,8 @@ public class Banking extends Node {
     public static SceneObject resourceDungeon;
     private int insideResource = 52868;
     private final Area AROUND_LADDER_DOWN = new Area(new Tile(3113,3455,0), new Tile(3117,3450,0));
+
+    private final Area AROUND_LADDER_UP = new Area(new Tile(3115,9853,0), new Tile(3117,9851,0));
 
     private final Tile[] TO_BANK ={ new Tile(3115, 3445, 0), new Tile(3124, 3451, 0), new Tile(3131, 3455, 0),
             new Tile(3139, 3456, 0), new Tile(3145, 3456, 0), new Tile(3152, 3456, 0),
@@ -68,14 +71,18 @@ public class Banking extends Node {
                     }
                 }else{
                     if(NPCs.getNearest(Global.NPC_IDS) != null){
-                        ladderUp = SceneEntities.getNearest(LADDER_UP);
+                        ladderUp = SceneEntities.getNearest(new Filter<SceneObject>() {
+                            @Override
+                            public boolean accept(SceneObject ladder) {
+                                return AROUND_LADDER_UP.contains(ladder);
+                            }
+                        });
                         if(ladderUp != null){
                             if(ladderUp.isOnScreen() && ladderUp.interact("Climb-up")){
                                 Methods.waitForArea(AROUND_LADDER_DOWN);
                             } else if(AROUND_MYSTERIOUS_ENTRANCE.contains(Players.getLocal()) && !Players.getLocal().isMoving()){
                                 Walking.walk(new Tile(3106,9832,0));
                             }else{
-                                System.out.println("traversing");
                                 Global.stuffToDo.execute(new Global.MoveCamera(ladderUp));
                                 Walking.newTilePath(FIND_WAY_OUT_DUNGEON).traverse();
                             }
@@ -99,7 +106,6 @@ public class Banking extends Node {
             Paint.status = "Banking...";
             ActionBar.expand(false);
             if(!Players.getLocal().isMoving() && Bank.open()){
-
                 Bank.depositInventory();
                 Task.sleep(500, 900);
                 if(Global.eatFood){
