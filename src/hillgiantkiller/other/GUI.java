@@ -6,6 +6,7 @@ import hillgiantkiller.enums.Loot;
 import hillgiantkiller.enums.Rune;
 import hillgiantkiller.enums.Skill;
 import hillgiantkiller.nodes.Banking;
+import hillgiantkiller.nodes.ToBank;
 import hillgiantkiller.nodes.Looting;
 
 import javax.swing.*;

@@ -4,7 +4,6 @@ import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.wrappers.Locatable;
 import org.powerbot.game.api.wrappers.Tile;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -16,7 +15,6 @@ import java.util.concurrent.Executors;
 public class Global {
 
     public static ExecutorService stuffToDo = Executors.newFixedThreadPool(10);
-
 
     /*
     Combat stuff

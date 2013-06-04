@@ -45,7 +45,7 @@ public enum Loot {
     SPACE4(" ",1),
 
     GEMS("Uncut Gems", 1617,1619,1621,1623,1625,1627,1629,1631),
-
+    COINS("Coins",617,995,8890,18201),
     BIG_BONE("Big Bones",532),
     LIMPWURT("Limpwurt Root",225),
     BODY_TAL("Body talisman",1446),

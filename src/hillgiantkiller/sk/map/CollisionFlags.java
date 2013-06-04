@@ -1,7 +1,5 @@
 package hillgiantkiller.sk.map;
 
-import org.powerbot.game.api.methods.Game;
-import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.wrappers.Tile;
 
 public class CollisionFlags extends Obstacles {

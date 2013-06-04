@@ -5,7 +5,9 @@ import hillgiantkiller.other.Paint;
 import hillgiantkiller.sk.action.ActionBar;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
+import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.interactive.Players;
+import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.List;
  */
 public class Banking extends Node {
     public static List<Integer> runesToKeep = new ArrayList<>();
+    private final int KEY_ID = 983;
     @Override
     public boolean activate() {
         return Bank.isOpen();
@@ -45,6 +48,8 @@ public class Banking extends Node {
             Task.sleep(250, 750);
         }
 
-
+        if(!Inventory.contains(Global.foodId) || !Inventory.contains(KEY_ID)){
+            Game.logout(true);
+        }
     }
 }

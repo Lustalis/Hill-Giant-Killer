@@ -10,7 +10,6 @@ import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.SceneEntities;
 import org.powerbot.game.api.wrappers.Area;
 import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.map.TilePath;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
 public class ToHillGiants extends Node {
@@ -49,7 +48,7 @@ public class ToHillGiants extends Node {
                 if(!DUNGEON_ENTRANCE.getTileArray()[1].isOnScreen()){
                     Walking.newTilePath(TO_DUNGEON).traverse();
                 }else {
-                    door = SceneEntities.getNearest(Banking.DOOR_ID);
+                    door = SceneEntities.getNearest(ToBank.DOOR_ID);
                     if(door != null && door.interact("Open")){
                         Methods.waitForArea(AROUND_LADDER_DOWN);
                     }

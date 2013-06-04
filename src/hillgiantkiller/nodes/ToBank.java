@@ -51,8 +51,7 @@ public class ToBank extends Node {
     @Override
     public boolean activate() {
 
-        return (Inventory.isFull() || (Global.eatFood && !Methods.haveFood(Global.foodId)) || !Inventory.contains(983) || Methods.getHpPercent() <=25)
-                || Bank.isOpen();
+        return (Inventory.isFull() || (Global.eatFood && !Methods.haveFood(Global.foodId)) || !Inventory.contains(983) || Methods.getHpPercent() <=25);
     }
 
     @Override
@@ -102,7 +101,7 @@ public class ToBank extends Node {
             }
             Walking.newTilePath(TO_BANK).traverse();
         }else{
-
+            Bank.open();
         }
 
     }//End of Execute
