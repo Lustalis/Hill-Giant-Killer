@@ -22,26 +22,21 @@ public class EquipShield extends Node {
 
     @Override
     public boolean activate() {
-        return Global.weaponSwitch && Global.useRejuvenate && switchToShield();
+        return Global.weaponSwitch && Global.useRejuvenate && Inventory.contains(shieldId) && switchToShield();
     }
 
     @Override
     public void execute() {
-        if(Inventory.contains(shieldId)){
-            Paint.status = "Equiping shield";
-            System.out.println("Switching to shield");
+        Paint.status = "Equiping shield";
+        System.out.println("Switching to shield");
 
-            Equipment.equip(shieldId);
-            Methods.waitFor(new Methods.Condition() {
-                @Override
-                public boolean accept() {
-                    return Equipment.containsOneOf(shieldId);
-                }
-            }, 5000);
-
-        }else{
-            System.out.println("No Shield");
-        }
+        Equipment.equip(shieldId);
+        Methods.waitFor(new Methods.Condition() {
+            @Override
+            public boolean accept() {
+                return Equipment.containsOneOf(shieldId);
+            }
+        }, 5000);
     }
 
     private boolean switchToShield(){
