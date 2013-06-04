@@ -1,13 +1,16 @@
 package hillgiantkiller.other;
 
 import hillgiantkiller.nodes.Eat;
+import hillgiantkiller.nodes.EquipShield;
 import hillgiantkiller.nodes.Looting;
+import hillgiantkiller.sk.action.ActionBar;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.GroundItems;
+import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Area;
@@ -26,6 +29,14 @@ public class Methods {
 
     public interface Condition{
         public boolean accept();
+    }
+
+    //generic wait for
+    public static void waitFor(Condition x, int timer){
+        Timer t = new Timer(timer);
+        while(t.isRunning() && !x.accept()){
+            Task.sleep(150, 350);
+        }
     }
 
     //waits for player to enter an area
@@ -190,16 +201,13 @@ public class Methods {
         }
     }
 
-    public static void findPath(Tile choice1, Tile choice2, Tile choice3){
-
-
+    //makes sure rejuvenate is not reloading, HP is less than HEAL_PERCENT but greater than
+    //HEAL_PERCENT - 10
+    public static boolean canUseReju(){
+        return ActionBar.getNode(0).canUse() && Equipment.containsOneOf(EquipShield.shieldId)
+                && ActionBar.getAdrenaline() == 1000 && getHpPercent() <= Eat.HEAL_PERCENT
+                && getHpPercent() > Eat.HEAL_PERCENT - 10;
     }
-
-
-
-
-
-
 
 
 

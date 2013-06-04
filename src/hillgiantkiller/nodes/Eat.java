@@ -10,13 +10,13 @@ import org.powerbot.game.api.methods.tab.Inventory;
 public class Eat extends Node {
 
 
-    public static final int HEAL_PERCENT = 50;
+    public static final int HEAL_PERCENT = 60;
 
     @Override
     public boolean activate() {
 
         return Methods.needToHeal() && (Global.useRejuvenate && ActionBar.getNode(0).canUse() && ActionBar.getAdrenaline() == 1000) ||
-                (Global.eatFood && Methods.getHpPercent() <= HEAL_PERCENT - 5);
+                (Global.eatFood && Methods.getHpPercent() <= HEAL_PERCENT - 10);
     }
 
     @Override

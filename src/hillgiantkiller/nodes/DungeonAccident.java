@@ -15,7 +15,7 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
  * Date: 5/6/13
  * Time: 3:34 PM
  */
-public class WentIntoDungeonByAccident extends Node {
+public class DungeonAccident extends Node {
     private SceneObject resourceDungeon;
     private int insideResource = 52868;
     private int outsideResource = 52853;

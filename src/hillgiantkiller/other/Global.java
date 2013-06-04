@@ -33,7 +33,7 @@ public class Global {
 
     public static boolean isMage = false;
     public static boolean isRange = false;
-
+    public static boolean weaponSwitch = false;
 
     public static boolean useAbilities = false;
     public static boolean useMomentum = false;
